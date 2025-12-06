@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://db3ig16pf8itp"]
+
+[ext_resource type="Script" uid="uid://cbs437jcjfubl" path="res://Scripts/blast.gd" id="1_rcayi"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="2_rcayi"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_rcayi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckmgq"]
+
+[node name="Blast" type="Area3D"]
+script = ExtResource("1_rcayi")
+speed = 0.0
+lifetime = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, -6.556708e-08, -0.6, 0, 1.5, -2.6226834e-08, 0, 0, -1)
+material_override = ExtResource("2_rcayi")
+mesh = SubResource("PrismMesh_rcayi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 0.6, 0, 0, 0, 1.5, 0, 0, -1)
+shape = SubResource("BoxShape3D_ckmgq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_area_entered"]

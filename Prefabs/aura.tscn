@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://2ic78ou0ps1t"]
+
+[ext_resource type="Script" uid="uid://bi73kf53isfjb" path="res://Scripts/aura.gd" id="1_h802a"]
+[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/auraZone.tres" id="2_tdtkl"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="3_tdtkl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t72bq"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j48g2"]
+top_radius = 2.0
+bottom_radius = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j48g2"]
+radius = 2.0
+
+[node name="Aura" type="Node3D"]
+script = ExtResource("1_h802a")
+
+[node name="warning zone" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_tdtkl")
+mesh = SubResource("CylinderMesh_t72bq")
+
+[node name="Area3D" type="Area3D" parent="."]
+visible = false
+monitoring = false
+
+[node name="hit zone" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("3_tdtkl")
+mesh = SubResource("CylinderMesh_j48g2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_j48g2")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_entered"]

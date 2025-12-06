@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfn5tlkxxxwqc"]
+
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="1_3l4nu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3l4nu"]
+
+[node name="Shield" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_3l4nu")
+mesh = SubResource("CapsuleMesh_3l4nu")

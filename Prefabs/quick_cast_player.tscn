@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://bat6v7klylgnx"]
+
+[ext_resource type="Script" uid="uid://e4wbr3ei5rt4" path="res://Scripts/quick_cast_player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://bslgr05wdgk30" path="res://Prefabs/quick_cast_ui.tscn" id="2_knrd4"]
+[ext_resource type="Script" uid="uid://hlv7me51jvlu" path="res://Scripts/camera_spring_arm.gd" id="2_onrkg"]
+[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/auraZone.tres" id="3_2nftw"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="4_knrd4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hck1p"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_08u7w"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4qbli"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_juxdh"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_kgmex"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_spot", "book_displays")]
+script = ExtResource("1_4flbx")
+shoot_spot = NodePath("SpringArm3D")
+book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node3D/MeshInstance3D4"), NodePath("Node3D/Node3D/MeshInstance3D3"), NodePath("Node3D/Node3D/MeshInstance3D2")]
+
+[node name="Cast UI" parent="." instance=ExtResource("2_knrd4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+spring_length = 2.0
+script = ExtResource("2_onrkg")
+mouse_sensitivity = null
+
+[node name="Node3D" type="Node3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9858355, -0.16771516, 0, 0.16771516, 0.9858355, 0.6378248, 0.9534426, -0.8695181)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.40209746, 0.028884785, 0, -0.12131618, 0.09573747, 0, 0, 0, 0.6000001, -0.18890953, 0.010862529, 0.00089764595)
+mesh = SubResource("BoxMesh_hck1p")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.38600507, -0.039411824, 0, 0.16552965, 0.09190593, 0, 0, 0, 0.6000001, 0.16567409, 0.017208159, 0.00089764595)
+mesh = SubResource("BoxMesh_hck1p")
+skeleton = NodePath("../..")
+
+[node name="Node3D" type="Node3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38162923, -0.0649246)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Node3D"]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 3.7252903e-09, 0, -3.7252903e-09, 0.375, 0, 0, 0)
+visible = false
+material_override = ExtResource("4_knrd4")
+mesh = SubResource("SphereMesh_08u7w")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D/Node3D"]
+transform = Transform3D(0.40227276, 0, 0, 0, 0.010817182, -7.450581e-09, 0, -2.3283064e-10, 0.35320288, 0, -0.090078235, 0.015324593)
+visible = false
+material_override = ExtResource("3_2nftw")
+mesh = SubResource("CylinderMesh_4qbli")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D/Node3D"]
+transform = Transform3D(0.40227276, 0, 0, 0, 0.25322008, 0, 0, 3.7252903e-09, 0.18369669, 0, 0, 0)
+visible = false
+material_override = ExtResource("3_2nftw")
+mesh = SubResource("BoxMesh_juxdh")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D/Node3D"]
+transform = Transform3D(0.37684655, 0, 0, 0, 3.7252903e-09, -0.08530346, 0, 0.349424, 0, 0, 0.008321643, 0.04891479)
+visible = false
+material_override = ExtResource("4_knrd4")
+mesh = SubResource("PrismMesh_kgmex")
