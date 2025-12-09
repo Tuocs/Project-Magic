@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3ap8oroixhpg"]
+
+[ext_resource type="Script" uid="uid://cla5b3tvi32nv" path="res://Scripts/enemy_spawner.gd" id="1_woko2"]
+[ext_resource type="PackedScene" uid="uid://7jfpqutml3jl" path="res://Prefabs/enemy.tscn" id="2_b2yyk"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_woko2")
+enemy_scene = ExtResource("2_b2yyk")
+target_enemy_count = 5
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

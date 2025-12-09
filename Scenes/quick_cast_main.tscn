@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b45fieohufsan"]
+
+[ext_resource type="PackedScene" uid="uid://c1oiapt4kpdis" path="res://Scenes/main.tscn" id="1_yi3fc"]
+[ext_resource type="PackedScene" uid="uid://bat6v7klylgnx" path="res://Prefabs/quick_cast_player.tscn" id="2_46yjc"]
+
+[node name="Main" instance=ExtResource("1_yi3fc")]
+
+[node name="Player" parent="." index="10" instance=ExtResource("2_46yjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)

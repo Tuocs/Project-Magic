@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Quick Cast Magic"
-run/main_scene="uid://c1oiapt4kpdis"
+run/main_scene="uid://o2ygfbwk5t5y"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
