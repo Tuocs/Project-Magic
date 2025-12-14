@@ -120,7 +120,7 @@ func _physics_process(delta: float) -> void:
 func imbue(type: element_type):
 	imbuements[current_magic] = type
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
-	set_color(element_colors[type], book_displays[current_magic])
+	set_color(element_colors[type], book_displays[current_magic-1])
 
 func prepare_spell(type: MagicMode):
 	book_displays[current_magic-1].visible = false
