@@ -17,6 +17,7 @@ var selector_pos: Vector2 = Vector2(0,0)
 
 func activate():
 	is_active = true
+	selector_pos = Vector2.ZERO
 	expanded_visuals.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#mouse_filter = Control.MOUSE_FILTER_STOP
@@ -30,6 +31,7 @@ func deactivate():
 	is_active = false
 	expanded_visuals.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	selector_pos = Vector2.ZERO
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
 func charge(type: int):
 	emit_signal("crystal_charge_signal", type)
@@ -43,18 +45,7 @@ func _input(event: InputEvent) -> void:
 	if !is_active: 
 		return
 	if event.is_action_released("magic_cast"):
-		if (selector_pos.y < 0) && (abs(selector_pos.y) > abs(selector_pos.x)):
-			selection_box.set_position(Vector2(100,0))
-			charge(Unit.element_type.BLUE)
-		if (selector_pos.y > 0) && (abs(selector_pos.y) > abs(selector_pos.x)):
-			selection_box.set_position(Vector2(100,200))
-			charge(Unit.element_type.GREEN)
-		if (selector_pos.x > 0) && (abs(selector_pos.x) > abs(selector_pos.y)):
-			selection_box.set_position(Vector2(200,100))
-			charge(Unit.element_type.RED)
-		if (selector_pos.x < 0) && (abs(selector_pos.x) > abs(selector_pos.y)):
-			selection_box.set_position(Vector2(0,100))
-			charge(Unit.element_type.YELLOW)
+		charge_selector_hover()
 	if event is InputEventMouseMotion:
 		selector_pos.y += event.relative.y * mouse_sensitivity
 		selector_pos.x += event.relative.x * mouse_sensitivity
@@ -69,3 +60,17 @@ func _input(event: InputEvent) -> void:
 			selection_box.set_position(Vector2(200,100))
 		if (selector_pos.x < 0) && (abs(selector_pos.x) > abs(selector_pos.y)):
 			selection_box.set_position(Vector2(0,100))
+			
+func charge_selector_hover():
+	if (selector_pos.y < 0) && (abs(selector_pos.y) > abs(selector_pos.x)):
+		selection_box.set_position(Vector2(100,0))
+		charge(Unit.element_type.BLUE)
+	if (selector_pos.y > 0) && (abs(selector_pos.y) > abs(selector_pos.x)):
+		selection_box.set_position(Vector2(100,200))
+		charge(Unit.element_type.GREEN)
+	if (selector_pos.x > 0) && (abs(selector_pos.x) > abs(selector_pos.y)):
+		selection_box.set_position(Vector2(200,100))
+		charge(Unit.element_type.RED)
+	if (selector_pos.x < 0) && (abs(selector_pos.x) > abs(selector_pos.y)):
+		selection_box.set_position(Vector2(0,100))
+		charge(Unit.element_type.YELLOW)

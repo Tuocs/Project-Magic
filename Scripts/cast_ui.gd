@@ -6,6 +6,7 @@ var is_active = false
 @export var crystals: Array[Control]
 var stored_imbue_type: int = -1
 var stored_spell_type: int = -1
+@export var auto_crystal: Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,10 +17,16 @@ func activate():
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if auto_crystal != null:
+		auto_crystal.activate()
 func deactivate():
+	if !is_active:
+		return
 	is_active = false
 	edit_overlay.visible = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if auto_crystal != null:
+		auto_crystal.charge_selector_hover()
 	for element in crystals:
 		element.deactivate()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
