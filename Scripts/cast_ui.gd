@@ -7,6 +7,7 @@ var is_active = false
 var stored_imbue_type: int = -1
 var stored_spell_type: int = -1
 @export var auto_crystal: Control
+@export var mana_bar: TextureProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,7 +41,10 @@ func _spell_crystal_charge(type: int):
 	stored_spell_type = type
 	
 func _finilize_spell():
+	player.spell_cost = 0
 	if stored_spell_type != -1:
+		player.spell_cost += 1
 		player.prepare_spell(stored_spell_type)
 	if stored_imbue_type != -1:
+		player.spell_cost += 1
 		player.imbue(stored_imbue_type)

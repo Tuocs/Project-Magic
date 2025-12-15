@@ -14,11 +14,18 @@ var element_dmg_multipliers: Dictionary[element_type, int] = { element_type.NONE
 @export var shield_type: element_type
 var shield_obj: Node3D
 @onready var shield_scene = preload("res://Prefabs/shield.tscn")
+@export var max_mana: float = 10
+var current_mana: float = 5
+@export var mana_regen: float = 1
 
 func _ready() -> void:
 	current_health = total_health
+	current_mana = max_mana
 	if shield_type != element_type.NONE:
 		give_shield(shield_type)
+
+func _process(delta: float) -> void:
+	current_mana = clamp(current_mana + (mana_regen * delta), 0, max_mana)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

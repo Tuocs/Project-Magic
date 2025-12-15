@@ -13,12 +13,15 @@ enum MagicMode { PROJECTILE, AURA, STRUCTURE, BLAST }
 @export var book_displays: Array[Node3D]
 var imbuements: Array[element_type] = [element_type.RED, element_type.RED, element_type.RED, element_type.RED]
 var ray_length: float = 1000.0 # Maximum distance of the raycast
+var spell_cost: int = 1
 
 func _ready():
 	super()
 	main_ui = $"Cast UI"
 
 func _process(delta: float) -> void:
+	super(delta)
+	main_ui.mana_bar.value = current_mana
 	#show and hide edit spell UI
 	if Input.is_action_just_pressed("edit_magic"):
 		main_ui.activate()
@@ -46,6 +49,9 @@ func _process(delta: float) -> void:
 	#actually cast the magic
 	if Input.is_action_just_pressed("magic_cast") && !main_ui.is_active:
 		if current_magic == MagicMode.PROJECTILE: #-----------------------------PROJECTILE
+			if current_mana < spell_cost:
+				return;
+			current_mana -= spell_cost
 			var spwn = projectile_scene.instantiate()
 			add_sibling(spwn)
 			var color = element_colors[imbuements[current_magic]]
@@ -64,6 +70,9 @@ func _process(delta: float) -> void:
 			var result: Dictionary = space_state.intersect_ray(query)
 
 			if result.has("position"):
+				if current_mana < spell_cost:
+					return;
+				current_mana -= spell_cost
 				var hit_position: Vector3 = result["position"]
 				print("Raycast hit at position: ", hit_position)
 				
@@ -88,6 +97,9 @@ func _process(delta: float) -> void:
 			var result: Dictionary = space_state.intersect_ray(query)
 
 			if result.has("position"):
+				if current_mana < spell_cost:
+					return;
+				current_mana -= spell_cost
 				var hit_position: Vector3 = result["position"]
 				print("Raycast hit at position: ", hit_position)
 				
@@ -100,6 +112,9 @@ func _process(delta: float) -> void:
 			else:
 				print("Raycast did not hit anything.")
 		if current_magic == MagicMode.BLAST:#------------------------------------BLAST
+			if current_mana < spell_cost:
+				return;
+			current_mana -= spell_cost
 			var spwn = blast_scene.instantiate()
 			add_sibling(spwn)
 			var color = element_colors[imbuements[current_magic]]
