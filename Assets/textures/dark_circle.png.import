@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx21sxgwjrmxn"
-path="res://.godot/imported/tile_0042.png-7d8ecba077a3e5065f9c4e8c038e7c36.ctex"
+uid="uid://dxhuj6rv6req8"
+path="res://.godot/imported/dark_circle.png-21077f37b49efc172b0625053ef4dfd9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tile_0042.png"
-dest_files=["res://.godot/imported/tile_0042.png-7d8ecba077a3e5065f9c4e8c038e7c36.ctex"]
+source_file="res://Assets/textures/dark_circle.png"
+dest_files=["res://.godot/imported/dark_circle.png-21077f37b49efc172b0625053ef4dfd9.ctex"]
 
 [params]
 

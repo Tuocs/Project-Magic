@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://2ic78ou0ps1t"]
 
 [ext_resource type="Script" uid="uid://bi73kf53isfjb" path="res://Scripts/aura.gd" id="1_h802a"]
-[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/auraZone.tres" id="2_tdtkl"]
-[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="3_tdtkl"]
+[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="2_tdtkl"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/mats/sheild.tres" id="3_tdtkl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_t72bq"]
 top_radius = 2.0

@@ -29,6 +29,7 @@ func deactivate():
 	if auto_crystal != null:
 		auto_crystal.charge_selector_hover()
 	for element in crystals:
+		element.reset_charge_texture()
 		element.deactivate()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	stored_imbue_type = -1

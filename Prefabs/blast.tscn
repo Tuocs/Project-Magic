@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://db3ig16pf8itp"]
 
 [ext_resource type="Script" uid="uid://cbs437jcjfubl" path="res://Scripts/blast.gd" id="1_rcayi"]
-[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="2_rcayi"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/mats/sheild.tres" id="2_rcayi"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_rcayi"]
 

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://e4wbr3ei5rt4" path="res://Scripts/quick_cast_player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://bslgr05wdgk30" path="res://Prefabs/quick_cast_ui.tscn" id="2_knrd4"]
 [ext_resource type="Script" uid="uid://hlv7me51jvlu" path="res://Scripts/camera_spring_arm.gd" id="2_onrkg"]
-[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/auraZone.tres" id="3_2nftw"]
-[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/sheild.tres" id="4_knrd4"]
+[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="3_2nftw"]
+[ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/mats/sheild.tres" id="4_knrd4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -20,9 +20,10 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_kgmex"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_spot", "book_displays")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_transform_spot", "shoot_rotate_spot", "book_displays")]
 script = ExtResource("1_4flbx")
-shoot_spot = NodePath("SpringArm3D")
+shoot_transform_spot = NodePath("Node3D/Node3D")
+shoot_rotate_spot = NodePath("SpringArm3D")
 book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node3D/MeshInstance3D4"), NodePath("Node3D/Node3D/MeshInstance3D3"), NodePath("Node3D/Node3D/MeshInstance3D2")]
 mana_regen = 0.5
 

@@ -1,11 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bslgr05wdgk30"]
+[gd_scene load_steps=14 format=3 uid="uid://bslgr05wdgk30"]
 
 [ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_htkfr"]
 [ext_resource type="Script" uid="uid://b1op4eiawmw4b" path="res://Scripts/crystal.gd" id="2_t66uw"]
-[ext_resource type="Texture2D" uid="uid://dx21sxgwjrmxn" path="res://Assets/tile_0042.png" id="3_em2wf"]
-[ext_resource type="Texture2D" uid="uid://e2x041y5gms7" path="res://Assets/mana bg.tres" id="4_twfh2"]
-[ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/hp overlay.tres" id="5_kplnf"]
-[ext_resource type="Texture2D" uid="uid://cy8ilhn55tirx" path="res://Assets/mana fill.tres" id="6_j5sf4"]
+[ext_resource type="Texture2D" uid="uid://dmphvpl2s3od8" path="res://Assets/textures/purple_slot.png" id="3_frdo2"]
+[ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="3_kplnf"]
+[ext_resource type="Texture2D" uid="uid://e2x041y5gms7" path="res://Assets/textures/mana bg.tres" id="4_twfh2"]
+[ext_resource type="Texture2D" uid="uid://cdb8br1wx1k3h" path="res://Assets/textures/Circle.png" id="4_wvmde"]
+[ext_resource type="Texture2D" uid="uid://cujcrmhdkvgmo" path="res://Assets/textures/blue_mana.png" id="5_4t8ip"]
+[ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="5_kplnf"]
+[ext_resource type="Texture2D" uid="uid://cy8ilhn55tirx" path="res://Assets/textures/mana fill.tres" id="6_j5sf4"]
+[ext_resource type="Texture2D" uid="uid://dsrtupkhf21qq" path="res://Assets/textures/yellow_mana.png" id="6_xgq5e"]
+[ext_resource type="Texture2D" uid="uid://bwsku3h4hp3wd" path="res://Assets/textures/red_mana.png" id="7_wjt2m"]
+[ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="8_3ei6a"]
+[ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="9_mbhm6"]
 
 [node name="Cast UI" type="Control" node_paths=PackedStringArray("edit_overlay", "crystals", "auto_crystal", "mana_bar")]
 layout_mode = 3
@@ -59,20 +66,30 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_t66uw")
-selector = NodePath("large/small")
+selector = NodePath("large/Edit Overlay/small")
 selection_box = NodePath("large/Edit Overlay/selector")
-radius = 75.0
-offset = Vector2(75, 75)
+radius = 125.0
+offset = Vector2(100, 100)
 main_crystal = true
 expanded_visuals = NodePath("large")
 
-[node name="Button" type="Button" parent="Edit Overlay/Crystal"]
-layout_mode = 0
-offset_left = 76.0
-offset_top = 75.0
-offset_right = 84.0
-offset_bottom = 83.0
+[node name="Button" type="TextureButton" parent="Edit Overlay/Crystal"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -23.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(5.8800025, 5.8800025)
+texture_normal = ExtResource("3_frdo2")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="large" type="TextureRect" parent="Edit Overlay/Crystal"]
 visible = false
@@ -89,7 +106,8 @@ offset_right = 100.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_em2wf")
+texture = ExtResource("4_wvmde")
+expand_mode = 1
 
 [node name="Edit Overlay" type="Control" parent="Edit Overlay/Crystal/large"]
 anchors_preset = 0
@@ -100,78 +118,55 @@ offset_bottom = 325.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 
-[node name="up" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+[node name="up" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 layout_mode = 0
 offset_left = 100.0
 offset_right = 200.0
 offset_bottom = 100.0
 mouse_filter = 2
-color = Color(0.25281844, 0.3236525, 1, 1)
+texture = ExtResource("5_4t8ip")
+expand_mode = 1
 
-[node name="left" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+[node name="left" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 layout_mode = 0
 offset_top = 100.0
 offset_right = 100.0
 offset_bottom = 200.0
 mouse_filter = 2
-color = Color(0.84968233, 0.67115617, 7.70092e-07, 1)
+texture = ExtResource("6_xgq5e")
+expand_mode = 1
 
-[node name="right" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+[node name="right" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 100.0
 offset_right = 300.0
 offset_bottom = 200.0
 mouse_filter = 2
-color = Color(0.82521325, 0, 0.1429488, 1)
+texture = ExtResource("7_wjt2m")
+expand_mode = 1
 
-[node name="down" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+[node name="down" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 200.0
 offset_right = 200.0
 offset_bottom = 300.0
 mouse_filter = 2
-color = Color(0.3091738, 0.5788489, 0, 1)
+texture = ExtResource("8_3ei6a")
+expand_mode = 1
 
-[node name="selector" type="Control" parent="Edit Overlay/Crystal/large/Edit Overlay"]
-anchors_preset = 0
+[node name="selector" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 100.0
 offset_right = 200.0
 offset_bottom = 200.0
 mouse_filter = 2
+texture = ExtResource("9_mbhm6")
+expand_mode = 1
 
-[node name="up2" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay/selector"]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 6.0
-mouse_filter = 2
-
-[node name="up3" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay/selector"]
-layout_mode = 0
-offset_top = 94.0
-offset_right = 100.0
-offset_bottom = 100.0
-mouse_filter = 2
-
-[node name="up4" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay/selector"]
-layout_mode = 0
-offset_left = 6.0
-offset_right = 106.0
-offset_bottom = 6.0
-rotation = 1.5707964
-mouse_filter = 2
-
-[node name="up5" type="ColorRect" parent="Edit Overlay/Crystal/large/Edit Overlay/selector"]
-layout_mode = 0
-offset_left = 100.0
-offset_right = 200.0
-offset_bottom = 6.0
-rotation = 1.5707964
-mouse_filter = 2
-
-[node name="small" type="TextureRect" parent="Edit Overlay/Crystal/large"]
+[node name="small" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -179,14 +174,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -13.0
-offset_top = -13.0
-offset_right = 37.0
-offset_bottom = 37.0
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 147.99994
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.525761, 0.525761)
-texture = ExtResource("3_em2wf")
+texture = ExtResource("3_kplnf")
+expand_mode = 1
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://db5pbk416ivsy"]
 
 [ext_resource type="Script" uid="uid://cyog3f627kaj6" path="res://Scripts/structure.gd" id="1_6vo2c"]
-[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/auraZone.tres" id="2_gp7w8"]
+[ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="2_gp7w8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6vo2c"]
 

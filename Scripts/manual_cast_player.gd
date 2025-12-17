@@ -9,7 +9,8 @@ enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }
 @onready var blast_scene = preload("res://Prefabs/blast.tscn")
 @onready var aura_scene = preload("res://Prefabs/aura.tscn")
 @onready var structure_scene = preload("res://Prefabs/structure.tscn")
-@export var shoot_spot: Node3D
+@export var shoot_transform_spot: Node3D
+@export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
 var imbuements: Array[element_type] = [element_type.NONE, element_type.RED, element_type.RED, element_type.RED, element_type.RED]
 var ray_length: float = 1000.0 # Maximum distance of the raycast
@@ -40,8 +41,8 @@ func _process(delta: float) -> void:
 			color.a = 0.5
 			set_color(color, spwn.get_child(0))
 			spwn.type = imbuements[current_magic]
-			spwn.global_position = shoot_spot.global_position
-			spwn.transform.basis = shoot_spot.global_transform.basis
+			spwn.global_position = shoot_transform_spot.global_position
+			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
 			current_magic = MagicMode.NONE
 		if current_magic == MagicMode.AURA:#-----------------------------------------AURA
@@ -68,7 +69,7 @@ func _process(delta: float) -> void:
 				set_color(color, spwn.get_child(1).get_child(0))
 				spwn.type = imbuements[current_magic]
 				spwn.global_position = hit_position
-				spwn.transform.basis = shoot_spot.get_parent().global_transform.basis
+				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
 				current_magic = MagicMode.NONE
 			else:
@@ -94,7 +95,7 @@ func _process(delta: float) -> void:
 				set_color(element_colors[imbuements[current_magic]], spwn.get_child(0))
 				spwn.type = imbuements[current_magic]
 				spwn.global_position = hit_position
-				spwn.transform.basis = shoot_spot.get_parent().global_transform.basis
+				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
 				current_magic = MagicMode.NONE
 			else:
@@ -109,8 +110,8 @@ func _process(delta: float) -> void:
 			color.a = 0.5
 			set_color(color, spwn.get_child(0))
 			spwn.type = imbuements[current_magic]
-			spwn.global_position = shoot_spot.global_position
-			spwn.transform.basis = shoot_spot.global_transform.basis
+			spwn.global_position = shoot_transform_spot.global_position
+			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
 			current_magic = MagicMode.NONE
 

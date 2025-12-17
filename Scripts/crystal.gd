@@ -10,6 +10,7 @@ var selector_pos: Vector2 = Vector2(0,0)
 @export var radius: float
 @export var offset: Vector2
 @export var main_crystal = false
+@export var charge_textures: Array[Texture]
 
 
 @export var expanded_visuals: Control
@@ -39,7 +40,13 @@ func charge(type: int):
 		emit_signal("crystal_charge_signal", type)
 		emit_signal("crystal_finish_spell")
 		get_parent().get_parent().deactivate()
+	else:
+		$Button.texture_normal = charge_textures[type]
 	deactivate()
+	
+func reset_charge_texture():
+	if !main_crystal:
+		$Button.texture_normal = charge_textures[0]
 
 func _input(event: InputEvent) -> void:
 	if !is_active: 
