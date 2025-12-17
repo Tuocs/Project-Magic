@@ -49,3 +49,5 @@ func _finilize_spell():
 	if stored_imbue_type != -1:
 		player.spell_cost += 1
 		player.imbue(stored_imbue_type)
+	else:
+		player.imbue(0)

@@ -25,7 +25,7 @@ script = ExtResource("1_w1kf8")
 shoot_transform_spot = NodePath("Node3D/Node3D")
 shoot_rotate_spot = NodePath("SpringArm3D")
 book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node3D/MeshInstance3D4"), NodePath("Node3D/Node3D/MeshInstance3D3"), NodePath("Node3D/Node3D/MeshInstance3D2")]
-mana_regen = 0.5
+mana_regen = 0.2
 
 [node name="Cast UI" parent="." instance=ExtResource("2_w1kf8")]
 
