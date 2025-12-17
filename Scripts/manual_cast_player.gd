@@ -15,10 +15,13 @@ enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }
 var imbuements: Array[element_type] = [element_type.NONE, element_type.RED, element_type.RED, element_type.RED, element_type.RED]
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
+@export var instant_cast: bool
 
 func _ready():
 	super()
 	main_ui = $"Cast UI"
+	if instant_cast:
+		main_ui.instant_cast = instant_cast
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -33,6 +36,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("magic_cast") && !main_ui.is_active:
 		if current_magic == MagicMode.PROJECTILE: #-----------------------------PROJECTILE
 			if current_mana < spell_cost:
+				if instant_cast:
+					fizzle_spell()
 				return;
 			current_mana -= spell_cost
 			var spwn = projectile_scene.instantiate()
@@ -56,6 +61,8 @@ func _process(delta: float) -> void:
 
 			if result.has("position"):
 				if current_mana < spell_cost:
+					if instant_cast:
+						fizzle_spell()
 					return;
 				current_mana -= spell_cost
 				var hit_position: Vector3 = result["position"]
@@ -74,6 +81,8 @@ func _process(delta: float) -> void:
 				current_magic = MagicMode.NONE
 			else:
 				print("Raycast did not hit anything.")
+				if instant_cast:
+					fizzle_spell()
 		if current_magic == MagicMode.STRUCTURE:#---------------------------------Structure
 			var mouse_pos: Vector2 = cam.get_viewport().get_mouse_position()
 			var from: Vector3 = cam.project_ray_origin(mouse_pos)
@@ -85,6 +94,8 @@ func _process(delta: float) -> void:
 
 			if result.has("position"):
 				if current_mana < spell_cost:
+					if instant_cast:
+						fizzle_spell()
 					return;
 				current_mana -= spell_cost
 				var hit_position: Vector3 = result["position"]
@@ -100,8 +111,12 @@ func _process(delta: float) -> void:
 				current_magic = MagicMode.NONE
 			else:
 				print("Raycast did not hit anything.")
+				if instant_cast:
+					fizzle_spell()
 		if current_magic == MagicMode.BLAST:#------------------------------------BLAST
 			if current_mana < spell_cost:
+				if instant_cast:
+					fizzle_spell()
 				return;
 			current_mana -= spell_cost
 			var spwn = blast_scene.instantiate()
@@ -143,3 +158,7 @@ func prepare_spell(type: MagicMode):
 	current_magic = type
 	book_displays[current_magic-1].visible = true
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
+	
+func fizzle_spell():
+	book_displays[current_magic-1].visible = false
+	current_magic = MagicMode.NONE

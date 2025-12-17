@@ -8,6 +8,7 @@ var stored_imbue_type: int = -1
 var stored_spell_type: int = -1
 @export var auto_crystal: Control
 @export var mana_bar: TextureProgressBar
+var instant_cast: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,3 +52,5 @@ func _finilize_spell():
 		player.imbue(stored_imbue_type)
 	else:
 		player.imbue(0)
+	if instant_cast:
+		Input.action_press("magic_cast")
