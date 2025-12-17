@@ -23,16 +23,17 @@ func _ready():
 	if instant_cast:
 		main_ui.instant_cast = instant_cast
 
+func _input(event):
+	if event.is_action_just_pressed("edit_magic"):
+		main_ui.activate()
+	elif Input.is_action_just_released("edit_magic"):
+		main_ui.deactivate()
+
 func _process(delta: float) -> void:
 	super(delta)
 	main_ui.mana_bar.value = current_mana
 	if Input.is_action_just_pressed("escape"):
 		esc_pause()
-	#show and hide edit spell UI
-	if Input.is_action_just_pressed("edit_magic"):
-		main_ui.activate()
-	elif Input.is_action_just_released("edit_magic"):
-		main_ui.deactivate()
 	
 	#actually cast the magic
 	if Input.is_action_just_pressed("magic_cast") && !main_ui.is_active:

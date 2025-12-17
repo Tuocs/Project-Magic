@@ -20,16 +20,17 @@ func _ready():
 	super()
 	main_ui = $"Cast UI"
 
+func _input(event):
+	if event.is_action_just_pressed("edit_magic"):
+		main_ui.activate()
+	elif event.is_action_just_released("edit_magic"):
+		main_ui.deactivate()
+
 func _process(delta: float) -> void:
 	super(delta)
 	if Input.is_action_just_pressed("escape"):
 		esc_pause()
 	main_ui.mana_bar.value = current_mana
-	#show and hide edit spell UI
-	if Input.is_action_just_pressed("edit_magic"):
-		main_ui.activate()
-	elif Input.is_action_just_released("edit_magic"):
-		main_ui.deactivate()
 	
 	#switch spell modes
 	if Input.is_action_just_pressed("magic_projectile"):
