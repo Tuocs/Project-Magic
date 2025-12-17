@@ -26,6 +26,8 @@ func _ready():
 func _process(delta: float) -> void:
 	super(delta)
 	main_ui.mana_bar.value = current_mana
+	if Input.is_action_just_pressed("escape"):
+		esc_pause()
 	#show and hide edit spell UI
 	if Input.is_action_just_pressed("edit_magic"):
 		main_ui.activate()
@@ -162,3 +164,8 @@ func prepare_spell(type: MagicMode):
 func fizzle_spell():
 	book_displays[current_magic-1].visible = false
 	current_magic = MagicMode.NONE
+	
+
+func esc_pause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://main_menu.tscn")

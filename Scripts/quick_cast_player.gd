@@ -22,6 +22,8 @@ func _ready():
 
 func _process(delta: float) -> void:
 	super(delta)
+	if Input.is_action_just_pressed("escape"):
+		esc_pause()
 	main_ui.mana_bar.value = current_mana
 	#show and hide edit spell UI
 	if Input.is_action_just_pressed("edit_magic"):
@@ -147,3 +149,7 @@ func imbue(type: element_type):
 	imbuements[current_magic] = type
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 	set_color(element_colors[type], book_displays[current_magic])
+
+func esc_pause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://main_menu.tscn")
