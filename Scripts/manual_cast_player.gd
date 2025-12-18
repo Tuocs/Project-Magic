@@ -24,9 +24,9 @@ func _ready():
 		main_ui.instant_cast = instant_cast
 
 func _input(event):
-	if event.is_action_just_pressed("edit_magic"):
+	if event.is_action_pressed("edit_magic"):
 		main_ui.activate()
-	elif Input.is_action_just_released("edit_magic"):
+	elif event.is_action_released("edit_magic"):
 		main_ui.deactivate()
 
 func _process(delta: float) -> void:
