@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7jfpqutml3jl"]
+[gd_scene load_steps=8 format=3 uid="uid://7jfpqutml3jl"]
 
 [ext_resource type="Script" uid="uid://dg8ky2ue6d3ps" path="res://Scripts/enemy.gd" id="1_lgw76"]
+[ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="2_30yes"]
+[ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="3_n7q57"]
+[ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="4_80imi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -9,8 +12,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("StandardMaterial3D_lgw76")
 
-[node name="Enemy" type="CharacterBody3D" groups=["Enemy", "Unit"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("hp_fill") groups=["Enemy", "Unit"]]
 script = ExtResource("1_lgw76")
+hp_fill = NodePath("Node3D/fill")
 SPEED = 4.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -22,3 +26,23 @@ shape = SubResource("CapsuleShape3D_sh265")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2814646, 0)
+
+[node name="bg" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.4, 0, 0, 0, 1.4, 0, 0, 0, 1, -0.70234823, -0.09337735, 0)
+centered = false
+texture = ExtResource("2_30yes")
+
+[node name="fill" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.4, 0, 0, 0, 1.4, 0, 0, 0, 1, -0.70234823, -0.09337735, 0)
+sorting_offset = 0.1
+centered = false
+texture = ExtResource("3_n7q57")
+
+[node name="overlay" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.4, 0, 0, 0, 1.4, 0, 0, 0, 1, -0.70234823, -0.09337735, 0)
+sorting_offset = 0.2
+centered = false
+texture = ExtResource("4_80imi")

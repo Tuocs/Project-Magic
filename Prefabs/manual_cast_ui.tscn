@@ -80,10 +80,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 12.000061
-offset_top = 6.0
-offset_right = 52.00006
-offset_bottom = 46.0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.82277966
@@ -139,6 +139,91 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.568054
 scale = Vector2(3.551831, 0.165)
+
+[node name="ColorRect6" type="ColorRect" parent="Edit Overlay"]
+modulate = Color(1, 0.47058824, 1, 0.46666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 147.0
+offset_top = -44.0
+offset_right = 187.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.8338401
+scale = Vector2(3.5893693, 0.165)
+
+[node name="ColorRect7" type="ColorRect" parent="Edit Overlay"]
+modulate = Color(1, 0.47058824, 1, 0.46666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 75.00006
+offset_top = 115.0
+offset_right = 115.00006
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1454072
+scale = Vector2(3.5893693, 0.165)
+
+[node name="ColorRect8" type="ColorRect" parent="Edit Overlay"]
+modulate = Color(1, 0.47058824, 1, 0.46666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = 80.00003
+offset_right = -69.0
+offset_bottom = 120.00003
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 4.439562
+scale = Vector2(3.5893693, 0.165)
+
+[node name="ColorRect9" type="ColorRect" parent="Edit Overlay"]
+modulate = Color(1, 0.47058824, 1, 0.46666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -83.000015
+offset_right = -100.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 5.7158756
+scale = Vector2(3.5893693, 0.165)
+
+[node name="ColorRect10" type="ColorRect" parent="Edit Overlay"]
+modulate = Color(1, 0.47058824, 1, 0.46666667)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.000061
+offset_top = -162.00002
+offset_right = 60.00006
+offset_bottom = -122.000015
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.8442903
+scale = Vector2(3.5893693, 0.165)
 
 [node name="Crystal" type="Control" parent="Edit Overlay" node_paths=PackedStringArray("selector", "selection_box", "expanded_visuals")]
 layout_mode = 1

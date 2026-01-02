@@ -14,7 +14,7 @@ func _physics_process(delta):
 func _on_area_entered(body):
 	print(body)
 	if body.is_in_group("Unit"):
-		body.apply_knockback(position, 10)
+		body.apply_knockback(position, 15)
 		
 func set_color(color: Color):
 	var mesh_instance = $MeshInstance3D

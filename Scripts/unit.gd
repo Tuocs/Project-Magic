@@ -6,7 +6,7 @@ const JUMP_VELOCITY = 4.5
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
 var knockback_duration: float = 0.2
-@export var total_health: int = 100
+@export var max_health: int = 100
 var current_health
 enum element_type {NONE, RED, YELLOW, BLUE, GREEN }
 var element_dmg_multipliers: Dictionary[element_type, int] = { element_type.NONE:1, element_type.RED:1, element_type.YELLOW:1, element_type.BLUE:1, element_type.GREEN:1}
@@ -19,7 +19,7 @@ var current_mana: float = 5
 @export var mana_regen: float = 1
 
 func _ready() -> void:
-	current_health = total_health
+	current_health = max_health
 	current_mana = max_mana
 	if shield_type != element_type.NONE:
 		give_shield(shield_type)
@@ -83,8 +83,12 @@ func hit(dmg_ammount: int = 1000, dmg_type: element_type = element_type.NONE, pi
 	
 func take_damage(ammount: int):
 	current_health -= ammount
+	update_hp()
 	if current_health <= 0:
 		kill()
+
+func update_hp():
+	pass
 
 func set_element_dmg_multipliers(N: int, R: int, Y: int, B: int, G: int):
 	element_dmg_multipliers[element_type.NONE]=N

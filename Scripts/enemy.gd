@@ -3,6 +3,7 @@ extends Unit
 
 @onready var player = get_node("/root/Main/Player")
 @onready var nav_agent = $NavigationAgent3D
+@export var hp_fill: Sprite3D
 
 
 func _ready() -> void:
@@ -26,8 +27,11 @@ func _physics_process(delta: float) -> void:
 	var new_velocity = (next_location - current_location).normalized() * SPEED
 	
 	velocity = new_velocity
+	look_at(player.global_position)
 	combine_move_and_knock(delta)
-	
+
+func update_hp():
+	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4
 
 func randomize_elements_and_shield() -> void:
 	if randi_range(0,4) == 4:
