@@ -78,19 +78,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 0, -43)
 
 [node name="Spawner2" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -20)
-target_enemy_count = 2
+target_enemy_count = 4
 
 [node name="Spawner3" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -50)
-target_enemy_count = 2
+target_enemy_count = 4
 
 [node name="Spawner4" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -25)
-target_enemy_count = 2
+target_enemy_count = 3
 
 [node name="Spawner5" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 0, -27)
-target_enemy_count = 2
+target_enemy_count = 3
 
 [node name="Spawner6" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 0, -20)
