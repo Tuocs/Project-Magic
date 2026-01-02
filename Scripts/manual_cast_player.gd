@@ -1,6 +1,5 @@
 extends Unit
 
-
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var main_ui
 enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }

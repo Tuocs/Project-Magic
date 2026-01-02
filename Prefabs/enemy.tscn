@@ -11,6 +11,7 @@ material = SubResource("StandardMaterial3D_lgw76")
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemy", "Unit"]]
 script = ExtResource("1_lgw76")
+SPEED = 4.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

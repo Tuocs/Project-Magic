@@ -55,6 +55,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 577.0
+offset_top = 327.0
+offset_right = 617.0
+offset_bottom = 367.0
+rotation = 2.291456
+scale = Vector2(3.5893693, 0.39999998)
+
+[node name="ColorRect2" type="ColorRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 589.00006
+offset_top = 322.0
+offset_right = 629.00006
+offset_bottom = 362.0
+rotation = 0.82277966
+scale = Vector2(3.551831, 0.41318896)
+
+[node name="ColorRect3" type="ColorRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = 309.0001
+offset_right = 622.0
+offset_bottom = 349.0001
+rotation = -0.43975756
+scale = Vector2(3.5893693, 0.39999998)
+
+[node name="ColorRect4" type="ColorRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 321.99997
+offset_right = 598.0
+offset_bottom = 361.99997
+rotation = -2.6863723
+scale = Vector2(3.551831, 0.41318896)
+
+[node name="ColorRect5" type="ColorRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 566.99994
+offset_top = 309.0
+offset_right = 606.99994
+offset_bottom = 349.0
+rotation = -1.568054
+scale = Vector2(3.551831, 0.41318896)
+
 [node name="Crystal" type="Control" parent="Edit Overlay" node_paths=PackedStringArray("selector", "selection_box", "expanded_visuals")]
 layout_mode = 1
 anchors_preset = 8
@@ -214,10 +259,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -218.0
-offset_top = 17.0
-offset_right = -18.0
-offset_bottom = 217.0
+offset_left = -202.0
+offset_top = 8.0
+offset_right = -2.0
+offset_bottom = 208.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_iglr6")
@@ -229,6 +274,7 @@ charge_textures = Array[Texture]([ExtResource("3_6b4wp"), ExtResource("12_xe0iw"
 expanded_visuals = NodePath("large")
 
 [node name="Button" type="TextureButton" parent="Edit Overlay/Crystal2"]
+modulate = Color(0.23921569, 0.23137255, 0.3372549, 1)
 layout_mode = 0
 offset_left = 76.0
 offset_top = 75.0

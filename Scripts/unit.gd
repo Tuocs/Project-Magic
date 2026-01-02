@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name  Unit
 
-const SPEED = 5.0
+@export var SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
