@@ -2,6 +2,7 @@ extends Control
 
 @onready var edit_overlay = $"Edit Overlay"
 @onready var mana_bar = $"Mana Bar/TextureProgressBar"
+@onready var health_bar = $"HP Bar/TextureProgressBar"
 @onready var spell_details = $"Edit Overlay/Spell Details"
 @onready var selector = $"Edit Overlay/Center/small"
 @onready var player = get_parent()

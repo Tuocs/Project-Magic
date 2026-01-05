@@ -26,6 +26,7 @@ Shield=""
 Enemy=""
 Unit=""
 Terrain=""
+Player=""
 
 [input]
 

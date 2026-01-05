@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cgg8xh2ho75yh"]
+[gd_scene load_steps=20 format=3 uid="uid://cgg8xh2ho75yh"]
 
 [ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_i1068"]
 [ext_resource type="Script" uid="uid://b1op4eiawmw4b" path="res://Scripts/crystal.gd" id="2_iglr6"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bwsku3h4hp3wd" path="res://Assets/textures/red_mana.png" id="12_xe0iw"]
 [ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="13_urajh"]
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="14_cr8wu"]
+[ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="18_xe0iw"]
+[ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="19_urajh"]
 
 [node name="Cast UI" type="Control" node_paths=PackedStringArray("crystals")]
 layout_mode = 3
@@ -574,6 +576,36 @@ value = 5.0
 texture_under = ExtResource("4_usivk")
 texture_over = ExtResource("4_iglr6")
 texture_progress = ExtResource("6_6b4wp")
+
+[node name="HP Bar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HP Bar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.5
+offset_right = 180.5
+offset_bottom = 14.0
+grow_horizontal = 2
+scale = Vector2(2.345, 2.345)
+pivot_offset = Vector2(180.5, 0)
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource("18_xe0iw")
+texture_over = ExtResource("4_iglr6")
+texture_progress = ExtResource("19_urajh")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="crystal_charge_signal" from="Edit Overlay/Spell Details/Crystal2" to="." method="_imbuement_crystal_charge"]

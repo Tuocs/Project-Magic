@@ -29,6 +29,11 @@ func _physics_process(delta: float) -> void:
 	velocity = new_velocity
 	look_at(player.global_position)
 	combine_move_and_knock(delta)
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("Player"):
+			collider.hit(5)
 
 func update_hp():
 	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4

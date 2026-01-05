@@ -20,6 +20,7 @@ var spell_cost: int = 1
 func _ready():
 	super()
 	main_ui = $"Cast UI"
+	main_ui.health_bar.value = current_health
 	if instant_cast:
 		main_ui.instant_cast = instant_cast
 
@@ -169,5 +170,13 @@ func fizzle_spell():
 	
 
 func esc_pause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://main_menu.tscn")
+	
+	
+func update_hp():
+	main_ui.health_bar.value = float(current_health)/float(max_health)
+
+func kill():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://main_menu.tscn")
