@@ -11,10 +11,11 @@ enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }
 @export var shoot_transform_spot: Node3D
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
-var imbuements: Array[element_type] = [element_type.NONE, element_type.RED, element_type.RED, element_type.RED, element_type.RED]
+var imbuement: element_type = element_type.NONE
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
 @export var instant_cast: bool
+@export var unlimited_cast: bool
 
 func _ready():
 	super()
@@ -44,10 +45,10 @@ func _process(delta: float) -> void:
 			current_mana -= spell_cost
 			var spwn = projectile_scene.instantiate()
 			add_sibling(spwn)
-			var color = element_colors[imbuements[current_magic]]
+			var color = element_colors[imbuement]
 			color.a = 0.5
 			set_color(color, spwn.get_child(0))
-			spwn.type = imbuements[current_magic]
+			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
@@ -72,11 +73,11 @@ func _process(delta: float) -> void:
 				
 				var spwn = aura_scene.instantiate()
 				add_sibling(spwn)
-				set_color(element_colors[imbuements[current_magic]], spwn.get_child(0))
-				var color = element_colors[imbuements[current_magic]]
+				set_color(element_colors[imbuement], spwn.get_child(0))
+				var color = element_colors[imbuement]
 				color.a = 0.5
 				set_color(color, spwn.get_child(1).get_child(0))
-				spwn.type = imbuements[current_magic]
+				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
@@ -105,8 +106,8 @@ func _process(delta: float) -> void:
 				
 				var spwn = structure_scene.instantiate()
 				add_sibling(spwn)
-				set_color(element_colors[imbuements[current_magic]], spwn.get_child(0))
-				spwn.type = imbuements[current_magic]
+				set_color(element_colors[imbuement], spwn.get_child(0))
+				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
@@ -123,10 +124,10 @@ func _process(delta: float) -> void:
 			current_mana -= spell_cost
 			var spwn = blast_scene.instantiate()
 			add_sibling(spwn)
-			var color = element_colors[imbuements[current_magic]]
+			var color = element_colors[imbuement]
 			color.a = 0.5
 			set_color(color, spwn.get_child(0))
-			spwn.type = imbuements[current_magic]
+			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
@@ -151,7 +152,7 @@ func _physics_process(delta: float) -> void:
 	combine_move_and_knock(delta)
 	
 func imbue(type: element_type):
-	imbuements[current_magic] = type
+	imbuement = type
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 	set_color(element_colors[type], book_displays[current_magic-1])
 
@@ -164,6 +165,7 @@ func prepare_spell(type: MagicMode):
 func fizzle_spell():
 	book_displays[current_magic-1].visible = false
 	current_magic = MagicMode.NONE
+	imbuement = element_type.NONE
 	
 
 func esc_pause():

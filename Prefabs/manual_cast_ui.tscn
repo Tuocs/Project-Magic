@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="13_urajh"]
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="14_cr8wu"]
 
-[node name="Cast UI" type="Control" node_paths=PackedStringArray("edit_overlay", "crystals", "mana_bar")]
+[node name="Cast UI" type="Control" node_paths=PackedStringArray("crystals")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,11 +27,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_i1068")
-edit_overlay = NodePath("Edit Overlay")
-crystals = [NodePath("Edit Overlay/Crystal"), NodePath("Edit Overlay/Crystal2")]
-mana_bar = NodePath("Control/TextureProgressBar")
+crystals = [NodePath("Edit Overlay/Crystal"), NodePath("Edit Overlay/Spell Details/Crystal2")]
+radius = 300.0
+center_radius = 75.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Crosshair" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,6 +47,14 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Edit Overlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spell Details" type="Control" parent="Edit Overlay"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -55,7 +63,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -72,7 +80,7 @@ grow_vertical = 2
 rotation = 2.291456
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect2" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect2" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -89,7 +97,7 @@ grow_vertical = 2
 rotation = 0.82277966
 scale = Vector2(3.551831, 0.165)
 
-[node name="ColorRect3" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect3" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -106,7 +114,7 @@ grow_vertical = 2
 rotation = -0.43975756
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect4" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect4" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -123,7 +131,7 @@ grow_vertical = 2
 rotation = -2.6863723
 scale = Vector2(3.551831, 0.165)
 
-[node name="ColorRect5" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect5" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -140,7 +148,7 @@ grow_vertical = 2
 rotation = -1.568054
 scale = Vector2(3.551831, 0.165)
 
-[node name="ColorRect6" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect6" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -157,7 +165,7 @@ grow_vertical = 2
 rotation = 1.8338401
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect7" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect7" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -174,7 +182,7 @@ grow_vertical = 2
 rotation = 3.1454072
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect8" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect8" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -191,7 +199,7 @@ grow_vertical = 2
 rotation = 4.439562
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect9" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect9" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -208,7 +216,7 @@ grow_vertical = 2
 rotation = 5.7158756
 scale = Vector2(3.5893693, 0.165)
 
-[node name="ColorRect10" type="ColorRect" parent="Edit Overlay"]
+[node name="ColorRect10" type="ColorRect" parent="Edit Overlay/Spell Details"]
 modulate = Color(1, 0.47058824, 1, 0.46666667)
 layout_mode = 1
 anchors_preset = 8
@@ -224,6 +232,132 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 6.8442903
 scale = Vector2(3.5893693, 0.165)
+
+[node name="Crystal2" type="Control" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("selector", "selection_box", "expanded_visuals")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = 8.0
+offset_right = -2.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_iglr6")
+selector = NodePath("large/Edit Overlay/small")
+selection_box = NodePath("large/Edit Overlay/selector")
+radius = 125.0
+offset = Vector2(100, 100)
+charge_textures = Array[Texture]([ExtResource("3_6b4wp"), ExtResource("12_xe0iw"), ExtResource("11_jv731"), ExtResource("10_x02v6"), ExtResource("13_urajh")])
+expanded_visuals = NodePath("large")
+
+[node name="Button" type="TextureButton" parent="Edit Overlay/Spell Details/Crystal2"]
+modulate = Color(0.43714952, 0.42687365, 0.5812043, 1)
+layout_mode = 0
+offset_left = 77.0
+offset_top = 75.0
+offset_right = 85.0
+offset_bottom = 83.0
+scale = Vector2(5.8800025, 5.8800025)
+texture_normal = ExtResource("3_6b4wp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="large" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_nichs")
+expand_mode = 1
+
+[node name="Edit Overlay" type="Control" parent="Edit Overlay/Spell Details/Crystal2/large"]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 325.0
+offset_bottom = 325.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="up" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
+mouse_filter = 2
+texture = ExtResource("10_x02v6")
+expand_mode = 1
+
+[node name="left" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("11_jv731")
+expand_mode = 1
+
+[node name="right" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("12_xe0iw")
+expand_mode = 1
+
+[node name="down" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 200.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("13_urajh")
+expand_mode = 1
+
+[node name="selector" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("14_cr8wu")
+expand_mode = 1
+
+[node name="small" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 147.99994
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.525761, 0.525761)
+texture = ExtResource("5_prb1j")
+expand_mode = 1
 
 [node name="Crystal" type="Control" parent="Edit Overlay" node_paths=PackedStringArray("selector", "selection_box", "expanded_visuals")]
 layout_mode = 1
@@ -243,7 +377,7 @@ selector = NodePath("large/Edit Overlay/small")
 selection_box = NodePath("large/Edit Overlay/selector")
 radius = 125.0
 offset = Vector2(100, 100)
-main_crystal = true
+charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("8_x02v6"), ExtResource("7_fbone"), ExtResource("6_nhl1g"), ExtResource("9_jv731")])
 expanded_visuals = NodePath("large")
 
 [node name="Button" type="TextureButton" parent="Edit Overlay/Crystal"]
@@ -284,24 +418,6 @@ offset_bottom = 325.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 
-[node name="up" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 100.0
-offset_right = 200.0
-offset_bottom = 100.0
-mouse_filter = 2
-texture = ExtResource("6_nhl1g")
-expand_mode = 1
-
-[node name="left" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 100.0
-offset_bottom = 200.0
-mouse_filter = 2
-texture = ExtResource("7_fbone")
-expand_mode = 1
-
 [node name="right" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
 layout_mode = 0
 offset_left = 200.0
@@ -318,6 +434,24 @@ offset_left = 100.0
 offset_top = 200.0
 offset_right = 199.99988
 offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("7_fbone")
+expand_mode = 1
+
+[node name="left" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("6_nhl1g")
+expand_mode = 1
+
+[node name="up" type="TextureRect" parent="Edit Overlay/Crystal/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
 mouse_filter = 2
 texture = ExtResource("9_jv731")
 expand_mode = 1
@@ -377,116 +511,7 @@ scale = Vector2(0.525761, 0.525761)
 texture = ExtResource("5_prb1j")
 expand_mode = 1
 
-[node name="Crystal2" type="Control" parent="Edit Overlay" node_paths=PackedStringArray("selector", "selection_box", "expanded_visuals")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -202.0
-offset_top = 8.0
-offset_right = -2.0
-offset_bottom = 208.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_iglr6")
-selector = NodePath("large/Edit Overlay/small")
-selection_box = NodePath("large/Edit Overlay/selector")
-radius = 125.0
-offset = Vector2(100, 100)
-charge_textures = Array[Texture]([ExtResource("3_6b4wp"), ExtResource("12_xe0iw"), ExtResource("11_jv731"), ExtResource("10_x02v6"), ExtResource("13_urajh")])
-expanded_visuals = NodePath("large")
-
-[node name="Button" type="TextureButton" parent="Edit Overlay/Crystal2"]
-modulate = Color(0.43714952, 0.42687365, 0.5812043, 1)
-layout_mode = 0
-offset_left = 77.0
-offset_top = 75.0
-offset_right = 85.0
-offset_bottom = 83.0
-scale = Vector2(5.8800025, 5.8800025)
-texture_normal = ExtResource("3_6b4wp")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="large" type="TextureRect" parent="Edit Overlay/Crystal2"]
-visible = false
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_nichs")
-expand_mode = 1
-
-[node name="Edit Overlay" type="Control" parent="Edit Overlay/Crystal2/large"]
-anchors_preset = 0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 325.0
-offset_bottom = 325.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-
-[node name="up" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 100.0
-offset_right = 200.0
-offset_bottom = 100.0
-mouse_filter = 2
-texture = ExtResource("10_x02v6")
-expand_mode = 1
-
-[node name="left" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 100.0
-offset_bottom = 200.0
-mouse_filter = 2
-texture = ExtResource("11_jv731")
-expand_mode = 1
-
-[node name="right" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 100.0
-offset_right = 300.0
-offset_bottom = 200.0
-mouse_filter = 2
-texture = ExtResource("12_xe0iw")
-expand_mode = 1
-
-[node name="down" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 200.0
-offset_right = 200.0
-offset_bottom = 300.0
-mouse_filter = 2
-texture = ExtResource("13_urajh")
-expand_mode = 1
-
-[node name="selector" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 200.0
-mouse_filter = 2
-texture = ExtResource("14_cr8wu")
-expand_mode = 1
-
-[node name="small" type="TextureRect" parent="Edit Overlay/Crystal2/large/Edit Overlay"]
-texture_filter = 1
+[node name="Center" type="Control" parent="Edit Overlay"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -495,15 +520,32 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -52.0
 offset_top = -52.0
-offset_right = 147.99994
-offset_bottom = 148.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="small" type="TextureRect" parent="Edit Overlay/Center"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 180.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.525761, 0.525761)
+mouse_filter = 2
 texture = ExtResource("5_prb1j")
 expand_mode = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Mana Bar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -513,7 +555,7 @@ offset_top = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Mana Bar"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
@@ -533,8 +575,5 @@ texture_over = ExtResource("4_iglr6")
 texture_progress = ExtResource("6_6b4wp")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="crystal_charge_signal" from="Edit Overlay/Spell Details/Crystal2" to="." method="_imbuement_crystal_charge"]
 [connection signal="crystal_charge_signal" from="Edit Overlay/Crystal" to="." method="_spell_crystal_charge"]
-[connection signal="crystal_finish_spell" from="Edit Overlay/Crystal" to="." method="_finilize_spell"]
-[connection signal="button_down" from="Edit Overlay/Crystal/Button" to="Edit Overlay/Crystal" method="activate"]
-[connection signal="crystal_charge_signal" from="Edit Overlay/Crystal2" to="." method="_imbuement_crystal_charge"]
-[connection signal="button_down" from="Edit Overlay/Crystal2/Button" to="Edit Overlay/Crystal2" method="activate"]
