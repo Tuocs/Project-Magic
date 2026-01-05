@@ -12,7 +12,7 @@ var stored_imbue_type: int = -1
 var stored_spell_type: int = -1
 @export var auto_crystal: Control
 var instant_cast: bool
-var mouse_sensitivity = 1
+var mouse_sensitivity = 0.5
 var selector_pos: Vector2 = Vector2(0,0)
 @export var radius: float
 @export var offset: Vector2
@@ -77,7 +77,7 @@ func _finilize_spell():
 		player.imbue(0)
 	if instant_cast:
 		Input.action_press("magic_cast")
-		
+
 
 func _input(event: InputEvent) -> void:
 	if !is_active || !cursor_active: 

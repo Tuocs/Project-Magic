@@ -28,7 +28,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_i1068")
 crystals = [NodePath("Edit Overlay/Crystal"), NodePath("Edit Overlay/Spell Details/Crystal2")]
-radius = 300.0
+radius = 200.0
 center_radius = 75.0
 
 [node name="Crosshair" type="ColorRect" parent="."]
@@ -47,6 +47,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Edit Overlay" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -293,24 +294,6 @@ offset_bottom = 325.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 
-[node name="up" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_left = 100.0
-offset_right = 200.0
-offset_bottom = 100.0
-mouse_filter = 2
-texture = ExtResource("10_x02v6")
-expand_mode = 1
-
-[node name="left" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 100.0
-offset_bottom = 200.0
-mouse_filter = 2
-texture = ExtResource("11_jv731")
-expand_mode = 1
-
 [node name="right" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
 layout_mode = 0
 offset_left = 200.0
@@ -327,6 +310,24 @@ offset_left = 100.0
 offset_top = 200.0
 offset_right = 200.0
 offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("11_jv731")
+expand_mode = 1
+
+[node name="left" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("10_x02v6")
+expand_mode = 1
+
+[node name="up" type="TextureRect" parent="Edit Overlay/Spell Details/Crystal2/large/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
 mouse_filter = 2
 texture = ExtResource("13_urajh")
 expand_mode = 1

@@ -3,7 +3,7 @@ extends Node3D
 @export var speed: float = 70.0
 @export var lifetime: float = 5.0
 var lived_time = 0
-var damage = 34
+var damage = 51
 var type: Unit.element_type
 
 func _physics_process(delta):
