@@ -16,6 +16,10 @@ run/main_scene="uid://o2ygfbwk5t5y"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/textures/icon.svg"
 
+[autoload]
+
+Globals="*res://globals.gd"
+
 [dotnet]
 
 project/assembly_name="Quick Cast Magic"

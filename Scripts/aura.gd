@@ -4,7 +4,7 @@ extends Node3D
 @export var detonatetime: float = 2.0
 var active = false
 var lived_time = 0
-var type: Unit.element_type
+var type: Globals.element_type
 
 func _process(delta: float) -> void:
 	lived_time += delta

@@ -5,5 +5,11 @@
 
 [node name="Main" instance=ExtResource("1_fetk5")]
 
+[node name="Enemy" parent="." index="1"]
+shield_type = 0
+
+[node name="Enemy2" parent="." index="2"]
+shield_type = 0
+
 [node name="Player" parent="." index="10" instance=ExtResource("2_a1rqv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)

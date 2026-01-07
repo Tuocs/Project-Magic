@@ -2,8 +2,7 @@ extends Unit
 
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var main_ui
-enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }
-@export var current_magic: MagicMode = MagicMode.NONE
+@export var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @onready var projectile_scene = preload("res://Prefabs/projectile.tscn")
 @onready var blast_scene = preload("res://Prefabs/blast.tscn")
 @onready var aura_scene = preload("res://Prefabs/aura.tscn")
@@ -11,7 +10,8 @@ enum MagicMode {NONE, PROJECTILE, AURA, STRUCTURE, BLAST }
 @export var shoot_transform_spot: Node3D
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
-var imbuement: element_type = element_type.NONE
+var imbuement: Globals.element_type = Globals.element_type.NONE
+var spell_mod_data: Array[bool] = []
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
 @export var instant_cast: bool
@@ -21,6 +21,8 @@ func _ready():
 	super()
 	main_ui = $"Cast UI"
 	main_ui.health_bar.value = current_health
+	spell_mod_data.resize(Globals.spell_mod.size())
+	spell_mod_data.fill(false)
 	if instant_cast:
 		main_ui.instant_cast = instant_cast
 
@@ -29,16 +31,15 @@ func _input(event):
 		main_ui.activate()
 	elif event.is_action_released("edit_magic"):
 		main_ui.deactivate()
+	elif event.is_action_pressed("escape"):
+		esc_pause()
 
 func _process(delta: float) -> void:
 	super(delta)
 	main_ui.mana_bar.value = current_mana
-	if Input.is_action_just_pressed("escape"):
-		esc_pause()
-	
-	#actually cast the magic
+#region Projectile
 	if Input.is_action_just_pressed("magic_cast") && !main_ui.is_active:
-		if current_magic == MagicMode.PROJECTILE: #-----------------------------PROJECTILE
+		if current_magic == Globals.spell_type.PROJECTILE: #-----------------------------PROJECTILE
 			if current_mana < spell_cost:
 				if instant_cast:
 					fizzle_spell()
@@ -48,13 +49,15 @@ func _process(delta: float) -> void:
 			add_sibling(spwn)
 			var color = element_colors[imbuement]
 			color.a = 0.5
-			set_color(color, spwn.get_child(0))
+			My_Globals.set_color(color, spwn.get_child(0))
 			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
-			current_magic = MagicMode.NONE
-		if current_magic == MagicMode.AURA:#-----------------------------------------AURA
+			current_magic = Globals.spell_type.NONE
+#endregion
+#region Aura
+		if current_magic == Globals.spell_type.AURA:#-----------------------------------------AURA
 			var mouse_pos: Vector2 = cam.get_viewport().get_mouse_position()
 			var from: Vector3 = cam.project_ray_origin(mouse_pos)
 			var to: Vector3 = from + cam.project_ray_normal(mouse_pos) * ray_length
@@ -62,7 +65,6 @@ func _process(delta: float) -> void:
 			var space_state: PhysicsDirectSpaceState3D = get_world_3d().get_direct_space_state()
 			var query := PhysicsRayQueryParameters3D.create(from, to)
 			var result: Dictionary = space_state.intersect_ray(query)
-
 			if result.has("position"):
 				if current_mana < spell_cost:
 					if instant_cast:
@@ -74,20 +76,22 @@ func _process(delta: float) -> void:
 				
 				var spwn = aura_scene.instantiate()
 				add_sibling(spwn)
-				set_color(element_colors[imbuement], spwn.get_child(0))
+				My_Globals.set_color(element_colors[imbuement], spwn.get_child(0))
 				var color = element_colors[imbuement]
 				color.a = 0.5
-				set_color(color, spwn.get_child(1).get_child(0))
+				My_Globals.set_color(color, spwn.get_child(1).get_child(0))
 				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
-				current_magic = MagicMode.NONE
+				current_magic = Globals.spell_type.NONE
 			else:
 				print("Raycast did not hit anything.")
 				if instant_cast:
 					fizzle_spell()
-		if current_magic == MagicMode.STRUCTURE:#---------------------------------Structure
+#endregion
+#region Structure
+		if current_magic == Globals.spell_type.STRUCTURE:#---------------------------------Structure
 			var mouse_pos: Vector2 = cam.get_viewport().get_mouse_position()
 			var from: Vector3 = cam.project_ray_origin(mouse_pos)
 			var to: Vector3 = from + cam.project_ray_normal(mouse_pos) * ray_length
@@ -107,17 +111,19 @@ func _process(delta: float) -> void:
 				
 				var spwn = structure_scene.instantiate()
 				add_sibling(spwn)
-				set_color(element_colors[imbuement], spwn.get_child(0))
+				My_Globals.set_color(element_colors[imbuement], spwn.get_child(0))
 				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
 				book_displays[current_magic-1].visible = false
-				current_magic = MagicMode.NONE
+				current_magic = Globals.spell_type.NONE
 			else:
 				print("Raycast did not hit anything.")
 				if instant_cast:
 					fizzle_spell()
-		if current_magic == MagicMode.BLAST:#------------------------------------BLAST
+#endregion
+#region Blast
+		if current_magic == Globals.spell_type.BLAST:#------------------------------------BLAST
 			if current_mana < spell_cost:
 				if instant_cast:
 					fizzle_spell()
@@ -127,12 +133,13 @@ func _process(delta: float) -> void:
 			add_sibling(spwn)
 			var color = element_colors[imbuement]
 			color.a = 0.5
-			set_color(color, spwn.get_child(0))
+			My_Globals.set_color(color, spwn.get_child(0))
 			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
 			book_displays[current_magic-1].visible = false
-			current_magic = MagicMode.NONE
+			current_magic = Globals.spell_type.NONE
+#endregion
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -151,29 +158,31 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	combine_move_and_knock(delta)
-	
-func imbue(type: element_type):
-	imbuement = type
-	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
-	set_color(element_colors[type], book_displays[current_magic-1])
 
-func prepare_spell(type: MagicMode):
+func set_spell_mods(_mods: Array[bool]):
+	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
+	spell_mod_data = _mods
+	for i in range(Globals.spell_mod.size()):
+		if i < 5 && _mods[i] == true:
+			imbuement = i as Globals.element_type
+			My_Globals.set_color(element_colors[i], book_displays[current_magic-1])
+
+func set_spell_type(_type: Globals.spell_type):
 	book_displays[current_magic-1].visible = false
-	current_magic = type
+	current_magic = _type
 	book_displays[current_magic-1].visible = true
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
-	
+
 func fizzle_spell():
 	book_displays[current_magic-1].visible = false
-	current_magic = MagicMode.NONE
-	imbuement = element_type.NONE
-	
+	current_magic = Globals.spell_type.NONE
+	imbuement = Globals.element_type.NONE
+	spell_mod_data.fill(false)
 
 func esc_pause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://main_menu.tscn")
-	
-	
+
 func update_hp():
 	main_ui.health_bar.value = float(current_health)/float(max_health)
 

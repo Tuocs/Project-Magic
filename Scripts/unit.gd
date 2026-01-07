@@ -8,10 +8,9 @@ var knockback_timer: float = 0.0
 var knockback_duration: float = 0.2
 @export var max_health: int = 100
 var current_health
-enum element_type {NONE, RED, YELLOW, BLUE, GREEN }
-var element_dmg_multipliers: Dictionary[element_type, int] = { element_type.NONE:1, element_type.RED:1, element_type.YELLOW:1, element_type.BLUE:1, element_type.GREEN:1}
+var element_dmg_multipliers: Dictionary[Globals.element_type, int] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
 @export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
-@export var shield_type: element_type
+@export var shield_type: Globals.element_type
 var shield_obj: Node3D
 @onready var shield_scene = preload("res://Prefabs/shield.tscn")
 @export var max_mana: float = 10
@@ -21,7 +20,7 @@ var current_mana: float = 5
 func _ready() -> void:
 	current_health = max_health
 	current_mana = max_mana
-	if shield_type != element_type.NONE:
+	if shield_type != Globals.element_type.NONE:
 		give_shield(shield_type)
 
 func _process(delta: float) -> void:
@@ -55,24 +54,24 @@ func apply_knockback(source_position: Vector3, power: float = 5):
 	knockback_velocity = ((global_position - source_position).normalized()+Vector3(0,1,0)) * power
 	knockback_timer = knockback_duration
 
-func give_shield(type: element_type):
+func give_shield(type: Globals.element_type):
 	shield_type = type
 	if shield_obj == null:
 		shield_obj = shield_scene.instantiate()
 		add_child(shield_obj)
 	var color = element_colors[type]
 	color.a = 0.5
-	set_color(color, shield_obj.get_child(0))
+	My_Globals.set_color(color, shield_obj.get_child(0))
 	shield_obj.scale = scale*1.2
 	shield_obj.position = Vector3(0,1,0)
 
 func destroy_shield():
-	shield_type = element_type.NONE
+	shield_type = Globals.element_type.NONE
 	if shield_obj != null:
 		shield_obj.queue_free()
 
-func hit(dmg_ammount: int = 1000, dmg_type: element_type = element_type.NONE, piercing: bool = false):
-	if shield_type == element_type.NONE:
+func hit(dmg_ammount: int = 1000, dmg_type: Globals.element_type = Globals.element_type.NONE, piercing: bool = false):
+	if shield_type == Globals.element_type.NONE:
 		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
 		print("hit enemy")
 	elif shield_type == dmg_type && piercing:
@@ -91,22 +90,11 @@ func update_hp():
 	pass
 
 func set_element_dmg_multipliers(N: int, R: int, Y: int, B: int, G: int):
-	element_dmg_multipliers[element_type.NONE]=N
-	element_dmg_multipliers[element_type.RED]=R
-	element_dmg_multipliers[element_type.YELLOW]=Y
-	element_dmg_multipliers[element_type.BLUE]=B
-	element_dmg_multipliers[element_type.GREEN]=G
-	
-func set_color(color: Color, target: MeshInstance3D = $MeshInstance3D):
-	var material = target.get_active_material(0)
-	if material == null:
-		material = StandardMaterial3D.new()
-	else:
-		material = material.duplicate() # Create a unique copy of the material
-	material.albedo_color = color
-	target.material_override = null
-	target.set_surface_override_material(0, material) # Assign the unique material back
-	print("origonal ", target.get_active_material(0).albedo_color, "target ", color)
+	element_dmg_multipliers[Globals.element_type.NONE]=N
+	element_dmg_multipliers[Globals.element_type.RED]=R
+	element_dmg_multipliers[Globals.element_type.YELLOW]=Y
+	element_dmg_multipliers[Globals.element_type.BLUE]=B
+	element_dmg_multipliers[Globals.element_type.GREEN]=G
 
 func kill():
 	queue_free()

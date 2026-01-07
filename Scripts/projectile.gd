@@ -1,10 +1,11 @@
 extends Node3D
 
+@onready var explosion_scene = preload("res://Prefabs/explosion.tscn")
 @export var speed: float = 70.0
 @export var lifetime: float = 5.0
 var lived_time = 0
 var damage = 51
-var type: Unit.element_type
+var type: Globals.element_type
 
 func _physics_process(delta):
 	lived_time += delta
@@ -15,7 +16,19 @@ func _physics_process(delta):
 func _on_area_entered(body):
 	print(body)
 	if body.is_in_group("Unit"):
-		body.hit(damage, type)
+		#body.hit(damage, type)
+		spawn_explosion()
 		queue_free()
 	if body.is_in_group("Terrain"):
+		spawn_explosion()
 		queue_free()
+
+func spawn_explosion():
+	var spwn = explosion_scene.instantiate()
+	add_sibling(spwn)
+	var color = $MeshInstance3D.get_active_material(0).albedo_color
+	color.a = 0.5
+	My_Globals.set_color(color, spwn.get_child(0))
+	spwn.type = type
+	spwn.global_position = global_position
+	spwn.transform.basis = global_transform.basis

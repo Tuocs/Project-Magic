@@ -3,7 +3,7 @@ extends Node3D
 @export var lifetime: float = 10.0
 var lived_time = 0
 @onready var nav = get_node("/root/Main/NavigationRegion3D")
-var type: Unit.element_type
+var type: Globals.element_type
 
 func _ready() -> void:
 	nav.bake_navigation_mesh()
