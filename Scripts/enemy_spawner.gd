@@ -2,7 +2,7 @@ extends Node3D
 
 @export var enemy_scene: PackedScene
 @export var target_enemy_count: int
-@onready var my_timer = $Timer # Assuming your Timer node is named "Timer"
+@onready var my_timer = $Timer
 
 func _ready():
 	my_timer.wait_time = randi_range(8,20)

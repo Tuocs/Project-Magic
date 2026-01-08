@@ -4,7 +4,7 @@ extends Control
 @onready var mana_bar = $"Mana Bar/TextureProgressBar"
 @onready var health_bar = $"HP Bar/TextureProgressBar"
 @onready var spell_details = $"Edit Overlay/Spell Details"
-@onready var selector = $"Edit Overlay/Center/small"
+@onready var selector = $"Edit Overlay/MainCursor"
 @onready var player = get_parent()
 var is_active = false
 var cursor_active = false
@@ -18,14 +18,19 @@ var spell_mod_data: Array[bool] = []
 #fake cursor stuff
 var mouse_sensitivity = 0.5
 var selector_pos: Vector2 = Vector2(0,0)
-@export var radius: float
-@export var offset: Vector2
-@export var center_radius: float
+@export var cursor_radius: float
+@export var cursor_offset: Vector2
+@export var center_zone_radius: float
+@export var crystal_spawn_radius: float
+var sections: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spell_mod_data.resize(Globals.spell_mod.size())
 	spell_mod_data.fill(false)
+	sections = crystals.size()-1
+	cursor_offset = (size/2) - Vector2(100,100)
+	move_crystals_in_circle()
 
 func activate():
 	is_active = true
@@ -40,7 +45,7 @@ func deactivate():
 	_finilize_spell()
 	is_active = false
 	selector_pos = Vector2.ZERO
-	selector.position = selector_pos + offset
+	selector.position = selector_pos + cursor_offset
 	edit_overlay.visible = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	spell_details.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -79,19 +84,18 @@ func _finilize_spell():
 func _input(event: InputEvent) -> void:
 	if !is_active || !cursor_active: 
 		return
-	var sections = crystals.size()-1
 	var section = get_section(sections)
 	if event is InputEventMouseMotion:
 		selector_pos.y += event.relative.y * mouse_sensitivity
 		selector_pos.x += event.relative.x * mouse_sensitivity
 		
-		selector_pos = selector_pos.limit_length(radius)
-		selector.position = selector_pos + offset
+		selector_pos = selector_pos.limit_length(cursor_radius)
+		selector.position = selector_pos + cursor_offset
 		match section:
 			#highlight section here
 			pass
 	if event.is_action_pressed("magic_cast"):
-		if (selector_pos.distance_to(Vector2.ZERO) < center_radius):
+		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
 			crystals[0].activate()
 		else:
 			crystals[section+1].activate()
@@ -114,3 +118,13 @@ func count_array_values(_array, _target_value) -> int:
 		if item == _target_value:
 			count += 1
 	return count
+
+func move_crystals_in_circle():
+	var angle_increment = TAU / sections # TAU is 2 * PI radians (360 degrees)
+
+	for i in range(sections):
+		var current_angle = (angle_increment * i) + deg_to_rad(54)
+		var x = cos(current_angle) * crystal_spawn_radius
+		var y = sin(current_angle) * crystal_spawn_radius
+		var spawn_position = cursor_offset + Vector2(x, y)
+		crystals[i+1].position = spawn_position
