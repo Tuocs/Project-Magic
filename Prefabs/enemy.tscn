@@ -46,3 +46,5 @@ transform = Transform3D(0.4, 0, 0, 0, 1.4, 0, 0, 0, 1, -0.70234823, -0.09337735,
 sorting_offset = 0.2
 centered = false
 texture = ExtResource("4_80imi")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

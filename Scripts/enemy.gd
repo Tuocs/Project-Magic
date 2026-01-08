@@ -1,9 +1,13 @@
 extends Unit
 
 
+@onready var projectile_scene = preload("res://Prefabs/projectile.tscn")
 @onready var player = get_node("/root/Main/Player")
 @onready var nav_agent = $NavigationAgent3D
+@onready var ray_cast_node = $RayCast3D
 @export var hp_fill: Sprite3D
+@export var is_ranged: bool = false
+@export var fire_range: float = 10
 
 
 func _ready() -> void:
@@ -11,7 +15,17 @@ func _ready() -> void:
 	randomize_elements_and_shield()
 
 func update_target_location(target_location):
-	nav_agent.set_target_position(target_location)
+	if is_ranged && global_position.distance_to(player.global_position) < fire_range && can_see_player():
+		nav_agent.set_target_position(global_position)
+		if is_ranged:
+			var spwn = projectile_scene.instantiate()
+			add_sibling(spwn)
+			My_Globals.set_color(Color(1.0, 1.0, 1.0, 1.0), spwn.get_child(0))
+			spwn.global_position = global_position
+			spwn.transform.basis = global_transform.basis
+			spwn.look_at(player.global_position)
+	else:
+		nav_agent.set_target_position(target_location)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,6 +51,14 @@ func _physics_process(delta: float) -> void:
 
 func update_hp():
 	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4
+	
+func can_see_player() -> bool:
+	ray_cast_node.target_position = player.global_position
+	if ray_cast_node.is_colliding():
+		var collider = ray_cast_node.get_collider()
+		if collider == player:
+			return true
+	return false
 
 func randomize_elements_and_shield() -> void:
 	if randi_range(0,4) == 4:
