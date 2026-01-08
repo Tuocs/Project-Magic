@@ -67,10 +67,12 @@ shadow_enabled = true
 
 [node name="Enemy" parent="." instance=ExtResource("4_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+is_ranged = true
 shield_type = 1
 
 [node name="Enemy2" parent="." instance=ExtResource("4_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -50)
+is_ranged = true
 shield_type = 1
 
 [node name="Spawner" parent="." instance=ExtResource("2_0xm2m")]

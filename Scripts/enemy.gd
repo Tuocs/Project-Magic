@@ -5,26 +5,37 @@ extends Unit
 @onready var player = get_node("/root/Main/Player")
 @onready var nav_agent = $NavigationAgent3D
 @onready var ray_cast_node = $RayCast3D
+@onready var fire_rate_timer = $AttackTimer
 @export var hp_fill: Sprite3D
 @export var is_ranged: bool = false
 @export var fire_range: float = 10
+@export var fire_rate: float = 1
+var can_shoot = true
+var speed_mod: float = 1
 
 
 func _ready() -> void:
 	super()
 	randomize_elements_and_shield()
+	fire_rate_timer.wait_time = 1/fire_rate
 
 func update_target_location(target_location):
-	if is_ranged && global_position.distance_to(player.global_position) < fire_range && can_see_player():
-		nav_agent.set_target_position(global_position)
-		if is_ranged:
+	if is_ranged && global_position.distance_to(player.global_position) < fire_range:
+		speed_mod = 0
+		if is_ranged && can_shoot:
+			fire_rate_timer.start()
+			can_shoot = false
 			var spwn = projectile_scene.instantiate()
 			add_sibling(spwn)
 			My_Globals.set_color(Color(1.0, 1.0, 1.0, 1.0), spwn.get_child(0))
-			spwn.global_position = global_position
+			spwn.hostile = true
+			spwn.speed = 40
+			spwn.damage = 5
+			spwn.global_position = global_position + Vector3(0,1.5,0)
 			spwn.transform.basis = global_transform.basis
-			spwn.look_at(player.global_position)
+			spwn.look_at(player.global_position + Vector3(0,1.5,0))
 	else:
+		speed_mod = 1
 		nav_agent.set_target_position(target_location)
 
 func _physics_process(delta: float) -> void:
@@ -38,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	update_target_location(player.global_position)
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
-	var new_velocity = (next_location - current_location).normalized() * SPEED
+	var new_velocity = (next_location - current_location).normalized() * SPEED * speed_mod
 	
 	velocity = new_velocity
 	look_at(player.global_position)
@@ -91,3 +102,6 @@ func randomize_elements_and_shield() -> void:
 			4:
 				give_shield(Globals.element_type.GREEN)
 		pass
+
+func _on_attack_timer_timeout() -> void:
+	can_shoot = true

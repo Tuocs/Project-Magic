@@ -15,6 +15,7 @@ material = SubResource("StandardMaterial3D_lgw76")
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("hp_fill") groups=["Enemy", "Unit"]]
 script = ExtResource("1_lgw76")
 hp_fill = NodePath("Node3D/fill")
+fire_range = 20.0
 SPEED = 4.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -48,3 +49,8 @@ centered = false
 texture = ExtResource("4_80imi")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

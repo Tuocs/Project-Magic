@@ -20,7 +20,7 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_kgmex"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_transform_spot", "shoot_rotate_spot", "book_displays") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_transform_spot", "shoot_rotate_spot", "book_displays") groups=["Player", "Unit"]]
 script = ExtResource("1_w1kf8")
 shoot_transform_spot = NodePath("Node3D/Node3D")
 shoot_rotate_spot = NodePath("SpringArm3D")

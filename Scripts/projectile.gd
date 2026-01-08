@@ -6,6 +6,7 @@ extends Node3D
 var lived_time = 0
 var damage = 51
 var type: Globals.element_type
+var hostile: bool = false
 
 func _physics_process(delta):
 	lived_time += delta
@@ -15,7 +16,11 @@ func _physics_process(delta):
 
 func _on_area_entered(body):
 	print(body)
-	if body.is_in_group("Unit"):
+	if !hostile && body.is_in_group("Enemy"):
+		#body.hit(damage, type)
+		spawn_explosion()
+		queue_free()
+	if hostile && body.is_in_group("Player"):
 		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
@@ -30,5 +35,6 @@ func spawn_explosion():
 	color.a = 0.5
 	My_Globals.set_color(color, spwn.get_child(0))
 	spwn.type = type
+	spwn.damage = damage
 	spwn.global_position = global_position
 	spwn.transform.basis = global_transform.basis
