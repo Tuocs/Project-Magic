@@ -460,6 +460,17 @@ mouse_filter = 2
 texture = ExtResource("5_prb1j")
 expand_mode = 1
 
+[node name="Highlight" type="TextureRect" parent="Edit Overlay"]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 299.0
+offset_right = 599.0
+offset_bottom = 346.0
+pivot_offset = Vector2(24, 24)
+mouse_filter = 2
+texture = ExtResource("14_cr8wu")
+expand_mode = 1
+
 [node name="Mana Bar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12

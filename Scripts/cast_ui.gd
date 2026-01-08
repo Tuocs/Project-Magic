@@ -5,6 +5,7 @@ extends Control
 @onready var health_bar = $"HP Bar/TextureProgressBar"
 @onready var spell_details = $"Edit Overlay/Spell Details"
 @onready var selector = $"Edit Overlay/MainCursor"
+@onready var highlight = $"Edit Overlay/Highlight"
 @onready var player = get_parent()
 var is_active = false
 var cursor_active = false
@@ -84,16 +85,17 @@ func _finilize_spell():
 func _input(event: InputEvent) -> void:
 	if !is_active || !cursor_active: 
 		return
-	var section = get_section(sections)
+	var section: int
 	if event is InputEventMouseMotion:
 		selector_pos.y += event.relative.y * mouse_sensitivity
 		selector_pos.x += event.relative.x * mouse_sensitivity
 		
 		selector_pos = selector_pos.limit_length(cursor_radius)
 		selector.position = selector_pos + cursor_offset
-		match section:
-			#highlight section here
-			pass
+		section = get_section(sections)
+		highlight.position = crystals[section+1].position + Vector2(75,75)
+		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
+			highlight.position = cursor_offset + Vector2(75,75)
 	if event.is_action_pressed("magic_cast"):
 		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
 			crystals[0].activate()
