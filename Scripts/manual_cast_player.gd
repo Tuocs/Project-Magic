@@ -11,9 +11,10 @@ var main_ui
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
 var imbuement: Globals.element_type = Globals.element_type.NONE
-var spell_mod_data: Array[bool] = []
+var spell_mods: Array[bool] = []
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
+var spell_charges: int = 0
 @export var instant_cast: bool
 @export var unlimited_cast: bool
 
@@ -21,8 +22,8 @@ func _ready():
 	super()
 	main_ui = $"Cast UI"
 	main_ui.health_bar.value = current_health
-	spell_mod_data.resize(Globals.spell_mod.size())
-	spell_mod_data.fill(false)
+	spell_mods.resize(Globals.spell_mod.size())
+	spell_mods.fill(false)
 	if instant_cast:
 		main_ui.instant_cast = instant_cast
 
@@ -53,8 +54,13 @@ func _process(delta: float) -> void:
 			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
-			book_displays[current_magic-1].visible = false
-			current_magic = Globals.spell_type.NONE
+			if spell_mods[Globals.spell_mod.EXTRA_DMG]:
+				spwn.damage = spwn.damage + 50
+			if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+				spwn.aoe = true
+			spell_charges -= 1
+			if spell_charges <= 0:
+					fizzle_spell()
 #endregion
 #region Aura
 		if current_magic == Globals.spell_type.AURA:#-----------------------------------------AURA
@@ -83,8 +89,13 @@ func _process(delta: float) -> void:
 				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
-				book_displays[current_magic-1].visible = false
-				current_magic = Globals.spell_type.NONE
+				if spell_mods[Globals.spell_mod.EXTRA_DMG]:
+					spwn.damage = spwn.damage + 50
+				if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+					spwn.scale *= 2.0
+				spell_charges -= 1
+				if spell_charges <= 0:
+					fizzle_spell()
 			else:
 				print("Raycast did not hit anything.")
 				if instant_cast:
@@ -115,8 +126,12 @@ func _process(delta: float) -> void:
 				spwn.type = imbuement
 				spwn.global_position = hit_position
 				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
-				book_displays[current_magic-1].visible = false
-				current_magic = Globals.spell_type.NONE
+				if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+					print("bigger structure")
+					spwn.scale *= 2.0
+				spell_charges -= 1
+				if spell_charges <= 0:
+					fizzle_spell()
 			else:
 				print("Raycast did not hit anything.")
 				if instant_cast:
@@ -137,8 +152,13 @@ func _process(delta: float) -> void:
 			spwn.type = imbuement
 			spwn.global_position = shoot_transform_spot.global_position
 			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
-			book_displays[current_magic-1].visible = false
-			current_magic = Globals.spell_type.NONE
+			if spell_mods[Globals.spell_mod.EXTRA_DMG]:
+				spwn.damage = spwn.damage + 50
+			if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+				spwn.scale *= 2.0
+			spell_charges -= 1
+			if spell_charges <= 0:
+				fizzle_spell()
 #endregion
 
 func _physics_process(delta: float) -> void:
@@ -161,7 +181,11 @@ func _physics_process(delta: float) -> void:
 
 func set_spell_mods(_mods: Array[bool]):
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
-	spell_mod_data = _mods
+	spell_mods = _mods.duplicate()
+	print("set_spell_mods", spell_mods)
+	spell_charges = 1
+	if spell_mods[Globals.spell_mod.EXTRA_CHARGE]:
+		spell_charges = 3
 	for i in range(Globals.spell_mod.size()):
 		if i < 5 && _mods[i] == true:
 			imbuement = i as Globals.element_type
@@ -174,10 +198,11 @@ func set_spell_type(_type: Globals.spell_type):
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 
 func fizzle_spell():
+	print("fizzle")
 	book_displays[current_magic-1].visible = false
 	current_magic = Globals.spell_type.NONE
 	imbuement = Globals.element_type.NONE
-	spell_mod_data.fill(false)
+	spell_mods.fill(false)
 
 func esc_pause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

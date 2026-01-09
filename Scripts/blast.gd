@@ -4,6 +4,7 @@ extends Node3D
 @export var lifetime: float = 10.0
 var lived_time = 0
 var type: Globals.element_type
+var damage = 0
 
 func _physics_process(delta):
 	lived_time += delta
@@ -12,10 +13,10 @@ func _physics_process(delta):
 	global_position += -global_transform.basis.z.normalized() * speed * delta
 
 func _on_area_entered(body):
-	print(body)
+	print("blast hit ",body)
 	if body.is_in_group("Unit"):
 		body.apply_knockback(position, 15)
-		
+		body.hit(damage, type)
 func set_color(color: Color):
 	var mesh_instance = $MeshInstance3D
 	var material = mesh_instance.get_active_material(0)

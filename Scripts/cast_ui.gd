@@ -40,6 +40,7 @@ func activate():
 	selector.visible = true
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	highlight.position = cursor_offset + Vector2(72,72)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func deactivate():
@@ -94,17 +95,17 @@ func _input(event: InputEvent) -> void:
 		selector.position = selector_pos + cursor_offset
 		section = get_section(sections)
 		
-		highlight.position = crystals[section+1].position + Vector2(75,75)
-		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
-			highlight.position = cursor_offset + Vector2(75,75)
+		highlight.position = crystals[section+1].position + Vector2(72,72)
+		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
+		if spell_details.visible == false:
+			highlight.position = cursor_offset + Vector2(72,72)
 	
 	if event.is_action_pressed("magic_cast"):
 		section = get_section(sections)
-		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
-			print("opening crystal 0")
+		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
+		if spell_details.visible == false:
 			crystals[0].activate()
 		else:
-			print("opening crystal ", section+1)
 			crystals[section+1].activate()
 		cursor_active = false
 		selector.visible = false

@@ -5,6 +5,7 @@ extends Node3D
 @export var lifetime: float = 5.0
 var lived_time = 0
 var damage = 51
+var aoe: bool = false
 var type: Globals.element_type
 var hostile: bool = false
 
@@ -38,3 +39,5 @@ func spawn_explosion():
 	spwn.damage = damage
 	spwn.global_position = global_position
 	spwn.transform.basis = global_transform.basis
+	if aoe:
+		spwn.scale *= 2.0

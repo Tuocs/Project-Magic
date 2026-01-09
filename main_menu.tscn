@@ -13,6 +13,7 @@ script = ExtResource("1_06t4h")
 versionText = NodePath("Label")
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 31.0
 offset_top = 32.0

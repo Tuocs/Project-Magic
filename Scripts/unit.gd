@@ -77,6 +77,7 @@ func hit(dmg_ammount: int = 1000, dmg_type: Globals.element_type = Globals.eleme
 	elif shield_type == dmg_type && piercing:
 		print("hit shield")
 		destroy_shield()
+		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
 	else:
 		print("hit blocked")
 	

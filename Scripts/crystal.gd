@@ -30,7 +30,7 @@ func _ready() -> void:
 	spawn_rects_in_circle()
 
 func activate():
-	print("opened crystal")
+	#print("opened crystal")
 	is_active = true
 	cursor_pos = Vector2.ZERO
 	expanded_visuals.visible = true

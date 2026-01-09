@@ -5,6 +5,7 @@ extends Node3D
 var active = false
 var lived_time = 0
 var type: Globals.element_type
+var damage = 0
 
 func _process(delta: float) -> void:
 	lived_time += delta
@@ -15,9 +16,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func _on_area_entered(body):
-	print(body)
+	print("aura hit ", body)
 	if body.is_in_group("Unit"):
-		body.hit(0, type, true)
-		queue_free()
-	if body.is_in_group("Terrain"):
+		body.hit(damage, type, true)
 		queue_free()
