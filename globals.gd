@@ -2,7 +2,7 @@ extends Node
 class_name My_Globals
 
 enum spell_type {NONE, PROJECTILE, AURA, STRUCTURE, BLAST}
-enum spell_mod {NONE, COLOR_RED, COLOR_YELLOW, COLOR_BLUE, COLOR_GREEN}
+enum spell_mod {NONE, COLOR_RED, COLOR_YELLOW, COLOR_BLUE, COLOR_GREEN, EXTRA_CHARGE, EXTRA_DMG, EXTRA_AOE}
 enum element_type {NONE, RED, YELLOW, BLUE, GREEN}
 
 static func set_color(color: Color, target: MeshInstance3D):

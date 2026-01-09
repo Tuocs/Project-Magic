@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxblkj71ril0k"]
+
+[ext_resource type="Script" uid="uid://b1op4eiawmw4b" path="res://Scripts/crystal.gd" id="1_kckhq"]
+[ext_resource type="Texture2D" uid="uid://dmphvpl2s3od8" path="res://Assets/textures/purple_slot.png" id="2_ele40"]
+[ext_resource type="Texture2D" uid="uid://cdb8br1wx1k3h" path="res://Assets/textures/Circle.png" id="7_dym0c"]
+[ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="8_vsvub"]
+[ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="9_2w086"]
+
+[node name="Spell Crystal" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = 8.0
+offset_right = -2.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+script = ExtResource("1_kckhq")
+cursor_radius = 125.0
+cursor_offset = Vector2(100, 100)
+
+[node name="Button" type="TextureButton" parent="."]
+modulate = Color(0.43714952, 0.42687365, 0.5812043, 1)
+layout_mode = 0
+offset_left = 77.0
+offset_top = 75.0
+offset_right = 85.0
+offset_bottom = 83.0
+scale = Vector2(5.8800025, 5.8800025)
+texture_normal = ExtResource("2_ele40")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="largeBG" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_dym0c")
+expand_mode = 1
+
+[node name="Edit Overlay" type="Control" parent="largeBG"]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 325.0
+offset_bottom = 325.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="selector" type="TextureRect" parent="largeBG/Edit Overlay"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("8_vsvub")
+expand_mode = 1
+
+[node name="smallCursor" type="TextureRect" parent="largeBG/Edit Overlay"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 147.99994
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.525761, 0.525761)
+texture = ExtResource("9_2w086")
+expand_mode = 1

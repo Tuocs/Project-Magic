@@ -10,20 +10,21 @@ extends Control
 var is_active = false
 var cursor_active = false
 var instant_cast: bool
+var sections: int = 0
 
-#spell stuff
+@export_category("Spell Settings")
 @export var crystals: Array[Control]
 var spell_type_data: Globals.spell_type = Globals.spell_type.NONE
 var spell_mod_data: Array[bool] = []
+@export var crystal_spawn_radius: float
 
-#fake cursor stuff
+@export_category("Mouse Settings")
 var mouse_sensitivity = 0.5
 var selector_pos: Vector2 = Vector2(0,0)
 @export var cursor_radius: float
 @export var cursor_offset: Vector2
 @export var center_zone_radius: float
-@export var crystal_spawn_radius: float
-var sections: int = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,6 +41,7 @@ func activate():
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func deactivate():
 	if !is_active:
 		return
@@ -57,15 +59,14 @@ func deactivate():
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	spell_mod_data.fill(false)
 
-func _imbuement_crystal_charge(_type: int):
-	spell_mod_data[_type] = true
-	_open_spell_details()
-	
-func _spell_crystal_charge(_type: int):
-	spell_type_data = _type as Globals.spell_type
-	_open_spell_details()
+func _mod_crystal_charge(_mod: Globals.spell_mod):
+	spell_mod_data[_mod] = true
+	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
+	cursor_active = true
+	selector.visible = true
 
-func _open_spell_details():
+func _type_crystal_charge(_type: Globals.spell_type):
+	spell_type_data = _type
 	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
 	spell_details.visible = true
 	cursor_active = true
@@ -89,21 +90,24 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		selector_pos.y += event.relative.y * mouse_sensitivity
 		selector_pos.x += event.relative.x * mouse_sensitivity
-		
 		selector_pos = selector_pos.limit_length(cursor_radius)
 		selector.position = selector_pos + cursor_offset
 		section = get_section(sections)
+		
 		highlight.position = crystals[section+1].position + Vector2(75,75)
 		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
 			highlight.position = cursor_offset + Vector2(75,75)
+	
 	if event.is_action_pressed("magic_cast"):
+		section = get_section(sections)
 		if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius):
+			print("opening crystal 0")
 			crystals[0].activate()
 		else:
+			print("opening crystal ", section+1)
 			crystals[section+1].activate()
 		cursor_active = false
 		selector.visible = false
-
 
 func get_section(section_count: int) -> int:
 	if selector_pos == Vector2.ZERO:
@@ -123,7 +127,6 @@ func count_array_values(_array, _target_value) -> int:
 
 func move_crystals_in_circle():
 	var angle_increment = TAU / sections # TAU is 2 * PI radians (360 degrees)
-
 	for i in range(sections):
 		var current_angle = (angle_increment * i) + deg_to_rad(54)
 		var x = cos(current_angle) * crystal_spawn_radius
