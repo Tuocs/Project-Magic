@@ -51,7 +51,7 @@ offset_right = 604.0
 grow_vertical = 0
 scale = Vector2(0.9972013, 1)
 text = "* WASD/Space for movement
-* alt/shift/ctrl/Mouse2 for spell menu (hold/toggle option in top right)
+* alt/shift/ctrl/Mouse2 for spell menu (hold/toggle option in bottom right)
 * Hold Mouse1 on crystal and release on wanted mode for spell mods
 * Mouse1 for casting prepared spells
 
