@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
-versionText = NodePath("Version Text")
+versionText = NodePath("MarginContainer3/Version Text")
 
 [node name="Play" type="Button" parent="."]
 layout_mode = 1
@@ -20,55 +20,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -74.0
-offset_top = -102.0
+offset_top = -77.0
 offset_right = 75.0
-offset_bottom = -71.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 36
 text = "Play"
-
-[node name="Version Text" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.9972013, 1)
-text = "0.0.0"
-
-[node name="Help Text" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -179.0
-offset_right = 604.0
-grow_vertical = 0
-scale = Vector2(0.9972013, 1)
-text = "* WASD/Space for movement
-* alt/shift/ctrl/Mouse2 for spell menu (hold/toggle option in bottom right)
-* Hold Mouse1 on crystal and release on wanted mode for spell mods
-* Mouse1 for casting prepared spells
-
-* Use aoe ground spell with matching color to get rid of shields
-*Use spell with dmg mod or projectile spell with matching color to hit enemies"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -158.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_right = 250.0
+offset_bottom = 158.0
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
@@ -159,6 +122,69 @@ offset_left = 5.0
 offset_right = 105.0
 grow_vertical = 2
 text = "Infinite Charge"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -334.5
+offset_top = -239.0
+offset_right = 334.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Help Text" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+text = "* WASD/Space for movement
+* alt/shift/ctrl/Mouse2 for spell menu (hold/toggle option in top left)
+* Hold Mouse1 on crystal and release on wanted mode for spell mods
+* Mouse1 for casting prepared spells
+
+* Use aoe ground spell with matching color to get rid of shields
+* Use spell with dmg mod or projectile spell with matching color to hit enemies"
+
+[node name="Panel" type="Panel" parent="MarginContainer2/Help Text"]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0028065
+offset_right = -1.0028076
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "* WASD/Space for movement
+* alt/shift/ctrl/Mouse2 for spell menu (hold/toggle option in bottom right)
+* Hold Mouse1 on crystal and release on wanted mode for spell mods
+* Mouse1 for casting prepared spells
+
+* Use aoe ground spell with matching color to get rid of shields
+* Use spell with dmg mod or projectile spell with matching color to hit enemies"
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.72998
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Version Text" type="Label" parent="MarginContainer3"]
+layout_mode = 2
+text = "0.0.0"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="Play" to="." method="_on_button_2_pressed"]
 [connection signal="toggled" from="MarginContainer/Panel/MarginContainer/VBoxContainer/Panel/Toggle UI" to="." method="_on_toggle_ui_toggled"]
