@@ -2,6 +2,7 @@ extends Control
 
 @onready var edit_overlay = $"Edit Overlay"
 @onready var mana_bar = $"Mana Bar/TextureProgressBar"
+@onready var cost_bar = $"Mana Bar/TextureProgressBar2"
 @onready var health_bar = $"HP Bar/TextureProgressBar"
 @onready var spell_details = $"Edit Overlay/Spell Details"
 @onready var selector = $"Edit Overlay/MainCursor"
@@ -9,7 +10,6 @@ extends Control
 @onready var player = get_parent()
 var is_active = false
 var cursor_active = false
-var instant_cast: bool
 var sections: int = 0
 
 @export_category("Spell Settings")
@@ -33,6 +33,7 @@ func _ready() -> void:
 	sections = crystals.size()-1
 	cursor_offset = (size/2) - Vector2(100,100)
 	move_crystals_in_circle()
+	cost_bar.value = 0
 
 func activate():
 	is_active = true
@@ -41,6 +42,7 @@ func activate():
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	highlight.position = cursor_offset + Vector2(72,72)
+	cost_bar.value = 0
 	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func deactivate():
@@ -60,28 +62,36 @@ func deactivate():
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	spell_mod_data.fill(false)
 
-func _mod_crystal_charge(_mod: Globals.spell_mod):
-	spell_mod_data[_mod] = true
-	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
-	cursor_active = true
-	selector.visible = true
-
-func _type_crystal_charge(_type: Globals.spell_type):
-	spell_type_data = _type
+func _crystal_charge():
 	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
 	spell_details.visible = true
 	cursor_active = true
 	selector.visible = true
+	for i in range(crystals.size()):
+		if i == 0 && crystals[i].charged_option != null:
+			cost_bar.value = 1
+		elif crystals[i].charged_option != null:
+			cost_bar.value += 1
 
 func _finilize_spell():
+	for i in range(crystals.size()):
+		if i == 0 && crystals[i].charged_option != null:
+			spell_type_data = crystals[i].charged_option
+			crystals[i].charged_option = null
+			cost_bar.value = 1
+		elif crystals[i].charged_option != null:
+			spell_mod_data[crystals[i].charged_option] = true
+			crystals[i].charged_option = null
+			cost_bar.value += 1
 	if spell_type_data == Globals.spell_type.NONE:
 		return;
 	player.spell_cost = 0
 	player.spell_cost += 1
 	player.set_spell_type(spell_type_data)
 	player.spell_cost += count_array_values(spell_mod_data,true)
+	cost_bar.value = player.spell_cost
 	player.set_spell_mods(spell_mod_data)
-	if instant_cast:
+	if Globals.instant_spell_cast:
 		Input.action_press("magic_cast")
 
 func _input(event: InputEvent) -> void:

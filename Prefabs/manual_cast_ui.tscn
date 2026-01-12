@@ -330,6 +330,25 @@ texture_under = ExtResource("4_usivk")
 texture_over = ExtResource("4_iglr6")
 texture_progress = ExtResource("6_6b4wp")
 
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="Mana Bar"]
+modulate = Color(0.30002594, 3.5376102e-06, 0.20709708, 0.6431373)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.5
+offset_right = 180.5
+offset_bottom = 14.0
+grow_horizontal = 2
+scale = Vector2(2.345, 2.345)
+pivot_offset = Vector2(180.5, 0)
+max_value = 10.0
+step = 0.01
+value = 3.0
+texture_over = ExtResource("4_iglr6")
+texture_progress = ExtResource("6_6b4wp")
+
 [node name="HP Bar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 12

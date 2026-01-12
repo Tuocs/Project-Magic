@@ -6,6 +6,7 @@ var texture_rects: Array[TextureRect]
 var sections: int = 0
 @export var cast_ui: Control
 @onready var expanded_visuals = $"largeBG"
+var has_charged
 
 @export_category("Mouse Settings")
 @export var mouse_sensitivity = 1
@@ -23,6 +24,7 @@ var cursor_pos: Vector2 = Vector2(0,0)
 @export_category("Main Crystal Settings")
 @export var is_main_crystal: bool = false
 @export var spell_types: Array[Globals.spell_type]
+var charged_option
 
 
 func _ready() -> void:
@@ -51,9 +53,10 @@ func deactivate():
 
 func charge(_section: int):
 	if is_main_crystal:
-		cast_ui._type_crystal_charge(spell_types[_section])
+		charged_option = spell_types[_section]
 	else:
-		cast_ui._mod_crystal_charge(spell_mods[_section])
+		charged_option = spell_mods[_section]
+	cast_ui._crystal_charge()
 	$Button.texture_normal = charge_textures[_section+1]
 	deactivate()
 
@@ -64,6 +67,9 @@ func _input(event: InputEvent) -> void:
 	if !is_active: 
 		return
 	var section = get_section(sections)
+	if section == -1:
+		print("no selection, defaulting to 1")
+		section = 1
 	if event is InputEventMouseMotion:
 		cursor_pos.y += event.relative.y * mouse_sensitivity
 		cursor_pos.x += event.relative.x * mouse_sensitivity
