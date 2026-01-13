@@ -2,7 +2,7 @@ extends Unit
 
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var cast_ui
-@export var current_magic: Globals.spell_type = Globals.spell_type.NONE
+var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @onready var projectile_scene = preload("res://Prefabs/projectile.tscn")
 @onready var blast_scene = preload("res://Prefabs/blast.tscn")
 @onready var aura_scene = preload("res://Prefabs/aura.tscn")
@@ -15,7 +15,7 @@ var spell_mods: Array[bool] = []
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
 var spell_charges: int = 0
-@export var unlimited_cast: bool
+var unlimited_cast: bool
 
 func _ready():
 	super()

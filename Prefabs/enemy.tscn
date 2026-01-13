@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jfpqutml3jl"]
+[gd_scene load_steps=9 format=3 uid="uid://7jfpqutml3jl"]
 
 [ext_resource type="Script" uid="uid://dg8ky2ue6d3ps" path="res://Scripts/enemy.gd" id="1_lgw76"]
 [ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="2_30yes"]
@@ -11,6 +11,8 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("StandardMaterial3D_lgw76")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_30yes"]
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("hp_fill") groups=["Enemy", "Unit"]]
 script = ExtResource("1_lgw76")
@@ -52,5 +54,10 @@ texture = ExtResource("4_80imi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="HatMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 1.9006385, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_30yes")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -18,6 +18,8 @@ func _ready() -> void:
 	super()
 	randomize_elements_and_shield()
 	fire_rate_timer.wait_time = 1/fire_rate
+	if is_ranged:
+		$HatMesh.visible = true
 
 func update_target_location(target_location):
 	if is_ranged && global_position.distance_to(player.global_position) < fire_range:
@@ -72,6 +74,7 @@ func can_see_player() -> bool:
 	return false
 
 func randomize_elements_and_shield() -> void:
+	#set base color
 	if randi_range(0,4) == 4:
 		match randi_range(0,4):
 			0:
@@ -89,6 +92,7 @@ func randomize_elements_and_shield() -> void:
 				set_element_dmg_multipliers(0,0,0,0,1)
 				My_Globals.set_color(Color(0.0, 1.0, 0.0, 1.0), $MeshInstance3D)
 		pass
+	#set shield color
 	if randi_range(0,4) == 4:
 		match randi_range(0,4):
 			0:
@@ -102,6 +106,14 @@ func randomize_elements_and_shield() -> void:
 			4:
 				give_shield(Globals.element_type.GREEN)
 		pass
+	#set attack type
+	match randi_range(0,4):
+		2:
+			is_ranged = true
+		3:
+			is_ranged = true
+		4:
+			is_ranged = true
 
 func _on_attack_timer_timeout() -> void:
 	can_shoot = true

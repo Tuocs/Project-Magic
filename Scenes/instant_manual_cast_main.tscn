@@ -7,4 +7,3 @@
 
 [node name="Player" parent="." index="10" instance=ExtResource("2_lr4ee")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
-instant_cast = true
