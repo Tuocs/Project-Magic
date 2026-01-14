@@ -1,6 +1,6 @@
 extends Control
 
-#@export_category("General Settings")
+
 var is_active = false
 var texture_rects: Array[TextureRect]
 var sections: int = 0

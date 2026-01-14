@@ -139,7 +139,7 @@ func count_array_values(_array, _target_value) -> int:
 func move_crystals_in_circle():
 	var angle_increment = TAU / sections # TAU is 2 * PI radians (360 degrees)
 	for i in range(sections):
-		var current_angle = (angle_increment * i) + deg_to_rad(54)
+		var current_angle = (angle_increment * i)# + deg_to_rad(54)
 		var x = cos(current_angle) * crystal_spawn_radius
 		var y = sin(current_angle) * crystal_spawn_radius
 		var spawn_position = cursor_offset + Vector2(x, y)

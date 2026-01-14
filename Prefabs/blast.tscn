@@ -5,7 +5,8 @@
 
 [sub_resource type="PrismMesh" id="PrismMesh_rcayi"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ckmgq"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcayi"]
+size = Vector3(2.725, 1.52, 2)
 
 [node name="Blast" type="Area3D"]
 script = ExtResource("1_rcayi")
@@ -18,8 +19,8 @@ material_override = ExtResource("2_rcayi")
 mesh = SubResource("PrismMesh_rcayi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.6, 0, 0, 0, 1.5, 0, 0, -1)
-shape = SubResource("BoxShape3D_ckmgq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.855)
+shape = SubResource("BoxShape3D_rcayi")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_area_entered"]

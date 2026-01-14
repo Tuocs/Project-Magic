@@ -4,6 +4,9 @@ extends Node3D
 var lived_time = 0
 @onready var nav = get_node("/root/Main/NavigationRegion3D")
 var type: Globals.element_type
+var damage = 0
+@onready var clear_color_target
+@onready var solid_color_target = $MeshInstance3D
 
 func _ready() -> void:
 	nav.bake_navigation_mesh()

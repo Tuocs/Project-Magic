@@ -8,6 +8,8 @@ var damage = 51
 var aoe: bool = false
 var type: Globals.element_type
 var hostile: bool = false
+@onready var clear_color_target = $MeshInstance3D
+@onready var solid_color_target
 
 func _physics_process(delta):
 	lived_time += delta
@@ -21,11 +23,13 @@ func _on_area_entered(body):
 		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
-	if hostile && body.is_in_group("Player"):
+	elif hostile && body.is_in_group("Player"):
 		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
-	if body.is_in_group("Terrain"):
+	if body.is_in_group("Reflect"):
+		global_transform.basis.z = -global_transform.basis.z
+	elif body.is_in_group("Terrain"):
 		spawn_explosion()
 		queue_free()
 
@@ -41,3 +45,14 @@ func spawn_explosion():
 	spwn.transform.basis = global_transform.basis
 	if aoe:
 		spwn.scale *= 2.0
+
+func set_color(color: Color):
+	color.a = 0.5
+	var mesh_instance = $MeshInstance3D
+	var material = mesh_instance.get_active_material(0)
+	if material == null:
+		material = StandardMaterial3D.new()
+	else:
+		material = material.duplicate() # Create a unique copy of the material
+	material.albedo_color = color
+	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back

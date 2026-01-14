@@ -108,8 +108,12 @@ func randomize_elements_and_shield() -> void:
 		pass
 	#set attack type
 	match randi_range(0,4):
+		0:
+			is_ranged = false
+		1:
+			is_ranged = false
 		2:
-			is_ranged = true
+			is_ranged = false
 		3:
 			is_ranged = true
 		4:

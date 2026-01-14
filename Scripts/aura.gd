@@ -6,6 +6,8 @@ var active = false
 var lived_time = 0
 var type: Globals.element_type
 var damage = 0
+@onready var clear_color_target = $"Area3D/hit zone"
+@onready var solid_color_target = $"warning zone"
 
 func _process(delta: float) -> void:
 	lived_time += delta
@@ -20,3 +22,23 @@ func _on_area_entered(body):
 	if body.is_in_group("Unit"):
 		body.hit(damage, type, true)
 		queue_free()
+
+func set_color(color: Color):
+	var mesh_instance = $"warning zone"
+	var material = mesh_instance.get_active_material(0)
+	if material == null:
+		material = StandardMaterial3D.new()
+	else:
+		material = material.duplicate() # Create a unique copy of the material
+	material.albedo_color = color
+	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back
+	
+	color.a = 0.5
+	mesh_instance = $"Area3D/hit zone"
+	material = mesh_instance.get_active_material(0)
+	if material == null:
+		material = StandardMaterial3D.new()
+	else:
+		material = material.duplicate() # Create a unique copy of the material
+	material.albedo_color = color
+	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back

@@ -5,6 +5,8 @@ extends Node3D
 var lived_time = 0
 var type: Globals.element_type
 var damage = 0
+@onready var clear_color_target = $MeshInstance3D
+@onready var solid_color_target
 
 func _physics_process(delta):
 	lived_time += delta
@@ -15,9 +17,11 @@ func _physics_process(delta):
 func _on_area_entered(body):
 	print("blast hit ",body)
 	if body.is_in_group("Unit"):
-		body.apply_knockback(position, 15)
+		body.apply_knockback(position, 20)
 		body.hit(damage, type)
+
 func set_color(color: Color):
+	color.a = 0.5
 	var mesh_instance = $MeshInstance3D
 	var material = mesh_instance.get_active_material(0)
 	if material == null:

@@ -31,6 +31,7 @@ Enemy=""
 Unit=""
 Terrain=""
 Player=""
+Reflect=""
 
 [input]
 

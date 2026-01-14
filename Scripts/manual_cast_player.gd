@@ -10,6 +10,7 @@ var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @export var shoot_transform_spot: Node3D
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
+var spread_count: int = 0
 var imbuement: Globals.element_type = Globals.element_type.NONE
 var spell_mods: Array[bool] = []
 var ray_length: float = 1000.0 # Maximum distance of the raycast
@@ -38,145 +39,109 @@ func _input(event):
 	if event.is_action_pressed("escape"):
 		esc_pause()
 
+
+#region Spells
+	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
+		if current_magic != Globals.spell_type.NONE:
+			if (!base_spell_costs()):
+				return
+			spread_count = 2
+		if current_magic == Globals.spell_type.PROJECTILE:
+			cast_projectile()
+		elif current_magic == Globals.spell_type.AURA:
+			cast_aura()
+		elif current_magic == Globals.spell_type.STRUCTURE:
+			cast_structure()
+		elif current_magic == Globals.spell_type.BLAST:
+			cast_blast()
+		if spell_charges <= 0:
+			fizzle_spell()
+
+func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJECTILE
+	var pos = shoot_transform_spot.global_position
+	var rot = shoot_rotate_spot.global_transform.basis
+	var spwn = base_spell_effects(projectile_scene, pos, rot)
+	spwn.rotation_degrees.y += randf_range(-inaccuracy, inaccuracy)
+	if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+		spwn.aoe = true
+	if spread_count > 0:
+		spread_count -= 1
+		cast_projectile(30)
+func cast_aura(inaccuracy: float = 0):#-----------------------------------------AURA
+	var viewport_size: Vector2 = get_viewport().size
+	var screen_center_pos: Vector2 = Vector2(viewport_size.x / 2.0, viewport_size.y / 2.0)
+	var from: Vector3 = cam.project_ray_origin(screen_center_pos)
+	var to: Vector3 = from + cam.project_ray_normal(screen_center_pos) * ray_length
+	var space_state: PhysicsDirectSpaceState3D = get_world_3d().get_direct_space_state()
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	var result: Dictionary = space_state.intersect_ray(query)
+	if result.has("position"):
+		var pos: Vector3 = result["position"]
+		pos += Vector3(randf_range(-inaccuracy, inaccuracy), 0, randf_range(-inaccuracy, inaccuracy))
+		var rot = shoot_rotate_spot.get_parent().global_transform.basis
+		var spwn = base_spell_effects(aura_scene, pos, rot)
+		if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+			spwn.scale *= 2.0
+		if spread_count > 0:
+			spread_count -= 1
+			cast_aura(5)
+	else:
+		print("Raycast did not hit anything.")
+		spread_count = 0
+		if Globals.instant_spell_cast:
+			fizzle_spell()
+func cast_structure(inaccuracy: float = 0):#---------------------------------Structure
+	var forward_direction = global_transform.basis.z.normalized()
+	var pos = global_transform.origin - forward_direction.rotated(Vector3.UP, randf_range(-inaccuracy, inaccuracy)) * 6
+	var rot = shoot_rotate_spot.get_parent().global_transform.basis
+	var spwn = base_spell_effects(structure_scene, pos, rot)
+	if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+		spwn.scale *= 2.0
+	if spread_count > 0:
+		spread_count -= 1
+		cast_structure(60)
+func cast_blast(inaccuracy: float = 0):#------------------------------------BLAST
+	var pos = shoot_transform_spot.global_position
+	var rot = shoot_rotate_spot.global_transform.basis
+	var spwn = base_spell_effects(blast_scene, pos, rot)
+	spwn.rotation_degrees.y += randf_range(-inaccuracy, inaccuracy)
+	if spell_mods[Globals.spell_mod.EXTRA_AOE]:
+		spwn.scale *= 2.0
+	if spread_count > 0:
+		spread_count -= 1
+		cast_blast(60)
+
+func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
+	var spwn = scene.instantiate()
+	add_sibling(spwn)
+	var color = element_colors[imbuement]	
+	spwn.set_color(color)
+	spwn.type = imbuement
+	spwn.global_position = pos
+	spwn.transform.basis = rot
+	if spell_mods[Globals.spell_mod.REFLECT]:
+		spwn.add_to_group("Reflect")
+	if spell_mods[Globals.spell_mod.EXTRA_DMG]:
+		spwn.damage = spwn.damage + 50
+	return spwn
+
+func base_spell_costs() -> bool:
+	if current_mana < spell_cost:
+		if Globals.instant_spell_cast:
+			fizzle_spell()
+		return false
+	current_mana -= spell_cost
+	if !Globals.infinite_spell_charge:
+		spell_cost = 0
+		cast_ui.cost_bar.value = 0
+	spell_charges -= 1
+	return true
+#endregion
+
+
 func _process(delta: float) -> void:
 	super(delta)
 	cast_ui.mana_bar.value = current_mana
-#region Projectile
-	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
-		if current_magic == Globals.spell_type.PROJECTILE: #-----------------------------PROJECTILE
-			if current_mana < spell_cost:
-				if Globals.instant_spell_cast:
-					fizzle_spell()
-				return;
-			current_mana -= spell_cost
-			var spwn = projectile_scene.instantiate()
-			add_sibling(spwn)
-			var color = element_colors[imbuement]
-			color.a = 0.5
-			My_Globals.set_color(color, spwn.get_child(0))
-			spwn.type = imbuement
-			spwn.global_position = shoot_transform_spot.global_position
-			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
-			if spell_mods[Globals.spell_mod.EXTRA_DMG]:
-				spwn.damage = spwn.damage + 50
-			if spell_mods[Globals.spell_mod.EXTRA_AOE]:
-				spwn.aoe = true
-			spell_charges -= 1
-			if !Globals.infinite_spell_charge:
-				spell_cost = 0
-				cast_ui.cost_bar.value = 0
-			if spell_charges <= 0:
-					fizzle_spell()
-#endregion
-#region Aura
-		if current_magic == Globals.spell_type.AURA:#-----------------------------------------AURA
-			#var mouse_pos: Vector2 = cam.get_viewport().get_mouse_position()
-			var viewport_size: Vector2 = get_viewport().size
-			var screen_center_pos: Vector2 = Vector2(viewport_size.x / 2.0, viewport_size.y / 2.0)
-			var from: Vector3 = cam.project_ray_origin(screen_center_pos)
-			var to: Vector3 = from + cam.project_ray_normal(screen_center_pos) * ray_length
-			
-			var space_state: PhysicsDirectSpaceState3D = get_world_3d().get_direct_space_state()
-			var query := PhysicsRayQueryParameters3D.create(from, to)
-			var result: Dictionary = space_state.intersect_ray(query)
-			if result.has("position"):
-				if current_mana < spell_cost:
-					if Globals.instant_spell_cast:
-						fizzle_spell()
-					return;
-				current_mana -= spell_cost
-				var hit_position: Vector3 = result["position"]
-				print("Raycast hit at position: ", hit_position)
-				
-				var spwn = aura_scene.instantiate()
-				add_sibling(spwn)
-				My_Globals.set_color(element_colors[imbuement], spwn.get_child(0))
-				var color = element_colors[imbuement]
-				color.a = 0.5
-				My_Globals.set_color(color, spwn.get_child(1).get_child(0))
-				spwn.type = imbuement
-				spwn.global_position = hit_position
-				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
-				if spell_mods[Globals.spell_mod.EXTRA_DMG]:
-					spwn.damage = spwn.damage + 50
-				if spell_mods[Globals.spell_mod.EXTRA_AOE]:
-					spwn.scale *= 2.0
-				spell_charges -= 1
-				if !Globals.infinite_spell_charge:
-					spell_cost = 0
-					cast_ui.cost_bar.value = 0
-				if spell_charges <= 0:
-					fizzle_spell()
-			else:
-				print("Raycast did not hit anything.")
-				if Globals.instant_spell_cast:
-					fizzle_spell()
-#endregion
-#region Structure
-		if current_magic == Globals.spell_type.STRUCTURE:#---------------------------------Structure
-			var mouse_pos: Vector2 = cam.get_viewport().get_mouse_position()
-			var from: Vector3 = cam.project_ray_origin(mouse_pos)
-			var to: Vector3 = from + cam.project_ray_normal(mouse_pos) * ray_length
-			
-			var space_state: PhysicsDirectSpaceState3D = get_world_3d().get_direct_space_state()
-			var query := PhysicsRayQueryParameters3D.create(from, to)
-			var result: Dictionary = space_state.intersect_ray(query)
-
-			if result.has("position"):
-				if current_mana < spell_cost:
-					if Globals.instant_spell_cast:
-						fizzle_spell()
-					return;
-				current_mana -= spell_cost
-				var hit_position: Vector3 = result["position"]
-				print("Raycast hit at position: ", hit_position)
-				
-				var spwn = structure_scene.instantiate()
-				add_sibling(spwn)
-				My_Globals.set_color(element_colors[imbuement], spwn.get_child(0))
-				spwn.type = imbuement
-				spwn.global_position = hit_position
-				spwn.transform.basis = shoot_rotate_spot.get_parent().global_transform.basis
-				if spell_mods[Globals.spell_mod.EXTRA_AOE]:
-					print("bigger structure")
-					spwn.scale *= 2.0
-				spell_charges -= 1
-				if !Globals.infinite_spell_charge:
-					spell_cost = 0
-					cast_ui.cost_bar.value = 0
-				if spell_charges <= 0:
-					fizzle_spell()
-			else:
-				print("Raycast did not hit anything.")
-				if Globals.instant_spell_cast:
-					fizzle_spell()
-#endregion
-#region Blast
-		if current_magic == Globals.spell_type.BLAST:#------------------------------------BLAST
-			if current_mana < spell_cost:
-				if Globals.instant_spell_cast:
-					fizzle_spell()
-				return;
-			current_mana -= spell_cost
-			var spwn = blast_scene.instantiate()
-			add_sibling(spwn)
-			var color = element_colors[imbuement]
-			color.a = 0.5
-			My_Globals.set_color(color, spwn.get_child(0))
-			spwn.type = imbuement
-			spwn.global_position = shoot_transform_spot.global_position
-			spwn.transform.basis = shoot_rotate_spot.global_transform.basis
-			if spell_mods[Globals.spell_mod.EXTRA_DMG]:
-				spwn.damage = spwn.damage + 50
-			if spell_mods[Globals.spell_mod.EXTRA_AOE]:
-				spwn.scale *= 2.0
-			spell_charges -= 1
-			if !Globals.infinite_spell_charge:
-				spell_cost = 0
-				cast_ui.cost_bar.value = 0
-			if spell_charges <= 0:
-				fizzle_spell()
-#endregion
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
