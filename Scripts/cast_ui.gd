@@ -11,6 +11,7 @@ extends Control
 var is_active = false
 var cursor_active = false
 var sections: int = 0
+var curent_section: int= -1
 
 @export_category("Spell Settings")
 @export var crystals: Array[Control]
@@ -97,26 +98,22 @@ func _finilize_spell():
 func _input(event: InputEvent) -> void:
 	if !is_active || !cursor_active: 
 		return
-	var section: int
 	if event is InputEventMouseMotion:
 		selector_pos.y += event.relative.y * mouse_sensitivity
 		selector_pos.x += event.relative.x * mouse_sensitivity
 		selector_pos = selector_pos.limit_length(cursor_radius)
 		selector.position = selector_pos + cursor_offset
-		section = get_section(sections)
+		get_section(sections)
 		
-		highlight.position = crystals[section+1].position + Vector2(72,72)
+		highlight.position = crystals[curent_section].position + Vector2(72,72)
 		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
-		if spell_details.visible == false:
-			highlight.position = cursor_offset + Vector2(72,72)
+		#if spell_details.visible == false:
+		#	highlight.position = cursor_offset + Vector2(72,72)
 	
 	if event.is_action_pressed("magic_cast"):
-		section = get_section(sections)
+		get_section(sections)
 		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
-		if spell_details.visible == false:
-			crystals[0].activate()
-		else:
-			crystals[section+1].activate()
+		crystals[curent_section].activate()
 		cursor_active = false
 		selector.visible = false
 
@@ -127,7 +124,18 @@ func get_section(section_count: int) -> int:
 	angle = fposmod(angle, TAU) # 0 .. TAU
 	var slice_size = TAU / section_count
 	angle = fposmod(angle + slice_size * 0.5, TAU) # CENTER offset
-	return int(angle / slice_size)
+	var new_section = int(angle / slice_size)
+	#add one for center section
+	if spell_details.visible == false:
+		new_section = 0
+	else:
+		new_section+=1
+	#animation logic
+	if new_section != curent_section:
+		crystals[curent_section].off_crystal_hovered()
+		curent_section = new_section
+		crystals[curent_section].on_crystal_hovered()
+	return new_section
 
 func count_array_values(_array, _target_value) -> int:
 	var count = 0

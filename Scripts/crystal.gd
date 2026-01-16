@@ -1,6 +1,7 @@
 extends Control
 
-
+signal section_entered
+signal section_exited
 var is_active = false
 var texture_rects: Array[TextureRect]
 var sections: int = 0
@@ -62,6 +63,11 @@ func charge(_section: int):
 
 func reset_charge_texture():
 	$Button.texture_normal = charge_textures[0]
+
+func on_crystal_hovered():
+	emit_signal("section_entered")
+func off_crystal_hovered():
+	emit_signal("section_exited")
 
 func _input(event: InputEvent) -> void:
 	if !is_active: 
