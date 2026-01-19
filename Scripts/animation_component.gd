@@ -6,7 +6,7 @@ signal entered
 @export var is_sectional: bool = true
 @export var enter_animation: bool = false
 @export var parallel_animations: bool = true
-@export var properties: Array = ["scale", "position", "rotation", "size", "self_modulate"]
+var properties: Array = ["scale", "position", "rotation", "size", "self_modulate"]
 
 @export_group("Hover Settings")
 @export var hover_time : float = 0.1

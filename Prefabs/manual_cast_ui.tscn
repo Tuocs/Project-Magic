@@ -64,6 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Highlight" type="TextureRect" parent="Edit Overlay"]
+visible = false
 layout_mode = 0
 offset_left = 549.0
 offset_top = 296.0
@@ -267,9 +268,11 @@ cast_ui = NodePath("../../..")
 spell_mods = Array[int]([1, 2, 3, 4])
 charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("12_xe0iw"), ExtResource("11_jv731"), ExtResource("10_x02v6"), ExtResource("13_urajh")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
+[node name="AnimationComponent2" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
 script = ExtResource("9_vl3lf")
+enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="Details Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
@@ -280,7 +283,10 @@ charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("9_ugto6")
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Details Crystal"]
 script = ExtResource("9_vl3lf")
+enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.05
+enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="Casting Crystal2" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
@@ -291,15 +297,18 @@ charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("8_cr8wu")
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Casting Crystal2"]
 script = ExtResource("9_vl3lf")
+enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.1
+enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="Type Crystal" parent="Edit Overlay" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
 layout_mode = 1
-offset_left = -101.0
-offset_top = -100.0
-offset_right = 99.0
-offset_bottom = 100.0
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
 cast_ui = NodePath("../..")
 charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("8_x02v6"), ExtResource("7_fbone"), ExtResource("6_nhl1g"), ExtResource("9_jv731")])
 is_main_crystal = true
@@ -307,7 +316,8 @@ spell_types = Array[int]([1, 2, 3, 4])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Type Crystal"]
 script = ExtResource("9_vl3lf")
-hover_scale = Vector2(1.1, 1.1)
+enter_transition = 9
+enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="MainCursor" type="TextureRect" parent="Edit Overlay"]

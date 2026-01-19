@@ -6,35 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="8_vsvub"]
 [ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="9_2w086"]
 
-[node name="Spell Crystal" type="Control"]
-layout_mode = 3
+[node name="Spell Crystal" type="TextureRect"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -202.0
-offset_top = 8.0
-offset_right = -2.0
-offset_bottom = 208.0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -526.0
+offset_bottom = -274.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(100, 100)
+pivot_offset = Vector2(25, 25)
+texture = ExtResource("2_ele40")
+expand_mode = 1
 script = ExtResource("1_kckhq")
 cursor_radius = 125.0
 cursor_offset = Vector2(100, 100)
-
-[node name="Button" type="TextureButton" parent="."]
-modulate = Color(0.43714952, 0.42687365, 0.5812043, 1)
-layout_mode = 0
-offset_left = 77.0
-offset_top = 75.0
-offset_right = 85.0
-offset_bottom = 83.0
-scale = Vector2(5.8800025, 5.8800025)
-texture_normal = ExtResource("2_ele40")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="largeBG" type="TextureRect" parent="."]
 visible = false

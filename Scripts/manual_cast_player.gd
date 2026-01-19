@@ -45,7 +45,8 @@ func _input(event):
 		if current_magic != Globals.spell_type.NONE:
 			if (!base_spell_costs()):
 				return
-			spread_count = 2
+			if spell_mods[Globals.spell_mod.CAST_SPREAD]:
+				spread_count = 2
 		if current_magic == Globals.spell_type.PROJECTILE:
 			cast_projectile()
 		elif current_magic == Globals.spell_type.AURA:
@@ -84,7 +85,7 @@ func cast_aura(inaccuracy: float = 0):#-----------------------------------------
 			spwn.scale *= 2.0
 		if spread_count > 0:
 			spread_count -= 1
-			cast_aura(5)
+			cast_aura(7)
 	else:
 		print("Raycast did not hit anything.")
 		spread_count = 0

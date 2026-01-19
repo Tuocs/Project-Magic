@@ -42,7 +42,7 @@ func activate():
 	selector.visible = true
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	highlight.position = cursor_offset + Vector2(72,72)
+	highlight.position = cursor_offset# + Vector2(72,72)
 	cost_bar.value = 0
 	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -118,8 +118,6 @@ func _input(event: InputEvent) -> void:
 		selector.visible = false
 
 func get_section(section_count: int) -> int:
-	if selector_pos == Vector2.ZERO:
-		return -1
 	var angle = atan2(selector_pos.y, selector_pos.x) # -PI .. PI
 	angle = fposmod(angle, TAU) # 0 .. TAU
 	var slice_size = TAU / section_count
@@ -128,6 +126,8 @@ func get_section(section_count: int) -> int:
 	#add one for center section
 	if spell_details.visible == false:
 		new_section = 0
+	elif selector_pos == Vector2.ZERO:
+		return -1
 	else:
 		new_section+=1
 	#animation logic
@@ -150,5 +150,6 @@ func move_crystals_in_circle():
 		var current_angle = (angle_increment * i)# + deg_to_rad(54)
 		var x = cos(current_angle) * crystal_spawn_radius
 		var y = sin(current_angle) * crystal_spawn_radius
-		var spawn_position = cursor_offset + Vector2(x, y)
+		var spawn_position = cursor_offset + Vector2(x, y) + Vector2(75,75)
 		crystals[i+1].position = spawn_position
+		crystals[i+1].find_children("*", "AnimationComponent")[0].enter_position = -Vector2(x, y)

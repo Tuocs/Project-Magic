@@ -1,4 +1,4 @@
-extends Control
+extends TextureRect
 
 signal section_entered
 signal section_exited
@@ -58,11 +58,11 @@ func charge(_section: int):
 	else:
 		charged_option = spell_mods[_section]
 	cast_ui._crystal_charge()
-	$Button.texture_normal = charge_textures[_section+1]
+	texture = charge_textures[_section+1]
 	deactivate()
 
 func reset_charge_texture():
-	$Button.texture_normal = charge_textures[0]
+	texture = charge_textures[0]
 
 func on_crystal_hovered():
 	emit_signal("section_entered")
