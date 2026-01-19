@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2ic78ou0ps1t"]
+[gd_scene load_steps=10 format=3 uid="uid://2ic78ou0ps1t"]
 
 [ext_resource type="Script" uid="uid://bi73kf53isfjb" path="res://Scripts/aura.gd" id="1_h802a"]
 [ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="2_tdtkl"]
@@ -15,6 +15,23 @@ bottom_radius = 2.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j48g2"]
 radius = 2.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tdtkl"]
+emission_shape_scale = Vector3(2, 0.1, 2)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 90, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t72bq"]
+albedo_color = Color(1, 0.1764706, 1, 0.5803922)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j48g2"]
+material = SubResource("StandardMaterial3D_t72bq")
+size = Vector2(0.1, 0.1)
 
 [node name="Aura" type="Node3D"]
 script = ExtResource("1_h802a")
@@ -35,6 +52,11 @@ mesh = SubResource("CylinderMesh_j48g2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_j48g2")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_tdtkl")
+draw_pass_1 = SubResource("QuadMesh_j48g2")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_entered"]

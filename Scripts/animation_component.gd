@@ -73,7 +73,7 @@ func setup() -> void:
 		"position" : target.position, 
 		"rotation" : target.rotation, 
 		"size" : target.size, 
-		"self_modulate" : target.modulate
+		"self_modulate" : target.self_modulate
 	}
 	hover_values = {
 		"scale" : hover_scale, 

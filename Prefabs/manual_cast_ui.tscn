@@ -263,7 +263,12 @@ rotation = 6.8442903
 scale = Vector2(3.5893693, 0.165)
 
 [node name="Color Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
+offset_left = -321.0
+offset_top = -114.0
+offset_right = -271.0
+offset_bottom = -64.0
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([1, 2, 3, 4])
 charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("12_xe0iw"), ExtResource("11_jv731"), ExtResource("10_x02v6"), ExtResource("13_urajh")])
@@ -276,6 +281,7 @@ enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="Details Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([6, 7, 9])
@@ -290,6 +296,7 @@ enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="Casting Crystal2" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([5, 8])
