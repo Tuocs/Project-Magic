@@ -20,4 +20,4 @@ static func set_color(color: Color, target: MeshInstance3D):
 	material.albedo_color = color
 	target.material_override = null
 	target.set_surface_override_material(0, material) # Assign the unique material back
-	print("origonal ", target.get_active_material(0).albedo_color, "target ", color)
+	#print("origonal ", target.get_active_material(0).albedo_color, "target ", color)

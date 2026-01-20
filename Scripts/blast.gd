@@ -22,11 +22,11 @@ func _on_area_entered(body):
 
 func set_color(color: Color):
 	color.a = 0.5
-	var mesh_instance = $MeshInstance3D
-	var material = mesh_instance.get_active_material(0)
+	var material = clear_color_target.get_active_material(0)
 	if material == null:
 		material = StandardMaterial3D.new()
 	else:
 		material = material.duplicate() # Create a unique copy of the material
 	material.albedo_color = color
-	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back
+	clear_color_target.material_override = null
+	clear_color_target.set_surface_override_material(0, material) # Assign the unique material back

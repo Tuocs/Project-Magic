@@ -18,7 +18,6 @@ func _physics_process(delta):
 	global_position += -global_transform.basis.z.normalized() * speed * delta
 
 func _on_area_entered(body):
-	print(body)
 	if !hostile && body.is_in_group("Enemy"):
 		#body.hit(damage, type)
 		spawn_explosion()
@@ -29,6 +28,17 @@ func _on_area_entered(body):
 		queue_free()
 	if body.is_in_group("Reflect"):
 		global_transform.basis.z = -global_transform.basis.z
+	elif body.is_in_group("Barrier"):
+		var angle_diff = get_y_rotation_difference_3d(self, body)
+		if angle_diff <= 90:
+			if body.type != My_Globals.element_type.NONE:
+				type = body.type
+			damage += body.damage
+			scale = scale*1.1
+			set_color(body.clear_color_target.get_active_material(0).albedo_color)
+		else:
+			spawn_explosion()
+			queue_free()
 	elif body.is_in_group("Terrain"):
 		spawn_explosion()
 		queue_free()
@@ -48,11 +58,21 @@ func spawn_explosion():
 
 func set_color(color: Color):
 	color.a = 0.5
-	var mesh_instance = $MeshInstance3D
-	var material = mesh_instance.get_active_material(0)
+	var material = clear_color_target.get_active_material(0)
 	if material == null:
 		material = StandardMaterial3D.new()
 	else:
 		material = material.duplicate() # Create a unique copy of the material
 	material.albedo_color = color
-	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back
+	clear_color_target.set_surface_override_material(0, material) # Assign the unique material back
+	
+func get_y_rotation_difference_3d(node1: Node3D, node2: Node3D) -> float:
+	# Get global Y-axis rotations
+	var angle1 = node1.global_rotation.y
+	var angle2 = node2.global_rotation.y
+	
+	# Calculate the raw difference and wrap it
+	var difference = angle1 - angle2
+	difference = fposmod(difference + PI, TAU) - PI
+	difference = abs(rad_to_deg(difference))
+	return difference

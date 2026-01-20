@@ -9,7 +9,7 @@ func _ready():
 	my_timer.start()
 
 func _on_timer_timeout() -> void:
-	print("timer")
+	#print("timer")
 	my_timer.wait_time = randi_range(4,10)
 	var collectibles_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemy")
 	var count: int = collectibles_in_scene.size()

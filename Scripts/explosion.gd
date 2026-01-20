@@ -11,7 +11,7 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_area_entered(body):
-	print("explosion hit ",body)
+	#print("explosion hit ",body)
 	if body.is_in_group("Unit"):
 		body.hit(damage, type)
 		#queue_free()

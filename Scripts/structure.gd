@@ -5,7 +5,7 @@ var lived_time = 0
 @onready var nav = get_node("/root/Main/NavigationRegion3D")
 var type: Globals.element_type
 var damage = 0
-@onready var clear_color_target
+@onready var clear_color_target = $MeshInstance3D
 @onready var solid_color_target = $MeshInstance3D
 
 func _ready() -> void:
@@ -19,11 +19,12 @@ func _process(delta):
 		queue_free()
 
 func set_color(color: Color):
-	var mesh_instance = $MeshInstance3D
-	var material = mesh_instance.get_active_material(0)
+	color.a = 0.5
+	var material = clear_color_target.get_active_material(0)
 	if material == null:
 		material = StandardMaterial3D.new()
 	else:
 		material = material.duplicate() # Create a unique copy of the material
 	material.albedo_color = color
-	mesh_instance.set_surface_override_material(0, material) # Assign the unique material back
+	clear_color_target.material_override = null
+	clear_color_target.set_surface_override_material(0, material) # Assign the unique material back

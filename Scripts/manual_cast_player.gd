@@ -165,7 +165,7 @@ func _physics_process(delta: float) -> void:
 func set_spell_mods(_mods: Array[bool]):
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 	spell_mods = _mods.duplicate()
-	print("set_spell_mods", spell_mods)
+	#print("set_spell_mods", spell_mods)
 	spell_charges = 1
 	if spell_mods[Globals.spell_mod.EXTRA_CHARGE]:
 		spell_charges = 3
