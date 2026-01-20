@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c1oiapt4kpdis"]
+[gd_scene load_steps=46 format=3 uid="uid://c1oiapt4kpdis"]
 
 [ext_resource type="Material" uid="uid://dovcrm3wfj0hh" path="res://Assets/mats/grass.tres" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dxqel80wtcxlq" path="res://Prefabs/killbox.tscn" id="1_344ge"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://dk4gf8507g3vm" path="res://Assets/mats/Rock.tres" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://5uw668wgs67x" path="res://Prefabs/manual_cast_player.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://7jfpqutml3jl" path="res://Prefabs/enemy.tscn" id="4_lquwl"]
+[ext_resource type="Material" uid="uid://b0063jpqf0u8w" path="res://Assets/mats/yellow.tres" id="6_ynf5e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
 sky_top_color = Color(0.18190077, 0.45919085, 0.73583186, 1)
@@ -67,6 +68,18 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 size = Vector3(60, 2, 60)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3802"]
+size = Vector3(150, 1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fevyy"]
+size = Vector3(150, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hibaj"]
+size = Vector3(150, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdsj5"]
+size = Vector3(150, 1, 0.1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_d1ilt"]
 size = Vector3(4, 1, 9)
 
@@ -105,6 +118,10 @@ size = Vector3(10.595, 12.305, 10.41)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hibaj"]
 size = Vector3(10.595, 12.305, 10.41)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ee4r6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gt3je"]
 
 [node name="Main" type="Node"]
 
@@ -207,6 +224,153 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 shape = SubResource("BoxShape3D_ynf5e")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree29" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(-0.1897468, 0, 0.9818331, 0, 1, 0, -0.9818331, 0, -0.1897468, -39.487762, -0.058886528, -114.91579)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree30" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(0.98471975, 0, 0.17414656, 0, 1, 0, -0.17414656, 0, 0.98471975, -30.096302, -0.98949337, -126.54772)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree33" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(0.98471975, 0, 0.17414656, 0, 1, 0, -0.17414656, 0, 0.98471975, -32.03178, -0.98949337, -105.09715)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree34" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(0.98471975, 0, 0.17414656, 0, 1, 0, -0.17414656, 0, 0.98471975, -49.618916, -0.98949337, -114.652596)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree35" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(0.8654139, 0, 0.5010576, 0, 1, 0, -0.5010576, 0, 0.8654139, -43.241917, 0.38775635, -104.39384)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree31" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(0.54412663, 0, 0.8390031, 0, 1, 0, -0.8390031, 0, 0.54412663, -49.19223, -0.058886528, -126.151276)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = ExtResource("2_6bp64")
+mesh = SubResource("BoxMesh_hptm8")
+
+[node name="Tree32" type="StaticBody3D" parent="NavigationRegion3D/Map/Filler" groups=["Terrain"]]
+transform = Transform3D(-0.4539906, 0, 0.89100647, 0, 1, 0, -0.89100647, 0, -0.4539906, -54.938587, -0.51818943, -102.34713)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_21xkr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6bp64")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Filler/Tree32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+shape = SubResource("BoxShape3D_ynf5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Filler/Tree32"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 material_override = ExtResource("2_6bp64")
 mesh = SubResource("BoxMesh_hptm8")
@@ -985,6 +1149,90 @@ shape = SubResource("BoxShape3D_7dm0k")
 material_override = ExtResource("1_8gbba")
 mesh = SubResource("BoxMesh_ig7tw")
 
+[node name="Roadside" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(0.8010642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4931345, -76.348625)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside"]
+shape = SubResource("BoxShape3D_b3802")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_fevyy")
+
+[node name="Roadside2" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(0.8010642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.493, -81.348625)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside2"]
+shape = SubResource("BoxShape3D_b3802")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside2"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_fevyy")
+
+[node name="Roadside3" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(0.8010642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4931345, -79.01606)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside3"]
+shape = SubResource("BoxShape3D_hibaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010159016, 0)
+material_override = ExtResource("6_ynf5e")
+mesh = SubResource("BoxMesh_pdsj5")
+
+[node name="Roadside4" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(0.8010642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4931345, -78.712944)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside4"]
+shape = SubResource("BoxShape3D_hibaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010159016, 0)
+material_override = ExtResource("6_ynf5e")
+mesh = SubResource("BoxMesh_pdsj5")
+
+[node name="Roadside5" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(-1.4503221e-08, 0, 1, 0, 1, 0, -0.33179504, 0, -4.371139e-08, 2.5079346, -0.4931345, -107.108826)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside5"]
+shape = SubResource("BoxShape3D_b3802")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside5"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_fevyy")
+
+[node name="Roadside6" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(-1.4503221e-08, 0, 1, 0, 1, 0, -0.33179504, 0, -4.371139e-08, -2.4920654, -0.493, -107.108826)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside6"]
+shape = SubResource("BoxShape3D_b3802")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside6"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_fevyy")
+
+[node name="Roadside7" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(-1.4503221e-08, 0, 1, 0, 1, 0, -0.33179504, 0, -4.371139e-08, -0.15950012, -0.4931345, -107.108826)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside7"]
+shape = SubResource("BoxShape3D_hibaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010159016, 0)
+material_override = ExtResource("6_ynf5e")
+mesh = SubResource("BoxMesh_pdsj5")
+
+[node name="Roadside8" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(-1.4503221e-08, 0, 1, 0, 1, 0, -0.33179504, 0, -4.371139e-08, 0.14361572, -0.4931345, -107.108826)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Roadside8"]
+shape = SubResource("BoxShape3D_hibaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Roadside8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010159016, 0)
+material_override = ExtResource("6_ynf5e")
+mesh = SubResource("BoxMesh_pdsj5")
+
 [node name="Ground2" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, -1, 26)
 
@@ -1002,6 +1250,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -1, -34)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground3"]
+material_override = ExtResource("1_8gbba")
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="Ground7" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, -102)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground7"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground7"]
+material_override = ExtResource("1_8gbba")
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="Ground8" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -1, -102)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground8"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground8"]
 material_override = ExtResource("1_8gbba")
 mesh = SubResource("BoxMesh_ig7tw")
 
@@ -1317,6 +1585,298 @@ transform = Transform3D(1, 0, 0, 0, 0.9238795, 0.38268346, 0, -0.38268346, 0.923
 material_override = ExtResource("2_kry3j")
 mesh = SubResource("BoxMesh_h1bgf")
 
+[node name="Bridge4" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -68)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge4"]
+shape = SubResource("BoxShape3D_d1ilt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6iyac")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+shape = SubResource("BoxShape3D_fdnlq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+shape = SubResource("BoxShape3D_fdnlq")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 0.92387944, -0.38268343, 0, 0.38268343, 0.92387944, 0, -0.24073486, 5.0010147)
+shape = SubResource("BoxShape3D_k12tt")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 0.9238794, 0.3826834, 0, -0.3826834, 0.9238794, 0, -0.24073486, -4.9989853)
+shape = SubResource("BoxShape3D_k12tt")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 0.9238795, -0.38268346, 0, 0.38268346, 0.9238795, 0, -0.24073486, 5.0010147)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_h1bgf")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge4"]
+transform = Transform3D(1, 0, 0, 0, 0.9238795, 0.38268346, 0, -0.38268346, 0.9238795, 0, -0.24073486, -4.9989853)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_h1bgf")
+
+[node name="Bridge5" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, -68)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge5"]
+shape = SubResource("BoxShape3D_d1ilt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_6iyac")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+shape = SubResource("BoxShape3D_fdnlq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+shape = SubResource("BoxShape3D_fdnlq")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -4)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_jkdf5")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 1)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -5)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_wsu2k")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 0.92387944, -0.38268343, 0, 0.38268343, 0.92387944, 0, -0.24073486, 5.0010147)
+shape = SubResource("BoxShape3D_k12tt")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 0.9238794, 0.3826834, 0, -0.3826834, 0.9238794, 0, -0.24073486, -4.9989853)
+shape = SubResource("BoxShape3D_k12tt")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 0.9238795, -0.38268346, 0, 0.38268346, 0.9238795, 0, -0.24073486, 5.0010147)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_h1bgf")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="NavigationRegion3D/Map/Bridge5"]
+transform = Transform3D(1, 0, 0, 0, 0.9238795, 0.38268346, 0, -0.38268346, 0.9238795, 0, -0.24073486, -4.9989853)
+material_override = ExtResource("2_kry3j")
+mesh = SubResource("BoxMesh_h1bgf")
+
 [node name="Bridge3" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 21)
 
@@ -1492,6 +2052,86 @@ shape = SubResource("BoxShape3D_fevyy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15.436581, 0)
 material_override = ExtResource("4_344ge")
 mesh = SubResource("BoxMesh_hibaj")
+
+[node name="Ground9" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(0.7682165, 0, 0.6401902, 0, 1, 0, -0.6401902, 0, 0.7682165, 34.427273, -1, -109.39161)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(0.9934767, 0, 0.11403555, 0, 1, 0, -0.11403555, 0, 0.9934767, 0, 0, 0)
+shape = SubResource("BoxShape3D_wsu2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(0.9934767, 0, 0.11403555, 0, 1, 0, -0.11403555, 0, 0.9934767, 0, 0, 0)
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_k12tt")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(0.9982346, 0, -0.059393488, 0, 1, 0, 0.059393488, 0, 0.9982346, -3, 8.575514, 0)
+shape = SubResource("BoxShape3D_h1bgf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(0.9982346, 0, -0.059393488, 0, 1, 0, 0.059393488, 0, 0.9982346, -3, 8.575514, 0)
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_b3802")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15.436581, 0)
+shape = SubResource("BoxShape3D_fevyy")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15.436581, 0)
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_hibaj")
+
+[node name="Ground10" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(11.614574, 0, 0, 0, 39.206116, 0, 0, 0, 8.27594, -54.37432, 16.111637, -90.11414)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground10"]
+shape = SubResource("BoxShape3D_ee4r6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground10"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_gt3je")
+
+[node name="Ground11" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(9.6701, 0, 0, 0, 34.364025, 0, 0, 0, 10.77829, -38.71983, 16.111637, -93.22059)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground11"]
+shape = SubResource("BoxShape3D_ee4r6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground11"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_gt3je")
+
+[node name="Ground12" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(14.242459, 0, 0, 0, 26.858847, 0, 0, 0, 5.4826756, -21.34856, 12.330389, -88.786865)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground12"]
+shape = SubResource("BoxShape3D_ee4r6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground12"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_gt3je")
+
+[node name="Ground13" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(11.858033, 0, 0, 0, 17.947851, 0, 0, 0, 7.140442, -12.503564, 8.640343, -97.680954)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground13"]
+shape = SubResource("BoxShape3D_ee4r6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground13"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_gt3je")
+
+[node name="Ground14" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
+transform = Transform3D(16.468811, 0, 0, 0, 43.099014, 0, 0, 0, 26.06298, -16.078964, 16.11164, -117.44145)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Ground14"]
+shape = SubResource("BoxShape3D_ee4r6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Map/Ground14"]
+material_override = ExtResource("4_344ge")
+mesh = SubResource("BoxMesh_gt3je")
 
 [node name="Enemy" parent="." instance=ExtResource("4_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
