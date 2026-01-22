@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://7jfpqutml3jl"]
+[gd_scene load_steps=10 format=3 uid="uid://7jfpqutml3jl"]
 
 [ext_resource type="Script" uid="uid://dg8ky2ue6d3ps" path="res://Scripts/enemy.gd" id="1_lgw76"]
 [ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="2_30yes"]
+[ext_resource type="Material" uid="uid://8nta8powxh0a" path="res://Assets/mats/shader base.tres" id="2_n7q57"]
 [ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="3_n7q57"]
 [ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="4_80imi"]
 
@@ -28,6 +29,7 @@ shape = SubResource("CapsuleShape3D_sh265")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_n7q57")
 mesh = SubResource("CapsuleMesh_4flbx")
 
 [node name="Node3D" type="Node3D" parent="."]
@@ -58,6 +60,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="HatMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 1.9006385, 0)
 visible = false
+material_override = ExtResource("2_n7q57")
 mesh = SubResource("CapsuleMesh_30yes")
+surface_material_override/0 = ExtResource("2_n7q57")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

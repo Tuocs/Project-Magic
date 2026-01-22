@@ -80,17 +80,13 @@ func randomize_elements_and_shield() -> void:
 			0:
 				pass
 			1:
-				set_element_dmg_multipliers(0,1,0,0,0)
-				My_Globals.set_color(Color(1.0, 0.0, 0.0, 1.0), $MeshInstance3D)
+				set_element_dmg_multipliers(0.25,1,0.25,0.25,0.25)
 			2:
-				set_element_dmg_multipliers(0,0,1,0,0)
-				My_Globals.set_color(Color(1.0, 1.0, 0.0, 1.0), $MeshInstance3D)
+				set_element_dmg_multipliers(0.25,0.25,1,0.25,0.25)
 			3:
-				set_element_dmg_multipliers(0,0,0,1,0)
-				My_Globals.set_color(Color(0.0, 0.0, 1.0, 1.0), $MeshInstance3D)
+				set_element_dmg_multipliers(0.25,0.25,0.25,1,0.25)
 			4:
-				set_element_dmg_multipliers(0,0,0,0,1)
-				My_Globals.set_color(Color(0.0, 1.0, 0.0, 1.0), $MeshInstance3D)
+				set_element_dmg_multipliers(0.25,0.25,0.25,0.25,1)
 		pass
 	#set shield color
 	if randi_range(0,4) == 4:

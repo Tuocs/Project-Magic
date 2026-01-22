@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ejnrb4qsmwc4"]
+
+[ext_resource type="Shader" uid="uid://dv42gbs0emtp1" path="res://Assets/Shaders/Cel Shader/outline.gdshader" id="1_oaho0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_oaho0")

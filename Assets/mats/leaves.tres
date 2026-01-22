@@ -1,4 +1,14 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dsxsqq0jbcw7t"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dsxsqq0jbcw7t"]
+
+[ext_resource type="Material" uid="uid://ejnrb4qsmwc4" path="res://Assets/mats/shader outline.tres" id="1_ef3um"]
+[ext_resource type="Shader" uid="uid://q8x88a1hxnnc" path="res://Assets/Shaders/Cel Shader/cel-shader-base.gdshader" id="2_xdjid"]
 
 [resource]
-albedo_color = Color(6.3532593e-06, 0.67904645, 0.18121427, 1)
+render_priority = 0
+next_pass = ExtResource("1_ef3um")
+shader = ExtResource("2_xdjid")
+shader_parameter/albedo_color = Color(0.32744896, 0.58542496, 0, 1)
+shader_parameter/specular = Color(0.3, 0.3, 0.3, 0.5)
+shader_parameter/fresnel = Color(0.2, 0.2, 0.2, 0.3)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)

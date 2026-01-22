@@ -19,6 +19,8 @@ func _on_area_entered(body):
 	if body.is_in_group("Unit"):
 		body.apply_knockback(position, 20)
 		body.hit(damage, type)
+		if type != Globals.element_type.NONE && body.is_in_group("Enemy"):
+			body.paint_color(type)
 
 func set_color(color: Color):
 	color.a = 0.5

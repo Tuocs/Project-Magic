@@ -8,7 +8,7 @@ var knockback_timer: float = 0.0
 var knockback_duration: float = 0.2
 @export var max_health: int = 100
 var current_health
-var element_dmg_multipliers: Dictionary[Globals.element_type, int] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
+var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
 @export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 @export var shield_type: Globals.element_type
 var shield_obj: Node3D
@@ -72,14 +72,33 @@ func destroy_shield():
 
 func hit(dmg_ammount: int = 1000, dmg_type: Globals.element_type = Globals.element_type.NONE, piercing: bool = false):
 	if shield_type == Globals.element_type.NONE:
-		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
+		take_damage(int(dmg_ammount * element_dmg_multipliers[dmg_type]))
 		print("hit enemy")
 	elif shield_type == dmg_type && piercing:
 		print("hit shield")
 		destroy_shield()
-		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
+		take_damage(int(dmg_ammount * element_dmg_multipliers[dmg_type]))
 	else:
 		print("hit blocked")
+
+func paint_color(type: Globals.element_type):
+	if shield_type != Globals.element_type.NONE:
+		give_shield(type)
+	else:
+		return
+	if element_dmg_multipliers[Globals.element_type.NONE]==1 :
+		return
+	match type:
+		Globals.element_type.NONE:
+			pass
+		Globals.element_type.GREEN:
+			set_element_dmg_multipliers(0.25,1,0.25,0.25,0.25)
+		Globals.element_type.BLUE:
+			set_element_dmg_multipliers(0.25,0.25,1,0.25,0.25)
+		Globals.element_type.YELLOW:
+			set_element_dmg_multipliers(0.25,0.25,0.25,1,0.25)
+		Globals.element_type.RED:
+			set_element_dmg_multipliers(0.25,0.25,0.25,0.25,1)
 	
 func take_damage(ammount: int):
 	current_health -= ammount
@@ -90,12 +109,22 @@ func take_damage(ammount: int):
 func update_hp():
 	pass
 
-func set_element_dmg_multipliers(N: int, R: int, Y: int, B: int, G: int):
+func set_element_dmg_multipliers(N: float, R: float, Y: float, B: float, G: float):
 	element_dmg_multipliers[Globals.element_type.NONE]=N
 	element_dmg_multipliers[Globals.element_type.RED]=R
 	element_dmg_multipliers[Globals.element_type.YELLOW]=Y
 	element_dmg_multipliers[Globals.element_type.BLUE]=B
 	element_dmg_multipliers[Globals.element_type.GREEN]=G
+	if R==1:
+		My_Globals.set_color(Color.RED, $MeshInstance3D)
+	if G==1:
+		My_Globals.set_color(Color.GREEN, $MeshInstance3D)
+	if B==1:
+		My_Globals.set_color(Color.BLUE, $MeshInstance3D)
+	if Y==1:
+		My_Globals.set_color(Color.YELLOW, $MeshInstance3D)
+	if R==1 && G==1 && B==1 && Y==1:
+		My_Globals.set_color(Color.WHITE, $MeshInstance3D)
 
 func kill():
 	queue_free()
