@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var explosion_scene = preload("res://Prefabs/explosion.tscn")
+@onready var explosion_scene = preload("res://Prefabs/Spawnables/explosion.tscn")
 @export var speed: float = 70.0
 @export var lifetime: float = 5.0
 var lived_time = 0

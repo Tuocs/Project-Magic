@@ -1,7 +1,7 @@
 extends Unit
 
 
-@onready var projectile_scene = preload("res://Prefabs/projectile.tscn")
+@onready var projectile_scene = preload("res://Prefabs/Spawnables/projectile.tscn")
 @onready var player = get_node("/root/Main/Player")
 @onready var nav_agent = $NavigationAgent3D
 @onready var ray_cast_node = $RayCast3D

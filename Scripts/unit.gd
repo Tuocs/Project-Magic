@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name  Unit
+class_name Unit
 
 @export var SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -12,7 +12,7 @@ var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals
 @export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 @export var shield_type: Globals.element_type
 var shield_obj: Node3D
-@onready var shield_scene = preload("res://Prefabs/shield.tscn")
+@onready var shield_scene = preload("res://Prefabs/Spawnables/shield.tscn")
 @export var max_mana: float = 10
 var current_mana: float = 5
 @export var mana_regen: float = 1

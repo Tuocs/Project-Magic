@@ -1,29 +1,29 @@
 [gd_scene load_steps=25 format=3 uid="uid://cgg8xh2ho75yh"]
 
-[ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_i1068"]
-[ext_resource type="PackedScene" uid="uid://bxblkj71ril0k" path="res://Prefabs/spell_crystal.tscn" id="2_urajh"]
-[ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="4_iglr6"]
-[ext_resource type="Texture2D" uid="uid://cdb8br1wx1k3h" path="res://Assets/textures/Circle.png" id="4_nichs"]
-[ext_resource type="Texture2D" uid="uid://e2x041y5gms7" path="res://Assets/textures/mana bg.tres" id="4_usivk"]
-[ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="5_prb1j"]
-[ext_resource type="Texture2D" uid="uid://cy8ilhn55tirx" path="res://Assets/textures/mana fill.tres" id="6_6b4wp"]
-[ext_resource type="Texture2D" uid="uid://dvl0cjpp18h8g" path="res://Assets/textures/wall.png" id="6_nhl1g"]
-[ext_resource type="Texture2D" uid="uid://dfnrxm4cp4klx" path="res://Assets/textures/Aura.png" id="7_fbone"]
-[ext_resource type="Texture2D" uid="uid://dke0fbx56w8qt" path="res://Assets/textures/Charge.png" id="8_cr8wu"]
-[ext_resource type="Texture2D" uid="uid://cp65u3hxn2jo3" path="res://Assets/textures/projectile.png" id="8_x02v6"]
-[ext_resource type="Texture2D" uid="uid://bh47vevw2yhhc" path="res://Assets/textures/Force_push.png" id="9_jv731"]
-[ext_resource type="Texture2D" uid="uid://fqlofmyxno27" path="res://Assets/textures/Dmg.png" id="9_ugto6"]
-[ext_resource type="Script" uid="uid://cvc4sh0ylj1o4" path="res://Scripts/animation_component.gd" id="9_vl3lf"]
-[ext_resource type="Texture2D" uid="uid://c5ubv04p08q1a" path="res://Assets/textures/Aoe.png" id="10_jsw5p"]
-[ext_resource type="Texture2D" uid="uid://cujcrmhdkvgmo" path="res://Assets/textures/blue_mana.png" id="10_x02v6"]
-[ext_resource type="Texture2D" uid="uid://be680asj0mp3m" path="res://Assets/textures/Reflect.png" id="11_jsw5p"]
-[ext_resource type="Texture2D" uid="uid://dsrtupkhf21qq" path="res://Assets/textures/yellow_mana.png" id="11_jv731"]
-[ext_resource type="Texture2D" uid="uid://bwsku3h4hp3wd" path="res://Assets/textures/red_mana.png" id="12_xe0iw"]
-[ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="13_urajh"]
-[ext_resource type="Texture2D" uid="uid://df8n0swdoo5jj" path="res://Assets/textures/Spread.png" id="13_vl3lf"]
-[ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="14_cr8wu"]
-[ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="18_xe0iw"]
-[ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="19_urajh"]
+[ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_hrqfe"]
+[ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="2_e856e"]
+[ext_resource type="PackedScene" uid="uid://bxblkj71ril0k" path="res://Prefabs/UI/spell_crystal.tscn" id="3_gf7ag"]
+[ext_resource type="Texture2D" uid="uid://cdb8br1wx1k3h" path="res://Assets/textures/Circle.png" id="4_ac0ky"]
+[ext_resource type="Texture2D" uid="uid://bwsku3h4hp3wd" path="res://Assets/textures/red_mana.png" id="5_jvqa2"]
+[ext_resource type="Texture2D" uid="uid://dsrtupkhf21qq" path="res://Assets/textures/yellow_mana.png" id="6_kblvp"]
+[ext_resource type="Texture2D" uid="uid://cujcrmhdkvgmo" path="res://Assets/textures/blue_mana.png" id="7_d6vlg"]
+[ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="8_qbgm8"]
+[ext_resource type="Script" uid="uid://cvc4sh0ylj1o4" path="res://Scripts/animation_component.gd" id="9_3yxrg"]
+[ext_resource type="Texture2D" uid="uid://fqlofmyxno27" path="res://Assets/textures/Dmg.png" id="10_ka52f"]
+[ext_resource type="Texture2D" uid="uid://c5ubv04p08q1a" path="res://Assets/textures/Aoe.png" id="11_xxskf"]
+[ext_resource type="Texture2D" uid="uid://be680asj0mp3m" path="res://Assets/textures/Reflect.png" id="12_gj236"]
+[ext_resource type="Texture2D" uid="uid://dke0fbx56w8qt" path="res://Assets/textures/Charge.png" id="13_a74r3"]
+[ext_resource type="Texture2D" uid="uid://df8n0swdoo5jj" path="res://Assets/textures/Spread.png" id="14_ik6ap"]
+[ext_resource type="Texture2D" uid="uid://cp65u3hxn2jo3" path="res://Assets/textures/projectile.png" id="15_e11g1"]
+[ext_resource type="Texture2D" uid="uid://dfnrxm4cp4klx" path="res://Assets/textures/Aura.png" id="16_ue45s"]
+[ext_resource type="Texture2D" uid="uid://dvl0cjpp18h8g" path="res://Assets/textures/wall.png" id="17_8w56e"]
+[ext_resource type="Texture2D" uid="uid://bh47vevw2yhhc" path="res://Assets/textures/Force_push.png" id="18_3iix7"]
+[ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="19_j2agj"]
+[ext_resource type="Texture2D" uid="uid://e2x041y5gms7" path="res://Assets/textures/mana bg.tres" id="20_cj1be"]
+[ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="21_frmym"]
+[ext_resource type="Texture2D" uid="uid://cy8ilhn55tirx" path="res://Assets/textures/mana fill.tres" id="22_n3itv"]
+[ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="23_ah8hy"]
+[ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="24_feqra"]
 
 [node name="Cast UI" type="Control" node_paths=PackedStringArray("crystals")]
 layout_mode = 3
@@ -33,7 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_i1068")
+script = ExtResource("1_hrqfe")
 crystals = [NodePath("Edit Overlay/Type Crystal"), NodePath("Edit Overlay/Spell Details/Color Crystal"), NodePath("Edit Overlay/Spell Details/Details Crystal"), NodePath("Edit Overlay/Spell Details/Casting Crystal2")]
 crystal_spawn_radius = 125.0
 cursor_radius = 200.0
@@ -72,7 +72,7 @@ offset_right = 604.0
 offset_bottom = 351.0
 pivot_offset = Vector2(27, 27)
 mouse_filter = 2
-texture = ExtResource("14_cr8wu")
+texture = ExtResource("2_e856e")
 expand_mode = 1
 
 [node name="Spell Details" type="Control" parent="Edit Overlay"]
@@ -262,7 +262,7 @@ grow_vertical = 2
 rotation = 6.8442903
 scale = Vector2(3.5893693, 0.165)
 
-[node name="Color Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+[node name="Color Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 offset_left = -321.0
@@ -271,58 +271,58 @@ offset_right = -271.0
 offset_bottom = -64.0
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([1, 2, 3, 4])
-charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("12_xe0iw"), ExtResource("11_jv731"), ExtResource("10_x02v6"), ExtResource("13_urajh")])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("5_jvqa2"), ExtResource("6_kblvp"), ExtResource("7_d6vlg"), ExtResource("8_qbgm8")])
 
 [node name="AnimationComponent2" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
-script = ExtResource("9_vl3lf")
+script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Details Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+[node name="Details Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([6, 7, 9])
-charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("9_ugto6"), ExtResource("10_jsw5p"), ExtResource("11_jsw5p")])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("11_xxskf"), ExtResource("12_gj236")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Details Crystal"]
-script = ExtResource("9_vl3lf")
+script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_delay = 0.05
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Casting Crystal2" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+[node name="Casting Crystal2" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
 spell_mods = Array[int]([5, 8])
-charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("8_cr8wu"), ExtResource("13_vl3lf")])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_a74r3"), ExtResource("14_ik6ap")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Casting Crystal2"]
-script = ExtResource("9_vl3lf")
+script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_delay = 0.1
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Type Crystal" parent="Edit Overlay" node_paths=PackedStringArray("cast_ui") instance=ExtResource("2_urajh")]
+[node name="Type Crystal" parent="Edit Overlay" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 layout_mode = 1
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 25.0
 offset_bottom = 25.0
 cast_ui = NodePath("../..")
-charge_textures = Array[Texture]([ExtResource("4_nichs"), ExtResource("8_x02v6"), ExtResource("7_fbone"), ExtResource("6_nhl1g"), ExtResource("9_jv731")])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_e11g1"), ExtResource("16_ue45s"), ExtResource("17_8w56e"), ExtResource("18_3iix7")])
 is_main_crystal = true
 spell_types = Array[int]([1, 2, 3, 4])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Type Crystal"]
-script = ExtResource("9_vl3lf")
+script = ExtResource("9_3yxrg")
 enter_transition = 9
 enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
@@ -344,7 +344,7 @@ grow_vertical = 2
 scale = Vector2(0.525761, 0.525761)
 pivot_offset = Vector2(100, 100)
 mouse_filter = 2
-texture = ExtResource("5_prb1j")
+texture = ExtResource("19_j2agj")
 expand_mode = 1
 
 [node name="Mana Bar" type="Control" parent="."]
@@ -372,9 +372,9 @@ pivot_offset = Vector2(180.5, 0)
 max_value = 10.0
 step = 0.01
 value = 5.0
-texture_under = ExtResource("4_usivk")
-texture_over = ExtResource("4_iglr6")
-texture_progress = ExtResource("6_6b4wp")
+texture_under = ExtResource("20_cj1be")
+texture_over = ExtResource("21_frmym")
+texture_progress = ExtResource("22_n3itv")
 
 [node name="TextureProgressBar2" type="TextureProgressBar" parent="Mana Bar"]
 modulate = Color(0.30002594, 3.5376102e-06, 0.20709708, 0.6431373)
@@ -392,8 +392,8 @@ pivot_offset = Vector2(180.5, 0)
 max_value = 10.0
 step = 0.01
 value = 3.0
-texture_over = ExtResource("4_iglr6")
-texture_progress = ExtResource("6_6b4wp")
+texture_over = ExtResource("21_frmym")
+texture_progress = ExtResource("22_n3itv")
 
 [node name="HP Bar" type="Control" parent="."]
 layout_mode = 1
@@ -421,8 +421,8 @@ pivot_offset = Vector2(180.5, 0)
 max_value = 1.0
 step = 0.01
 value = 1.0
-texture_under = ExtResource("18_xe0iw")
-texture_over = ExtResource("4_iglr6")
-texture_progress = ExtResource("19_urajh")
+texture_under = ExtResource("23_ah8hy")
+texture_over = ExtResource("21_frmym")
+texture_progress = ExtResource("24_feqra")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -3,10 +3,10 @@ extends Unit
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var cast_ui
 var current_magic: Globals.spell_type = Globals.spell_type.NONE
-@onready var projectile_scene = preload("res://Prefabs/projectile.tscn")
-@onready var blast_scene = preload("res://Prefabs/blast.tscn")
-@onready var aura_scene = preload("res://Prefabs/aura.tscn")
-@onready var structure_scene = preload("res://Prefabs/structure.tscn")
+@onready var projectile_scene = preload("res://Prefabs/Spawnables/projectile.tscn")
+@onready var blast_scene = preload("res://Prefabs/Spawnables/blast.tscn")
+@onready var aura_scene = preload("res://Prefabs/Spawnables/aura.tscn")
+@onready var structure_scene = preload("res://Prefabs/Spawnables/structure.tscn")
 @export var shoot_transform_spot: Node3D
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
@@ -36,8 +36,6 @@ func _input(event):
 			cast_ui.deactivate()
 		elif event.is_action_pressed("edit_magic"):
 			cast_ui.activate()
-	if event.is_action_pressed("escape"):
-		esc_pause()
 
 
 #region Spells
@@ -191,13 +189,9 @@ func fizzle_spell():
 	spell_mods.fill(false)
 	cast_ui.cost_bar.value = 0
 
-func esc_pause():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().change_scene_to_file("res://main_menu.tscn")
-
 func update_hp():
 	cast_ui.health_bar.value = float(current_health)/float(max_health)
 
 func kill():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	TransitionManager.scene_transition(0)

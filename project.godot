@@ -19,6 +19,7 @@ config/icon="res://Assets/textures/icon.svg"
 [autoload]
 
 Globals="*res://globals.gd"
+TransitionManager="*res://Scripts/transition_manager.gd"
 
 [dotnet]
 
