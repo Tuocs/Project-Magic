@@ -2,8 +2,8 @@ shader_type spatial;
 
 render_mode cull_front, unshaded, depth_draw_never;
 
-global uniform vec4 outline_color;
-global uniform float outline_width;
+uniform vec4 outline_color;
+uniform float outline_width;
 
 void vertex() {
 	vec4 clip_position = 

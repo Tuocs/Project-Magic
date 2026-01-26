@@ -194,4 +194,4 @@ func update_hp():
 
 func kill():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	TransitionManager.scene_transition(0)
+	TransitionManager.scene_transition(2)

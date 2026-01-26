@@ -4,11 +4,13 @@ extends Control
 
 var MenuScene
 var Level1
+var Hub
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	MenuScene = preload("res://main_menu.tscn")
 	Level1 = preload("res://Scenes/main.tscn")
+	Hub = preload("res://Scenes/home.tscn")
 	if fade_bar == null:
 		create_new_fade_bar()
 	reveal_scene()
@@ -22,6 +24,8 @@ func scene_transition(level_to_load: int):
 			get_tree().change_scene_to_packed(MenuScene)
 		1:
 			get_tree().change_scene_to_packed(Level1)
+		2:
+			get_tree().change_scene_to_packed(Hub)
 		_:
 			get_tree().change_scene_to_packed(MenuScene)
 	if fade_bar == null:
