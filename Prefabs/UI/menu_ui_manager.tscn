@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://df4npk1af8ol3"]
+
+[ext_resource type="Script" uid="uid://b1wxkqagxmcmb" path="res://Scripts/menu_ui_manager.gd" id="1_nalmu"]
+[ext_resource type="PackedScene" uid="uid://de856jo301dc7" path="res://Prefabs/UI/pause_menu.tscn" id="2_oh6xk"]
+[ext_resource type="PackedScene" uid="uid://x4gaii7gbwt5" path="res://Prefabs/UI/missions_menu.tscn" id="3_jrwq8"]
+[ext_resource type="PackedScene" uid="uid://c4qdcg30naqrk" path="res://Prefabs/UI/multiplayer_menu.tscn" id="4_7nhwm"]
+
+[node name="Menu UI Manager" type="Control"]
+process_mode = 3
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_nalmu")
+
+[node name="Pause Menu" parent="." instance=ExtResource("2_oh6xk")]
+visible = false
+z_index = 101
+layout_mode = 1
+
+[node name="Missions Menu" parent="." instance=ExtResource("3_jrwq8")]
+visible = false
+layout_mode = 1
+
+[node name="Multiplayer Menu" parent="." instance=ExtResource("4_7nhwm")]
+visible = false
+layout_mode = 1

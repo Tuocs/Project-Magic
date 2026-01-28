@@ -1,5 +1,6 @@
 extends Node3D
 
+signal scene_loaded()
 @onready var player = get_tree().get_first_node_in_group("Player")
 @onready var label = $"CanvasLayer/Interact Highlight"
 
@@ -9,6 +10,9 @@ var can_interact = true
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	label = $"CanvasLayer/Interact Highlight"
+	
+func scene_loaded_ready():
+	player = get_tree().get_first_node_in_group("Player")
 
 func register_area(area: InteractionArea):
 	active_areas.push_back(area)

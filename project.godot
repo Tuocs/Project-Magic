@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Quick Cast Magic"
-config/version="0.0.3"
+config/version="0.1.0"
 run/main_scene="uid://o2ygfbwk5t5y"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/textures/icon.svg"
@@ -20,6 +20,7 @@ config/icon="res://Assets/textures/icon.svg"
 
 Globals="*res://globals.gd"
 TransitionManager="*res://Scripts/transition_manager.gd"
+MenuManager="*res://Prefabs/UI/menu_ui_manager.tscn"
 InteractionManager="*res://Prefabs/Map Logic/interaction_manager.tscn"
 
 [dotnet]

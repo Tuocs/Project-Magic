@@ -16,6 +16,7 @@ var shield_obj: Node3D
 @export var max_mana: float = 10
 var current_mana: float = 5
 @export var mana_regen: float = 1
+var is_dead = false
 
 func _ready() -> void:
 	current_health = max_health
@@ -127,4 +128,7 @@ func set_element_dmg_multipliers(N: float, R: float, Y: float, B: float, G: floa
 		My_Globals.set_color(Color.WHITE, $MeshInstance3D)
 
 func kill():
+	if is_dead:
+		return
+	is_dead = true
 	queue_free()

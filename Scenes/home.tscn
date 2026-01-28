@@ -8,8 +8,8 @@
 [ext_resource type="Material" uid="uid://dovcrm3wfj0hh" path="res://Assets/mats/grass.tres" id="6_c8v7s"]
 [ext_resource type="Material" uid="uid://nxdklvxj2fts" path="res://Assets/mats/wood.tres" id="7_q1yq7"]
 [ext_resource type="Material" uid="uid://dceekjmgws838" path="res://Assets/mats/shader wood.tres" id="8_cykap"]
-[ext_resource type="Script" uid="uid://dq8qys5ecpe37" path="res://Scripts/mission_board.gd" id="9_8riyq"]
 [ext_resource type="PackedScene" uid="uid://bh1tks8rau4xh" path="res://Prefabs/Map Logic/interaction_area.tscn" id="9_nw1ns"]
+[ext_resource type="Script" uid="uid://dghem5wcrfgre" path="res://Scripts/menu_interactable.gd" id="10_8riyq"]
 [ext_resource type="PackedScene" uid="uid://5uw668wgs67x" path="res://Prefabs/player.tscn" id="10_d2gew"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
@@ -98,13 +98,6 @@ size = Vector3(1, 6, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8riyq"]
 size = Vector3(0.9274292, 10.2352295, 26.322998)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gyiet"]
-size = Vector3(3.006958, 2.5405884, 0.5073242)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cykap"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_jjai4"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wsu2k"]
 size = Vector3(36.57, 16.425, 31.94)
 
@@ -122,6 +115,13 @@ size = Vector3(10.595, 12.305, 10.41)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hibaj"]
 size = Vector3(10.595, 12.305, 10.41)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gyiet"]
+size = Vector3(3.006958, 2.5405884, 0.5073242)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cykap"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jjai4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8riyq"]
 radius = 2.9854524
@@ -535,23 +535,6 @@ transform = Transform3D(0.9999999, 0, 8.881784e-16, 0, 0.9999998, 0, -2.842171e-
 material_override = ExtResource("7_q1yq7")
 mesh = SubResource("BoxMesh_8riyq")
 
-[node name="Board2" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
-transform = Transform3D(1, 0, 0, 0, 2.5383708, 0, 0, 0, 1, 5.744478, -0.5993693, 18.651836)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Map/Board2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08929443, 0.7702942, 0.024902344)
-shape = SubResource("BoxShape3D_gyiet")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Map/Board2"]
-transform = Transform3D(0.26906258, 0, 0, 0, 0.17328978, 0, 0, 0, 1.0152371, 0.67687654, 1.2516097, 0)
-material_override = ExtResource("8_cykap")
-mesh = SubResource("BoxMesh_cykap")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Map/Board2"]
-transform = Transform3D(2.9191399, 0, 0, 0, 1.7027076, 0, 0, 0, 0.29083353, -0.10459292, 1.1361485, 0)
-material_override = ExtResource("8_cykap")
-mesh = SubResource("BoxMesh_jjai4")
-
 [node name="Ground9" type="StaticBody3D" parent="NavigationRegion3D/Map" groups=["Terrain"]]
 transform = Transform3D(0.7682165, 0, 0.6401902, 0, 1, 0, -0.6401902, 0, 0.7682165, 1.2748985, -1, -27.79583)
 
@@ -592,9 +575,34 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.0
 spot_range = 49.476643
 spot_angle = 84.98123
 
+[node name="Door" type="StaticBody3D" parent="NavigationRegion3D" groups=["Terrain"]]
+transform = Transform3D(1, 0, 0, 0, 2.5383708, 0, 0, 0, 1, 5.744478, -0.5993693, 18.651836)
+script = ExtResource("10_8riyq")
+menu = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08929443, 0.7702942, 0.024902344)
+shape = SubResource("BoxShape3D_gyiet")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Door"]
+transform = Transform3D(0.26906258, 0, 0, 0, 0.17328978, 0, 0, 0, 1.0152371, 0.67687654, 1.2516097, 0)
+material_override = ExtResource("8_cykap")
+mesh = SubResource("BoxMesh_cykap")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/Door"]
+transform = Transform3D(2.9191399, 0, 0, 0, 1.7027076, 0, 0, 0, 0.29083353, -0.10459292, 1.1361485, 0)
+material_override = ExtResource("8_cykap")
+mesh = SubResource("BoxMesh_jjai4")
+
+[node name="InteractionArea" parent="NavigationRegion3D/Door" instance=ExtResource("9_nw1ns")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Door/InteractionArea"]
+shape = SubResource("SphereShape3D_8riyq")
+
 [node name="Board" type="StaticBody3D" parent="NavigationRegion3D" groups=["Terrain"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1444783, 1.0028341, 2.8518372)
-script = ExtResource("9_8riyq")
+script = ExtResource("10_8riyq")
+menu = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08929443, 0.7702942, 0.024902344)
@@ -622,20 +630,3 @@ shape = SubResource("SphereShape3D_8riyq")
 
 [node name="Player" parent="." instance=ExtResource("10_d2gew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6475611, 12.373011)
-
-[node name="Interact Highlight" type="Label" parent="."]
-z_index = 40
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -31.0
-offset_right = 54.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "[E] To Interact"
-horizontal_alignment = 1
-vertical_alignment = 2

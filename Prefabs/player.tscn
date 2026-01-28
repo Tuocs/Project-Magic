@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5uw668wgs67x"]
+[gd_scene load_steps=14 format=3 uid="uid://5uw668wgs67x"]
 
 [ext_resource type="Script" uid="uid://dfosbecryss6c" path="res://Scripts/manual_cast_player.gd" id="1_juxdh"]
 [ext_resource type="PackedScene" uid="uid://cgg8xh2ho75yh" path="res://Prefabs/UI/cast_ui.tscn" id="2_4qbli"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://hlv7me51jvlu" path="res://Scripts/camera_spring_arm.gd" id="4_kgmex"]
 [ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/mats/sheild.tres" id="5_2xbkd"]
 [ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="6_3vpsw"]
-[ext_resource type="PackedScene" uid="uid://de856jo301dc7" path="res://Prefabs/UI/pause_menu.tscn" id="7_m62uw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -30,6 +29,7 @@ book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node
 mana_regen = 0.2
 
 [node name="Cast UI" parent="." instance=ExtResource("2_4qbli")]
+mouse_filter = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -95,5 +95,3 @@ transform = Transform3D(0.37684655, 0, 0, 0, 3.7252903e-09, -0.08530346, 0, 0.34
 visible = false
 material_override = ExtResource("5_2xbkd")
 mesh = SubResource("PrismMesh_kgmex")
-
-[node name="Pause Menu" parent="." instance=ExtResource("7_m62uw")]

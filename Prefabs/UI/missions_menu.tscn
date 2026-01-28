@@ -1,0 +1,148 @@
+[gd_scene load_steps=4 format=3 uid="uid://x4gaii7gbwt5"]
+
+[ext_resource type="Script" uid="uid://cy8nfgnh1i5lg" path="res://Prefabs/UI/missions_menu.gd" id="1_qnp52"]
+[ext_resource type="Shader" uid="uid://dn8mh5p33ut0l" path="res://Assets/Shaders/Blur.gdshader" id="2_3ck8w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6tovx"]
+shader = ExtResource("2_3ck8w")
+shader_parameter/blur_amount = 2.0
+
+[node name="Mission Menu" type="Control"]
+process_mode = 3
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qnp52")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6tovx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -196.25
+offset_right = 309.0
+offset_bottom = 196.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Mission Board"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 105.0
+grow_vertical = 2
+text = "Forest Exploration"
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 205.25
+offset_right = 100.0
+offset_bottom = 236.25
+text = "Accept"
+
+[node name="Panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 105.0
+grow_vertical = 2
+text = "Rescue Lost Person"
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel2"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 205.25
+offset_right = 100.0
+offset_bottom = 236.25
+disabled = true
+text = "Accept"
+
+[node name="Panel3" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 105.0
+grow_vertical = 2
+text = "Clear all Monsters"
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 205.25
+offset_right = 100.0
+offset_bottom = 236.25
+disabled = true
+text = "Accept"
+
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel/Button" to="." method="_on_button_pressed"]

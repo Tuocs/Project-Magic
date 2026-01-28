@@ -10,15 +10,6 @@ func _ready() -> void:
 	instant.button_pressed = Globals.instant_spell_cast
 	toggle.button_pressed = Globals.toggle_spell_window
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("escape"):
-		visible = !visible
-		get_tree().paused = visible
-		if visible:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_infinite_charge_toggled(toggled_on: bool) -> void:
 	Globals.infinite_spell_charge = toggled_on

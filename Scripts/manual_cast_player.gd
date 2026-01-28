@@ -193,5 +193,8 @@ func update_hp():
 	cast_ui.health_bar.value = float(current_health)/float(max_health)
 
 func kill():
+	if is_dead:
+		return
+	is_dead = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	TransitionManager.scene_transition(2)

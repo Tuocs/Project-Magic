@@ -24,3 +24,5 @@ grow_vertical = 2
 text = "[E] To Interact"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[connection signal="scene_loaded" from="." to="." method="scene_loaded_ready"]

@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://o2ygfbwk5t5y"]
 
-[ext_resource type="Script" uid="uid://c0e144r7ea63t" path="res://Scripts/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://c0e144r7ea63t" path="res://Scripts/main_menu.gd" id="1_28flt"]
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("versionText")]
+[node name="Main Menu" type="Control" node_paths=PackedStringArray("versionText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_06t4h")
+script = ExtResource("1_28flt")
 versionText = NodePath("MarginContainer3/Version Text")
 
 [node name="Play" type="Button" parent="."]

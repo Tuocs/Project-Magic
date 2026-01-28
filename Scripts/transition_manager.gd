@@ -8,7 +8,7 @@ var Hub
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	MenuScene = preload("res://main_menu.tscn")
+	MenuScene = preload("res://Scenes/main_menu.tscn")
 	Level1 = preload("res://Scenes/main.tscn")
 	Hub = preload("res://Scenes/home.tscn")
 	if fade_bar == null:
@@ -47,6 +47,9 @@ func reveal_scene():
 	for i in range(100):
 		fade_bar.size.x = (100-i)*(screen_size/25)
 		await get_tree().process_frame 
+	InteractionManager.emit_signal("scene_loaded")
+	if get_tree().current_scene.name == "Main Menu":
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func hide_scene():
 	var screen_size = get_viewport().size.x
@@ -55,7 +58,8 @@ func hide_scene():
 	for i in range(100):
 		fade_bar.size.x = i*(screen_size/25)
 		await get_tree().process_frame 
-		
+	MenuManager.close_menu()
+
 func create_new_fade_bar():
 	var fade_bar_canvas = CanvasLayer.new()
 	fade_bar_canvas.layer = 4000
