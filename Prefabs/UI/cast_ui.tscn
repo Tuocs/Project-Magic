@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cgg8xh2ho75yh"]
+[gd_scene load_steps=27 format=3 uid="uid://cgg8xh2ho75yh"]
 
 [ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_hrqfe"]
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="2_e856e"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://dke0fbx56w8qt" path="res://Assets/textures/Charge.png" id="13_a74r3"]
 [ext_resource type="Texture2D" uid="uid://df8n0swdoo5jj" path="res://Assets/textures/Spread.png" id="14_ik6ap"]
 [ext_resource type="Texture2D" uid="uid://cp65u3hxn2jo3" path="res://Assets/textures/projectile.png" id="15_e11g1"]
+[ext_resource type="Texture2D" uid="uid://dura4ud76f5ny" path="res://Assets/textures/duration_up.png" id="15_gf7ag"]
+[ext_resource type="Texture2D" uid="uid://6ik6yw6qw3nc" path="res://Assets/textures/duration_down.png" id="16_ac0ky"]
 [ext_resource type="Texture2D" uid="uid://dfnrxm4cp4klx" path="res://Assets/textures/Aura.png" id="16_ue45s"]
 [ext_resource type="Texture2D" uid="uid://dvl0cjpp18h8g" path="res://Assets/textures/wall.png" id="17_8w56e"]
 [ext_resource type="Texture2D" uid="uid://bh47vevw2yhhc" path="res://Assets/textures/Force_push.png" id="18_3iix7"]
@@ -299,8 +301,8 @@ metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_mods = Array[int]([5, 8])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_a74r3"), ExtResource("14_ik6ap")])
+spell_mods = Array[int]([5, 8, 12, 13])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_a74r3"), ExtResource("14_ik6ap"), ExtResource("15_gf7ag"), ExtResource("16_ac0ky")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Casting Crystal2"]
 script = ExtResource("9_3yxrg")

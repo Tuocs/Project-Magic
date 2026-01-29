@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var lingertime: float = 0.1
-@export var detonatetime: float = 2.0
+@export var lifetime: float = 2.0
 var active = false
 var lived_time = 0
 var type: Globals.element_type
@@ -11,10 +11,10 @@ var damage = 0
 
 func _process(delta: float) -> void:
 	lived_time += delta
-	if lived_time > detonatetime:
+	if lived_time > lifetime:
 		$Area3D.visible = true
 		$Area3D.monitoring = true
-	if lived_time > detonatetime + lingertime:
+	if lived_time > lifetime + lingertime:
 		queue_free()
 
 func _on_area_entered(body):
@@ -25,10 +25,11 @@ func _on_area_entered(body):
 
 func set_color(color: Color):
 	var material = solid_color_target.get_active_material(0)
-	if material == null:
-		material = StandardMaterial3D.new()
-	else:
-		material = material.duplicate() # Create a unique copy of the material
+	#if material == null:
+	#	material = StandardMaterial3D.new()
+	#else:
+	#	material = material.duplicate() # Create a unique copy of the material
+	material = StandardMaterial3D.new()
 	material.albedo_color = color
 	solid_color_target.material_override = null
 	solid_color_target.set_surface_override_material(0, material) # Assign the unique material back

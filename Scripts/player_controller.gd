@@ -98,6 +98,10 @@ func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 		spwn.add_to_group("Reflect")
 	if spell_mods[Globals.spell_mod.EXTRA_DMG]:
 		spwn.damage = spwn.damage + 50
+	if spell_mods[Globals.spell_mod.DURATION_UP]:
+		spwn.lifetime = spwn.lifetime*2
+	if spell_mods[Globals.spell_mod.DURATION_DOWN]:
+		spwn.lifetime = spwn.lifetime/3
 	return spwn
 
 func base_spell_costs() -> bool:
