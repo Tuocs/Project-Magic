@@ -65,3 +65,8 @@ func jump():
 func cast():
 	if multiplayer.is_server():
 		player.do_cast = true
+
+@rpc("call_local")
+func prepare_spell():
+	if multiplayer.is_server():
+		pass
