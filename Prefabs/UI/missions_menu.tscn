@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://x4gaii7gbwt5"]
 
-[ext_resource type="Script" uid="uid://cy8nfgnh1i5lg" path="res://Prefabs/UI/missions_menu.gd" id="1_qnp52"]
+[ext_resource type="Script" uid="uid://cy8nfgnh1i5lg" path="res://Scripts/missions_menu.gd" id="1_qnp52"]
 [ext_resource type="Shader" uid="uid://dn8mh5p33ut0l" path="res://Assets/Shaders/Blur.gdshader" id="2_3ck8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tovx"]

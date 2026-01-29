@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://bmovbq1hcu7b7" path="res://Assets/mats/tree.tres" id="2_kry3j"]
 [ext_resource type="Material" uid="uid://dk4gf8507g3vm" path="res://Assets/mats/Rock.tres" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://5uw668wgs67x" path="res://Prefabs/player.tscn" id="4_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://7jfpqutml3jl" path="res://Prefabs/enemy.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://7jfpqutml3jl" path="res://Prefabs/Spawnables/enemy.tscn" id="4_lquwl"]
 [ext_resource type="Material" uid="uid://b0063jpqf0u8w" path="res://Assets/mats/yellow.tres" id="6_ynf5e"]
 [ext_resource type="Shader" uid="uid://dbmuywc142fw2" path="res://Assets/Shaders/Fog Shader/fog-shader.gdshader" id="10_hptm8"]
 

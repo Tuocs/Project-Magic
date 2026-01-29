@@ -9,7 +9,8 @@ var damage = 0
 @onready var solid_color_target = $MeshInstance3D
 
 func _ready() -> void:
-	nav.bake_navigation_mesh()
+	pass
+	#nav.bake_navigation_mesh()
 
 func _process(delta):
 	lived_time += delta

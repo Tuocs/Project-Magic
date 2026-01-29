@@ -1,4 +1,4 @@
 extends Control
 
 func _on_button_pressed() -> void:
-	TransitionManager.scene_transition(1)
+	SceneManager.scene_transition(1)

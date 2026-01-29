@@ -1,5 +1,7 @@
 extends Unit
 
+@export_category("Player Options")
+@export var mouse_sensitivity: float = 0.001
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var cast_ui
 var current_magic: Globals.spell_type = Globals.spell_type.NONE
@@ -17,6 +19,10 @@ var ray_length: float = 1000.0 # Maximum distance of the raycast
 var spell_cost: int = 1
 var spell_charges: int = 0
 var unlimited_cast: bool
+@onready var player_input = $PlayerInput
+@export var do_jump = false
+@export var do_cast = false
+var _is_on_floor = true
 
 func _ready():
 	super()
@@ -24,37 +30,6 @@ func _ready():
 	cast_ui.health_bar.value = current_health
 	spell_mods.resize(Globals.spell_mod.size())
 	spell_mods.fill(false)
-
-func _input(event):
-	if Globals.toggle_spell_window:
-		if event.is_action_pressed("edit_magic") && cast_ui.is_active:
-			cast_ui.deactivate()
-		elif event.is_action_pressed("edit_magic"):
-			cast_ui.activate()
-	else:
-		if event.is_action_released("edit_magic"):
-			cast_ui.deactivate()
-		elif event.is_action_pressed("edit_magic"):
-			cast_ui.activate()
-
-
-#region Spells
-	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
-		if current_magic != Globals.spell_type.NONE:
-			if (!base_spell_costs()):
-				return
-			if spell_mods[Globals.spell_mod.CAST_SPREAD]:
-				spread_count = 2
-		if current_magic == Globals.spell_type.PROJECTILE:
-			cast_projectile()
-		elif current_magic == Globals.spell_type.AURA:
-			cast_aura()
-		elif current_magic == Globals.spell_type.STRUCTURE:
-			cast_structure()
-		elif current_magic == Globals.spell_type.BLAST:
-			cast_blast()
-		if spell_charges <= 0:
-			fizzle_spell()
 
 func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJECTILE
 	var pos = shoot_transform_spot.global_position
@@ -135,23 +110,40 @@ func base_spell_costs() -> bool:
 		cast_ui.cost_bar.value = 0
 	spell_charges -= 1
 	return true
-#endregion
 
 
 func _process(delta: float) -> void:
 	super(delta)
 	cast_ui.mana_bar.value = current_mana
+	if do_cast && !cast_ui.is_active:
+		if current_magic != Globals.spell_type.NONE:
+			if (!base_spell_costs()):
+				return
+			if spell_mods[Globals.spell_mod.CAST_SPREAD]:
+				spread_count = 2
+		if current_magic == Globals.spell_type.PROJECTILE:
+			cast_projectile()
+		elif current_magic == Globals.spell_type.AURA:
+			cast_aura()
+		elif current_magic == Globals.spell_type.STRUCTURE:
+			cast_structure()
+		elif current_magic == Globals.spell_type.BLAST:
+			cast_blast()
+		if spell_charges <= 0:
+			fizzle_spell()
+		do_cast = false
 
 func _physics_process(delta: float) -> void:
+	_apply_movement(delta)
+
+func _apply_movement(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if do_jump and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	# Get the input direction and handle the movement/deceleration.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		do_jump = false
+	var direction := (transform.basis * Vector3(player_input.input_dir.x, 0, player_input.input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -177,13 +169,15 @@ func set_spell_type(_type: Globals.spell_type):
 		book_displays[current_magic-1].visible = false
 		My_Globals.set_color(element_colors[0], book_displays[current_magic-1])
 	current_magic = _type
-	book_displays[current_magic-1].visible = true
+	if current_magic != 0:
+		book_displays[current_magic-1].visible = true
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 
 func fizzle_spell():
 	print("fizzle")
-	book_displays[current_magic-1].visible = false
-	My_Globals.set_color(element_colors[0], book_displays[current_magic-1])
+	if current_magic != 0:
+		book_displays[current_magic-1].visible = false
+		My_Globals.set_color(element_colors[0], book_displays[current_magic-1])
 	current_magic = Globals.spell_type.NONE
 	imbuement = Globals.element_type.NONE
 	spell_mods.fill(false)
@@ -197,4 +191,4 @@ func kill():
 		return
 	is_dead = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	TransitionManager.scene_transition(2)
+	SceneManager.scene_transition(2)

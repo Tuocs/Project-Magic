@@ -12,7 +12,7 @@ func open_menu(type: MENU):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if type == MENU.PAUSE:
 		pause_menu.show()
-		get_tree().paused = true
+		#get_tree().paused = true
 		current_menu = MENU.PAUSE
 	if type == MENU.MISSIONS:
 		missions_menu.show()
@@ -24,7 +24,7 @@ func open_menu(type: MENU):
 func close_menu():
 	if current_menu == MENU.PAUSE:
 		pause_menu.hide()
-		get_tree().paused = false
+		#get_tree().paused = false
 	if current_menu == MENU.MISSIONS:
 		missions_menu.hide()
 	if current_menu == MENU.MULTIPLAYER:

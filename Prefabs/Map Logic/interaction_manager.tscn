@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpgdjefsx8upq" path="res://Scripts/interaction_manager.gd" id="1_xrixy"]
 
-[node name="InteractionManager" type="Node3D"]
+[node name="InteractionManager" type="Node"]
 script = ExtResource("1_xrixy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

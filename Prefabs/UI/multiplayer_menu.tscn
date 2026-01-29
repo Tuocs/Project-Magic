@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4qdcg30naqrk"]
+[gd_scene load_steps=4 format=3 uid="uid://c4qdcg30naqrk"]
 
+[ext_resource type="Script" uid="uid://bfckoknfr4p51" path="res://Scripts/multiplayer_menu.gd" id="1_pph8x"]
 [ext_resource type="Shader" uid="uid://dn8mh5p33ut0l" path="res://Assets/Shaders/Blur.gdshader" id="2_iehk6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tovx"]
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pph8x")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6tovx")
@@ -85,7 +87,7 @@ offset_right = 105.0
 grow_vertical = 2
 text = "Join"
 
-[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel"]
+[node name="JoinButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 205.25
@@ -107,9 +109,9 @@ anchor_bottom = 1.0
 offset_left = 5.0
 offset_right = 105.0
 grow_vertical = 2
-text = "Create"
+text = "Host"
 
-[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel2"]
+[node name="HostButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel2"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 205.25
@@ -141,3 +143,6 @@ offset_right = 100.0
 offset_bottom = 236.25
 disabled = true
 text = "Accept"
+
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel2/HostButton" to="." method="_on_host_button_pressed"]

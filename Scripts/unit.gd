@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Unit
 
+@export_category("Unit Options")
 @export var SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var knockback_velocity: Vector3 = Vector3.ZERO
@@ -14,7 +15,7 @@ var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals
 var shield_obj: Node3D
 @onready var shield_scene = preload("res://Prefabs/Spawnables/shield.tscn")
 @export var max_mana: float = 10
-var current_mana: float = 5
+@export var current_mana: float = 5
 @export var mana_regen: float = 1
 var is_dead = false
 

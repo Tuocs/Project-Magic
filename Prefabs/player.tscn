@@ -1,11 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://5uw668wgs67x"]
+[gd_scene load_steps=15 format=3 uid="uid://5uw668wgs67x"]
 
-[ext_resource type="Script" uid="uid://dfosbecryss6c" path="res://Scripts/manual_cast_player.gd" id="1_juxdh"]
+[ext_resource type="Script" uid="uid://dilb50n3trr3n" path="res://Scripts/player_controller.gd" id="1_juxdh"]
 [ext_resource type="PackedScene" uid="uid://cgg8xh2ho75yh" path="res://Prefabs/UI/cast_ui.tscn" id="2_4qbli"]
+[ext_resource type="Script" uid="uid://edla0w6k0nes" path="res://Scripts/player_input.gd" id="2_juxdh"]
 [ext_resource type="Material" uid="uid://8nta8powxh0a" path="res://Assets/mats/shader base.tres" id="3_08u7w"]
-[ext_resource type="Script" uid="uid://hlv7me51jvlu" path="res://Scripts/camera_spring_arm.gd" id="4_kgmex"]
 [ext_resource type="Material" uid="uid://c0nf0t6w1kgut" path="res://Assets/mats/sheild.tres" id="5_2xbkd"]
 [ext_resource type="Material" uid="uid://dv0cen5k6gw52" path="res://Assets/mats/auraZone.tres" id="6_3vpsw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_juxdh"]
+properties/0/path = NodePath("PlayerInput:input_dir")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -28,6 +36,11 @@ shoot_rotate_spot = NodePath("SpringArm3D")
 book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node3D/MeshInstance3D4"), NodePath("Node3D/Node3D/MeshInstance3D3"), NodePath("Node3D/Node3D/MeshInstance3D2")]
 mana_regen = 0.2
 
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_juxdh")
+script = ExtResource("2_juxdh")
+singleplayer = true
+
 [node name="Cast UI" parent="." instance=ExtResource("2_4qbli")]
 mouse_filter = 2
 
@@ -43,8 +56,6 @@ mesh = SubResource("CapsuleMesh_4flbx")
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 spring_length = 2.0
-script = ExtResource("4_kgmex")
-mouse_sensitivity = null
 
 [node name="Node3D" type="Node3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

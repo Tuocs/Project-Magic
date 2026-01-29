@@ -11,7 +11,7 @@ func _ready() -> void:
 	Globals.toggle_spell_window = false
 
 func _on_button_2_pressed() -> void:
-	TransitionManager.scene_transition(2)
+	SceneManager.scene_transition(2)
 
 func _on_infinite_charge_toggled(toggled_on: bool) -> void:
 	Globals.infinite_spell_charge = toggled_on

@@ -20,4 +20,4 @@ func _on_toggle_ui_toggled(toggled_on: bool) -> void:
 
 
 func _on_button_pressed() -> void:
-	TransitionManager.scene_transition(0)
+	SceneManager.scene_transition(0)
