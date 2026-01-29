@@ -16,6 +16,18 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:current_mana")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:spell_cost")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:spell_charges")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:current_magic")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:spell_mods")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [node name="MultiplayerPlayer" node_paths=PackedStringArray("book_displays") instance=ExtResource("1_dh0ku")]
 script = ExtResource("2_dh0ku")

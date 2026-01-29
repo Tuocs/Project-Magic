@@ -7,7 +7,8 @@ extends Control
 @onready var spell_details = $"Edit Overlay/Spell Details"
 @onready var selector = $"Edit Overlay/MainCursor"
 @onready var highlight = $"Edit Overlay/Highlight"
-@onready var player = get_parent()
+#@onready var player = get_parent()
+@onready var player_input = $"../PlayerInput"
 var is_active = false
 var cursor_active = false
 var sections: int = 0
@@ -86,12 +87,10 @@ func _finilize_spell():
 			cost_bar.value += 1
 	if spell_type_data == Globals.spell_type.NONE:
 		return;
-	player.spell_cost = 0
-	player.spell_cost += 1
-	player.set_spell_type(spell_type_data)
-	player.spell_cost += count_array_values(spell_mod_data,true)
-	cost_bar.value = player.spell_cost
-	player.set_spell_mods(spell_mod_data)
+	var spell_cost = 1
+	spell_cost += Globals.count_array_values(spell_mod_data,true)
+	cost_bar.value = spell_cost
+	player_input.prepare_spell(spell_type_data, spell_mod_data)
 	if Globals.instant_spell_cast:
 		Input.action_press("magic_cast")
 
@@ -136,13 +135,6 @@ func get_section(section_count: int) -> int:
 		curent_section = new_section
 		crystals[curent_section].on_crystal_hovered()
 	return new_section
-
-func count_array_values(_array, _target_value) -> int:
-	var count = 0
-	for item in _array:
-		if item == _target_value:
-			count += 1
-	return count
 
 func move_crystals_in_circle():
 	var angle_increment = TAU / sections # TAU is 2 * PI radians (360 degrees)

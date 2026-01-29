@@ -4,7 +4,6 @@ extends Unit
 @export var mouse_sensitivity: float = 0.001
 @onready var cam = $SpringArm3D/Node3D/Camera3D
 var cast_ui
-var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @onready var projectile_scene = preload("res://Prefabs/Spawnables/projectile.tscn")
 @onready var blast_scene = preload("res://Prefabs/Spawnables/blast.tscn")
 @onready var aura_scene = preload("res://Prefabs/Spawnables/aura.tscn")
@@ -14,14 +13,16 @@ var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @export var book_displays: Array[Node3D]
 var spread_count: int = 0
 var imbuement: Globals.element_type = Globals.element_type.NONE
-var spell_mods: Array[bool] = []
 var ray_length: float = 1000.0 # Maximum distance of the raycast
-var spell_cost: int = 1
-var spell_charges: int = 0
 var unlimited_cast: bool
 @onready var player_input = $PlayerInput
+@export_category("Sync Exports")
 @export var do_jump = false
 @export var do_cast = false
+@export var spell_cost: int = 1
+@export var spell_charges: int = 0
+@export var current_magic: Globals.spell_type = Globals.spell_type.NONE
+@export var spell_mods: Array[bool] = []
 var _is_on_floor = true
 
 func _ready():

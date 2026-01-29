@@ -32,17 +32,26 @@ func _process(delta: float) -> void:
 		singleplayer_process(delta)
 	else:
 		multiplayer_process(delta)
-		
 	if Globals.toggle_spell_window:
 		if Input.is_action_just_pressed("edit_magic") && cast_ui.is_active:
 			cast_ui.deactivate()
 		elif Input.is_action_just_pressed("edit_magic"):
 			cast_ui.activate()
 	else:
-		if Input.is_action_just_pressed("edit_magic"):
+		if Input.is_action_just_released("edit_magic"):
 			cast_ui.deactivate()
 		elif Input.is_action_just_pressed("edit_magic"):
 			cast_ui.activate()
+
+func prepare_spell(_spell: Globals.spell_type, _mods: Array[bool]):
+	if singleplayer:
+		var spell_cost = 1
+		spell_cost += Globals.count_array_values(_mods,true)
+		player.set_spell_type(_spell)
+		player.set_spell_mods(_mods)
+		player.spell_cost = spell_cost
+	else:
+		finish_spell.rpc()
 
 func singleplayer_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
@@ -67,6 +76,10 @@ func cast():
 		player.do_cast = true
 
 @rpc("call_local")
-func prepare_spell():
+func finish_spell(_spell: Globals.spell_type, _mods: Array[bool]):
 	if multiplayer.is_server():
-		pass
+		var spell_cost = 1
+		spell_cost += Globals.count_array_values(_mods,true)
+		player.set_spell_type(_spell)
+		player.set_spell_mods(_mods)
+		player.spell_cost = spell_cost

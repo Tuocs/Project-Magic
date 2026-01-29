@@ -24,3 +24,10 @@ static func set_color(color: Color, target: MeshInstance3D):
 	target.material_override = null
 	target.set_surface_override_material(0, material) # Assign the unique material back
 	#print("origonal ", target.get_active_material(0).albedo_color, "target ", color)
+
+func count_array_values(_array, _target_value) -> int:
+	var count = 0
+	for item in _array:
+		if item == _target_value:
+			count += 1
+	return count

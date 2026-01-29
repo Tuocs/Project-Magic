@@ -5,6 +5,8 @@ extends "res://Scripts/player_controller.gd"
 
 func _enter_tree() -> void:
 	$PlayerInput.set_multiplayer_authority(name.to_int())
+	$"Cast UI".set_multiplayer_authority(name.to_int())
+	
 
 func _ready():
 	super()
