@@ -18,10 +18,10 @@ func become_host():
 	_remove_single_player()
 	_add_player(1)
 
-func join_as_player():
+func join_as_player(_ip = SERVER_IP):
 	print ("joining game")
 	var client_peer = ENetMultiplayerPeer.new()
-	client_peer.create_client(SERVER_IP,SERVER_PORT)
+	client_peer.create_client(_ip,SERVER_PORT)
 	multiplayer.multiplayer_peer = client_peer
 	_remove_single_player()
 
