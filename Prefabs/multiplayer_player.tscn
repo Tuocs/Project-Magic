@@ -28,10 +28,12 @@ properties/6/replication_mode = 1
 properties/7/path = NodePath(".:spell_mods")
 properties/7/spawn = true
 properties/7/replication_mode = 1
+properties/8/path = NodePath(".:imbuement")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
-[node name="MultiplayerPlayer" node_paths=PackedStringArray("book_displays") instance=ExtResource("1_dh0ku")]
+[node name="MultiplayerPlayer" instance=ExtResource("1_dh0ku")]
 script = ExtResource("2_dh0ku")
-book_displays = []
 mana_regen = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="0"]

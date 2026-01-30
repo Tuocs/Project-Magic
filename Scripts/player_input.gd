@@ -51,7 +51,7 @@ func prepare_spell(_spell: Globals.spell_type, _mods: Array[bool]):
 		player.set_spell_mods(_mods)
 		player.spell_cost = spell_cost
 	else:
-		finish_spell.rpc()
+		finish_spell.rpc(_spell, _mods)
 
 func singleplayer_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):

@@ -128,14 +128,23 @@ radius = 2.9854524
 
 [node name="Home" type="Node"]
 
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dcpqr52an8a52")
+spawn_path = NodePath("../Players")
+spawn_limit = 15
+
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://2ic78ou0ps1t", "uid://db3ig16pf8itp", "uid://dck3a108wo8cx", "uid://b6tmwh4y0t8kh", "uid://db5pbk416ivsy", "uid://7jfpqutml3jl")
+spawn_path = NodePath("../Entities")
+spawn_limit = 1000
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Entities" type="Node3D" parent="."]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6bp64")
 camera_attributes = SubResource("CameraAttributesPractical_344ge")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dcpqr52an8a52")
-spawn_path = NodePath("../Players")
-spawn_limit = 10
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5872203, -0.57235146, 0.57235146, 0, 0.7071068, 0.7071068, -0.80942714, 0.4152275, -0.4152275, 0, -7, 0)
@@ -635,5 +644,3 @@ shape = SubResource("SphereShape3D_8riyq")
 
 [node name="Player" parent="." instance=ExtResource("10_d2gew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6475611, -2.6269894)
-
-[node name="Players" type="Node3D" parent="."]

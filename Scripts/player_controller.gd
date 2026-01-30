@@ -12,7 +12,6 @@ var cast_ui
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
 var spread_count: int = 0
-var imbuement: Globals.element_type = Globals.element_type.NONE
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var unlimited_cast: bool
 @onready var player_input = $PlayerInput
@@ -24,7 +23,8 @@ var unlimited_cast: bool
 @export var spell_charges: int = 0
 @export var current_magic: Globals.spell_type = Globals.spell_type.NONE
 @export var spell_mods: Array[bool] = []
-var _is_on_floor = true
+@export var imbuement: Globals.element_type = Globals.element_type.NONE
+#var _is_on_floor = true
 
 func _ready():
 	super()
@@ -32,6 +32,7 @@ func _ready():
 	cast_ui.health_bar.value = current_health
 	spell_mods.resize(Globals.spell_mod.size())
 	spell_mods.fill(false)
+
 
 func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJECTILE
 	var pos = shoot_transform_spot.global_position
@@ -43,6 +44,7 @@ func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJE
 	if spread_count > 0:
 		spread_count -= 1
 		cast_projectile(30)
+
 func cast_aura(inaccuracy: float = 0):#-----------------------------------------AURA
 	var viewport_size: Vector2 = get_viewport().size
 	var screen_center_pos: Vector2 = Vector2(viewport_size.x / 2.0, viewport_size.y / 2.0)
@@ -66,6 +68,7 @@ func cast_aura(inaccuracy: float = 0):#-----------------------------------------
 		spread_count = 0
 		if Globals.instant_spell_cast:
 			fizzle_spell()
+
 func cast_structure(inaccuracy: float = 0):#---------------------------------Structure
 	var forward_direction = global_transform.basis.z.normalized()
 	var pos = global_transform.origin - forward_direction.rotated(Vector3.UP, randf_range(-inaccuracy, inaccuracy)) * 6
@@ -76,6 +79,7 @@ func cast_structure(inaccuracy: float = 0):#---------------------------------Str
 	if spread_count > 0:
 		spread_count -= 1
 		cast_structure(60)
+
 func cast_blast(inaccuracy: float = 0):#------------------------------------BLAST
 	var pos = shoot_transform_spot.global_position
 	var rot = shoot_rotate_spot.global_transform.basis
@@ -86,6 +90,8 @@ func cast_blast(inaccuracy: float = 0):#------------------------------------BLAS
 	if spread_count > 0:
 		spread_count -= 1
 		cast_blast(60)
+
+
 
 func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 	var spwn = scene.instantiate()
@@ -121,9 +127,11 @@ func update_spellbook_visuals():
 	for i in range(book_displays.size()):
 		book_displays[i].visible = false
 		My_Globals.set_color(element_colors[0], book_displays[i])
-	if current_magic != Globals.spell_type.NONE:
+	if current_magic-1 >= 0:
 		book_displays[current_magic-1].visible = true
 		My_Globals.set_color(element_colors[imbuement], book_displays[current_magic-1])
+
+
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -145,6 +153,8 @@ func _process(delta: float) -> void:
 		if spell_charges <= 0:
 			fizzle_spell()
 		do_cast = false
+		if multiplayer.is_server():
+			rpc_update_spellbook.rpc()
 
 func _physics_process(delta: float) -> void:
 	_apply_movement(delta)
@@ -165,6 +175,8 @@ func _apply_movement(delta: float):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	combine_move_and_knock(delta)
 
+
+
 func set_spell_mods(_mods: Array[bool]):
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 	spell_mods = _mods.duplicate()
@@ -176,19 +188,25 @@ func set_spell_mods(_mods: Array[bool]):
 		if i < 5 && _mods[i] == true:
 			imbuement = i as Globals.element_type
 	update_spellbook_visuals()
+	if multiplayer.is_server():
+		rpc_update_spellbook.rpc()
 
 func set_spell_type(_type: Globals.spell_type):
 	current_magic = _type
 	update_spellbook_visuals()
+	if multiplayer.is_server():
+		rpc_update_spellbook.rpc()
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 
 func fizzle_spell():
 	print("fizzle")
-	update_spellbook_visuals()
 	current_magic = Globals.spell_type.NONE
 	imbuement = Globals.element_type.NONE
 	spell_mods.fill(false)
 	cast_ui.cost_bar.value = 0
+	update_spellbook_visuals()
+
+
 
 func update_hp():
 	cast_ui.health_bar.value = float(current_health)/float(max_health)
@@ -199,3 +217,9 @@ func kill():
 	is_dead = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	SceneManager.scene_transition(2)
+
+
+
+@rpc("call_remote")
+func rpc_update_spellbook():
+	update_spellbook_visuals()

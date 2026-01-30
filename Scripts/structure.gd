@@ -16,7 +16,7 @@ func _process(delta):
 	lived_time += delta
 	if lived_time > lifetime:
 		position = Vector3(0,-1000,0)
-		nav.bake_navigation_mesh()
+		#nav.bake_navigation_mesh()
 		queue_free()
 
 func set_color(color: Color):
