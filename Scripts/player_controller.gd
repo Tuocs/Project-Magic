@@ -16,6 +16,7 @@ var imbuement: Globals.element_type = Globals.element_type.NONE
 var ray_length: float = 1000.0 # Maximum distance of the raycast
 var unlimited_cast: bool
 @onready var player_input = $PlayerInput
+
 @export_category("Sync Exports")
 @export var do_jump = false
 @export var do_cast = false
@@ -116,6 +117,13 @@ func base_spell_costs() -> bool:
 	spell_charges -= 1
 	return true
 
+func update_spellbook_visuals():
+	for i in range(book_displays.size()):
+		book_displays[i].visible = false
+		My_Globals.set_color(element_colors[0], book_displays[i])
+	if current_magic != Globals.spell_type.NONE:
+		book_displays[current_magic-1].visible = true
+		My_Globals.set_color(element_colors[imbuement], book_displays[current_magic-1])
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -167,22 +175,16 @@ func set_spell_mods(_mods: Array[bool]):
 	for i in range(Globals.spell_mod.size()):
 		if i < 5 && _mods[i] == true:
 			imbuement = i as Globals.element_type
-			My_Globals.set_color(element_colors[i], book_displays[current_magic-1])
+	update_spellbook_visuals()
 
 func set_spell_type(_type: Globals.spell_type):
-	if current_magic != 0:
-		book_displays[current_magic-1].visible = false
-		My_Globals.set_color(element_colors[0], book_displays[current_magic-1])
 	current_magic = _type
-	if current_magic != 0:
-		book_displays[current_magic-1].visible = true
+	update_spellbook_visuals()
 	#print(element_colors[type], current_magic, book_displays[current_magic].get_active_material(0).albedo_color)
 
 func fizzle_spell():
 	print("fizzle")
-	if current_magic != 0:
-		book_displays[current_magic-1].visible = false
-		My_Globals.set_color(element_colors[0], book_displays[current_magic-1])
+	update_spellbook_visuals()
 	current_magic = Globals.spell_type.NONE
 	imbuement = Globals.element_type.NONE
 	spell_mods.fill(false)
