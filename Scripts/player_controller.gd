@@ -12,7 +12,6 @@ var cast_ui
 @export var shoot_rotate_spot: Node3D
 @export var book_displays: Array[Node3D]
 var spread_count: int = 0
-var ray_length: float = 1000.0 # Maximum distance of the raycast
 var unlimited_cast: bool
 @onready var player_input = $PlayerInput
 
@@ -46,12 +45,8 @@ func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJE
 		cast_projectile(30)
 
 func cast_aura(inaccuracy: float = 0):#-----------------------------------------AURA
-	var viewport_size: Vector2 = get_viewport().size
-	var screen_center_pos: Vector2 = Vector2(viewport_size.x / 2.0, viewport_size.y / 2.0)
-	var from: Vector3 = cam.project_ray_origin(screen_center_pos)
-	var to: Vector3 = from + cam.project_ray_normal(screen_center_pos) * ray_length
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().get_direct_space_state()
-	var query := PhysicsRayQueryParameters3D.create(from, to)
+	var query := PhysicsRayQueryParameters3D.create(player_input.look_vector_origin, player_input.look_vector_target)
 	var result: Dictionary = space_state.intersect_ray(query)
 	if result.has("position"):
 		var pos: Vector3 = result["position"]

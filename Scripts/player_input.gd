@@ -2,8 +2,12 @@ extends MultiplayerSynchronizer
 
 @onready var player = $".."
 @onready var cast_ui = $"../Cast UI"
+@onready var cam = $"../SpringArm3D/Node3D/Camera3D"
 var input_dir
+var ray_length: float = 1000.0 # Maximum distance of the raycast
 @export var singleplayer = false
+@export var look_vector_origin: Vector3
+@export var look_vector_target: Vector3
 
 
 
@@ -54,6 +58,10 @@ func prepare_spell(_spell: Globals.spell_type, _mods: Array[bool]):
 		finish_spell.rpc(_spell, _mods)
 
 func singleplayer_process(delta: float) -> void:
+	var result: Array[Vector3] = get_look_vector()
+	look_vector_origin = result[0]
+	look_vector_target = result[1]
+
 	if Input.is_action_just_pressed("jump"):
 		player.do_jump = true
 	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
@@ -64,6 +72,13 @@ func multiplayer_process(delta: float) -> void:
 		jump.rpc()
 	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
 		cast.rpc()
+
+func get_look_vector() -> Array[Vector3]:
+	var viewport_size: Vector2 = get_viewport().size
+	var screen_center_pos: Vector2 = Vector2(viewport_size.x / 2.0, viewport_size.y / 2.0)
+	var from: Vector3 = cam.project_ray_origin(screen_center_pos)
+	var to: Vector3 = from + cam.project_ray_normal(screen_center_pos) * ray_length
+	return [from, to]
 
 @rpc("call_local")
 func jump():

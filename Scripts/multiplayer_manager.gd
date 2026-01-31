@@ -30,7 +30,6 @@ func _add_player(id: int):
 	var player_to_add = multiplayer_scene.instantiate()
 	player_to_add.name = str(id)
 	#player_to_add.get_node("PlayerInput").set_multiplayer_authority(id)
-	
 	_players_spawn_node.add_child(player_to_add, true)
 
 func _del_player(id: int):
