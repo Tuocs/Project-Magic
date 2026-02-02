@@ -1,13 +1,10 @@
-extends Node3D
+extends Attack
 
 @export var lingertime: float = 0.1
-@export var lifetime: float = 2.0
-var active = false
-var lived_time = 0
-var type: Globals.element_type
-var damage = 0
-@onready var clear_color_target = $"Area3D/hit zone"
-@onready var solid_color_target = $"warning zone"
+
+func _ready() -> void:
+	clear_color_target = $"Area3D/hit zone"
+	solid_color_target = $"warning zone"
 
 func _process(delta: float) -> void:
 	lived_time += delta

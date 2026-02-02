@@ -8,7 +8,7 @@ var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
 var knockback_duration: float = 0.2
 @export var max_health: int = 100
-var current_health
+@export var current_health: int = 100
 var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
 @export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 @export var shield_type: Globals.element_type

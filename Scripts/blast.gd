@@ -1,18 +1,7 @@
-extends Node3D
+extends Attack
 
-@export var speed: float = 30.0
-@export var lifetime: float = 10.0
-var lived_time = 0
-var type: Globals.element_type
-var damage = 0
-@onready var clear_color_target = $MeshInstance3D
-@onready var solid_color_target
-
-func _physics_process(delta):
-	lived_time += delta
-	if lived_time > lifetime:
-		queue_free()
-	global_position += -global_transform.basis.z.normalized() * speed * delta
+func _ready() -> void:
+	clear_color_target = $MeshInstance3D
 
 func _on_area_entered(body):
 	print("blast hit ",body)

@@ -1,16 +1,10 @@
-extends Node3D
+extends Attack
 
-@export var lifetime: float = 10.0
-var lived_time = 0
 @onready var nav = get_node("/root/Main/NavigationRegion3D")
-var type: Globals.element_type
-var damage = 0
-@onready var clear_color_target = $MeshInstance3D
-@onready var solid_color_target = $MeshInstance3D
 
 func _ready() -> void:
-	pass
-	#nav.bake_navigation_mesh()
+	clear_color_target = $MeshInstance3D
+	solid_color_target = $MeshInstance3D
 
 func _process(delta):
 	lived_time += delta

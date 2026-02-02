@@ -90,6 +90,7 @@ func cast_blast(inaccuracy: float = 0):#------------------------------------BLAS
 
 func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 	var spwn = scene.instantiate()
+	spwn.owner_name = name
 	add_sibling(spwn)
 	var color = element_colors[imbuement]	
 	spwn.set_color(color)
@@ -201,17 +202,21 @@ func fizzle_spell():
 	cast_ui.cost_bar.value = 0
 	update_spellbook_visuals()
 
-
-
 func update_hp():
-	cast_ui.health_bar.value = float(current_health)/float(max_health)
+	pass
 
 func kill():
 	if is_dead:
 		return
 	is_dead = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	SceneManager.scene_transition(2)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#SceneManager.scene_transition(2)
+	#some sort of delay
+	current_health = max_health
+	current_mana = max_mana
+	position = Vector3.ZERO
+	rotation = Vector3.ZERO
+	is_dead = false
 
 
 

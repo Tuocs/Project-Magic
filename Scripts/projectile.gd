@@ -1,15 +1,11 @@
-extends Node3D
+extends Attack
 
 @onready var explosion_scene = preload("res://Prefabs/Spawnables/explosion.tscn")
 @export var speed: float = 70.0
-@export var lifetime: float = 5.0
-var lived_time = 0
-var damage = 51
 var aoe: bool = false
-var type: Globals.element_type
-var hostile: bool = false
-@onready var clear_color_target = $MeshInstance3D
-@onready var solid_color_target
+
+func _ready() -> void:
+	clear_color_target = $MeshInstance3D
 
 func _physics_process(delta):
 	lived_time += delta
@@ -18,11 +14,7 @@ func _physics_process(delta):
 	global_position += -global_transform.basis.z.normalized() * speed * delta
 
 func _on_area_entered(body):
-	if !hostile && body.is_in_group("Enemy"):
-		#body.hit(damage, type)
-		spawn_explosion()
-		queue_free()
-	elif hostile && body.is_in_group("Player"):
+	if owner_name != body.name:
 		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
@@ -45,6 +37,7 @@ func _on_area_entered(body):
 
 func spawn_explosion():
 	var spwn = explosion_scene.instantiate()
+	spwn.owner_name = owner_name
 	add_sibling(spwn)
 	var color = $MeshInstance3D.get_active_material(0).albedo_color
 	color.a = 0.5

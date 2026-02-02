@@ -7,7 +7,7 @@ extends Control
 @onready var spell_details = $"Edit Overlay/Spell Details"
 @onready var selector = $"Edit Overlay/MainCursor"
 @onready var highlight = $"Edit Overlay/Highlight"
-#@onready var player = get_parent()
+@onready var player = get_parent()
 @onready var player_input = $"../PlayerInput"
 var is_active = false
 var cursor_active = false
@@ -145,3 +145,6 @@ func move_crystals_in_circle():
 		var spawn_position = cursor_offset + Vector2(x, y) + Vector2(75,75)
 		crystals[i+1].position = spawn_position
 		crystals[i+1].find_children("*", "AnimationComponent")[0].enter_position = -Vector2(x, y)
+
+func _process(delta: float) -> void:
+	health_bar.value = float(player.current_health)/float(player.max_health)

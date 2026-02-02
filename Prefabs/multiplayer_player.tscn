@@ -31,6 +31,9 @@ properties/7/replication_mode = 1
 properties/8/path = NodePath(".:imbuement")
 properties/8/spawn = true
 properties/8/replication_mode = 1
+properties/9/path = NodePath(".:current_health")
+properties/9/spawn = true
+properties/9/replication_mode = 1
 
 [node name="MultiplayerPlayer" instance=ExtResource("1_dh0ku")]
 script = ExtResource("2_dh0ku")
@@ -41,3 +44,6 @@ replication_config = SubResource("SceneReplicationConfig_dh0ku")
 
 [node name="PlayerInput" parent="." index="1"]
 singleplayer = false
+
+[node name="Cast UI" parent="." index="2"]
+visible = false
