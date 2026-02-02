@@ -4,6 +4,7 @@ class_name My_Globals
 enum spell_type {NONE, PROJECTILE, AURA, STRUCTURE, BLAST}
 enum spell_mod {NONE, COLOR_RED, COLOR_YELLOW, COLOR_BLUE, COLOR_GREEN, EXTRA_CHARGE, EXTRA_DMG, EXTRA_AOE, CAST_SPREAD, REFLECT, TRAP, PUDDLE, DURATION_UP, DURATION_DOWN}
 enum element_type {NONE, RED, YELLOW, BLUE, GREEN}
+enum status_effect {NONE, STUN, SLOW, HASTE, IGNITE, ROOT}
 
 @export var toggle_spell_window: bool = false
 @export var instant_spell_cast: bool = false

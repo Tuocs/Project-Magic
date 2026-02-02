@@ -40,6 +40,8 @@ script = ExtResource("1_juxdh")
 shoot_transform_spot = NodePath("Node3D/Node3D")
 shoot_rotate_spot = NodePath("SpringArm3D")
 book_displays = [NodePath("Node3D/Node3D/MeshInstance3D"), NodePath("Node3D/Node3D/MeshInstance3D4"), NodePath("Node3D/Node3D/MeshInstance3D3"), NodePath("Node3D/Node3D/MeshInstance3D2")]
+max_health = 200
+current_health = 200
 mana_regen = 0.2
 
 [node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]

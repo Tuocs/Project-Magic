@@ -18,6 +18,7 @@ var shield_obj: Node3D
 @export var current_mana: float = 5
 @export var mana_regen: float = 1
 var is_dead = false
+@export var status_effects: Array = []
 
 func _ready() -> void:
 	current_health = max_health
@@ -27,6 +28,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	current_mana = clamp(current_mana + (mana_regen * delta), 0, max_mana)
+	tick_status_effects(delta)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,6 +57,25 @@ func combine_move_and_knock(delta: float):
 func apply_knockback(source_position: Vector3, power: float = 5):
 	knockback_velocity = ((global_position - source_position).normalized()+Vector3(0,1,0)) * power
 	knockback_timer = knockback_duration
+
+func add_status_effect(effect: Globals.status_effect, duration: float):
+	for dictionary in status_effects:
+		if dictionary["effect"] == effect:
+			dictionary["power"] += 1
+			dictionary["duration"] = duration
+			return
+	status_effects.append({"effect": effect, "duration": duration, "power": 1})
+
+func remove_status_effect(effect: Globals.status_effect):
+	for i in range(status_effects.size() - 1, -1, -1):
+		if status_effects[i]["effect"] == effect:
+			status_effects.remove_at(i)
+
+func tick_status_effects(delta: float):
+	for i in range(status_effects.size() - 1, -1, -1):
+		status_effects[i]["duration"] -= delta
+		if status_effects[i]["duration"] <= 0:
+			remove_status_effect(status_effects[i]["effect"])
 
 func give_shield(type: Globals.element_type):
 	shield_type = type
