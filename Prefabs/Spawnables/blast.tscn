@@ -9,6 +9,7 @@
 size = Vector3(2.725, 1.52, 2)
 
 [node name="Blast" type="Area3D"]
+collision_mask = 7
 script = ExtResource("1_rcayi")
 lifetime = 0.1
 

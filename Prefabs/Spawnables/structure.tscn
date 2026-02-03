@@ -10,6 +10,7 @@ size = Vector3(3, 2.5, 0.7)
 size = Vector3(3, 2.5, 0.7)
 
 [node name="Structure" type="StaticBody3D" groups=["Barrier"]]
+collision_mask = 7
 script = ExtResource("1_6vo2c")
 lifetime = 10.0
 

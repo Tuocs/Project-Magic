@@ -24,6 +24,8 @@ material = SubResource("StandardMaterial3D_lgw76")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_30yes"]
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("hp_fill") groups=["Enemy", "Unit"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_lgw76")
 hp_fill = NodePath("Node3D/fill")
 fire_range = 20.0

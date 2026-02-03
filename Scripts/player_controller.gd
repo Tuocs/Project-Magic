@@ -130,6 +130,8 @@ func update_spellbook_visuals():
 
 
 func _process(delta: float) -> void:
+	if is_dead:
+		return
 	super(delta)
 	cast_ui.mana_bar.value = current_mana
 	if do_cast && !cast_ui.is_active:
@@ -153,6 +155,8 @@ func _process(delta: float) -> void:
 			rpc_update_spellbook.rpc()
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	_apply_movement(delta)
 
 func _apply_movement(delta: float):
@@ -205,13 +209,33 @@ func fizzle_spell():
 func update_hp():
 	pass
 
+
+
 func kill():
 	if is_dead:
 		return
 	is_dead = true
-	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	#SceneManager.scene_transition(2)
-	#some sort of delay
+	disable.rpc()
+	if Globals.get_alive_players().size() == 0:
+		SceneManager.map_transition(0)
+		return
+	await get_tree().create_timer(10.0).timeout
+	respawn.rpc()
+
+@rpc("call_local")
+func disable():
+	hide()
+	$CollisionShape3D.disabled = true
+
+@rpc("call_local")
+func respawn():
+	if is_dead:
+		show()
+		$CollisionShape3D.disabled = false
+		is_dead = false
+	fizzle_spell()
+	do_cast = false
+	do_jump = false
 	current_health = max_health
 	current_mana = max_mana
 	position = Vector3.ZERO
@@ -220,6 +244,6 @@ func kill():
 
 
 
-@rpc("call_remote")
+@rpc("call_local")
 func rpc_update_spellbook():
 	update_spellbook_visuals()

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cqd2hl3eclvmb" path="res://Scripts/interaction_area.gd" id="1_jrsqu"]
 
 [node name="InteractionArea" type="Area3D"]
-collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_jrsqu")
 

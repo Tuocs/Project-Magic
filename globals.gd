@@ -30,3 +30,11 @@ func count_array_values(_array, _target_value) -> int:
 		if item == _target_value:
 			count += 1
 	return count
+
+func get_alive_players() -> Array:
+	var player_array = get_tree().get_nodes_in_group("Player")
+	var alive_player_array: Array
+	for player in player_array:
+		if !player.is_dead:
+			alive_player_array.append(player)
+	return alive_player_array

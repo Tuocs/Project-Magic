@@ -36,6 +36,8 @@ properties/3/replication_mode = 1
 [sub_resource type="PrismMesh" id="PrismMesh_kgmex"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shoot_transform_spot", "shoot_rotate_spot", "book_displays") groups=["Player", "Unit"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_juxdh")
 shoot_transform_spot = NodePath("Node3D/Node3D")
 shoot_rotate_spot = NodePath("SpringArm3D")

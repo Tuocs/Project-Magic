@@ -14,5 +14,5 @@ func _ready():
 		$"Cast UI".show()
 
 func _physics_process(delta: float) -> void:
-	if multiplayer.is_server():
+	if multiplayer.is_server() && !is_dead:
 		_apply_movement(delta)

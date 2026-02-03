@@ -58,6 +58,10 @@ func map_transition(map_to_load: int):
 			1:
 				newmap = Forest.instantiate()
 		map_node.add_child(newmap, true)
+	var player_array = get_tree().get_nodes_in_group("Player")
+	for player in player_array:
+		player.respawn.rpc()
+		player.respawn()
 	if fade_bar == null:
 		create_new_fade_bar()
 	reveal_scene()

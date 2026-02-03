@@ -41,6 +41,7 @@ mesh = SubResource("CylinderMesh_t72bq")
 
 [node name="Area3D" type="Area3D" parent="."]
 visible = false
+collision_mask = 7
 monitoring = false
 
 [node name="hit zone" type="MeshInstance3D" parent="Area3D"]
