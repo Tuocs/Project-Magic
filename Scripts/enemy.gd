@@ -2,7 +2,8 @@ extends Unit
 
 
 @onready var projectile_scene = preload("res://Prefabs/Spawnables/projectile.tscn")
-@onready var player = get_node("/root/Main/Player")
+var target
+var player_array
 @onready var nav_agent = $NavigationAgent3D
 @onready var ray_cast_node = $RayCast3D
 @onready var fire_rate_timer = $AttackTimer
@@ -20,9 +21,11 @@ func _ready() -> void:
 	fire_rate_timer.wait_time = 1/fire_rate
 	if is_ranged:
 		$HatMesh.visible = true
+	player_array = get_tree().get_nodes_in_group("Player")
+	target = player_array.pick_random()
 
 func update_target_location(target_location):
-	if is_ranged && global_position.distance_to(player.global_position) < fire_range:
+	if is_ranged && global_position.distance_to(target.global_position) < fire_range:
 		speed_mod = 0
 		if is_ranged && can_shoot:
 			fire_rate_timer.start()
@@ -30,12 +33,12 @@ func update_target_location(target_location):
 			var spwn = projectile_scene.instantiate()
 			add_sibling(spwn)
 			My_Globals.set_color(Color(1.0, 1.0, 1.0, 1.0), spwn.get_child(0))
-			spwn.hostile = true
+			spwn.owner_name = name
 			spwn.speed = 40
 			spwn.damage = 5
 			spwn.global_position = global_position + Vector3(0,1.5,0)
 			spwn.transform.basis = global_transform.basis
-			spwn.look_at(player.global_position + Vector3(0,1.5,0))
+			spwn.look_at(target.global_position + Vector3(0,1.5,0))
 	else:
 		speed_mod = 1
 		nav_agent.set_target_position(target_location)
@@ -48,13 +51,13 @@ func _physics_process(delta: float) -> void:
 		return
 
 	#target and move at player
-	update_target_location(player.global_position)
+	update_target_location(target.global_position)
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
 	var new_velocity = (next_location - current_location).normalized() * SPEED * speed_mod
 	
 	velocity = new_velocity
-	look_at(player.global_position)
+	look_at(target.global_position)
 	combine_move_and_knock(delta)
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -66,10 +69,10 @@ func update_hp():
 	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4
 	
 func can_see_player() -> bool:
-	ray_cast_node.target_position = player.global_position
+	ray_cast_node.target_position = target.global_position
 	if ray_cast_node.is_colliding():
 		var collider = ray_cast_node.get_collider()
-		if collider == player:
+		if collider == target:
 			return true
 	return false
 

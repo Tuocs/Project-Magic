@@ -40,5 +40,5 @@ func _del_player(id: int):
 
 func _remove_single_player():
 	print ("remove single player")
-	var player_to_remove = get_tree().get_current_scene().get_node("Player")
+	var player_to_remove = get_tree().get_current_scene().get_node("Players").get_node("Player")
 	player_to_remove.queue_free()

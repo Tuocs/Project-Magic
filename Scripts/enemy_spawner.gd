@@ -18,6 +18,6 @@ func _on_timer_timeout() -> void:
 
 func spawn_enemy():
 	var spwn = enemy_scene.instantiate()
-	add_child(spwn)
+	$"/root/Hub/Units".add_child(spwn, true)
 	spwn.global_position = global_position
 	spwn.transform.basis = global_transform.basis

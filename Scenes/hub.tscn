@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0p8l2r4bg5b6"]
+
+[ext_resource type="PackedScene" uid="uid://5uw668wgs67x" path="res://Prefabs/player.tscn" id="11_3snl7"]
+
+[node name="Hub" type="Node"]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dcpqr52an8a52")
+spawn_path = NodePath("../Players")
+spawn_limit = 15
+
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://2ic78ou0ps1t", "uid://db3ig16pf8itp", "uid://dck3a108wo8cx", "uid://b6tmwh4y0t8kh", "uid://db5pbk416ivsy")
+spawn_path = NodePath("../Entities")
+spawn_limit = 1000
+
+[node name="MapSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bo5cxsrvkqf2f", "uid://c1oiapt4kpdis")
+spawn_path = NodePath("../Map")
+
+[node name="UnitSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://7jfpqutml3jl")
+spawn_path = NodePath("../Units")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("11_3snl7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6475611, -2.6269894)
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Units" type="Node3D" parent="."]

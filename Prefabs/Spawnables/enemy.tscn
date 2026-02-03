@@ -1,10 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://7jfpqutml3jl"]
+[gd_scene load_steps=11 format=3 uid="uid://7jfpqutml3jl"]
 
 [ext_resource type="Script" uid="uid://dg8ky2ue6d3ps" path="res://Scripts/enemy.gd" id="1_lgw76"]
 [ext_resource type="Texture2D" uid="uid://b1pprfj8c87ep" path="res://Assets/textures/hp bg.tres" id="2_30yes"]
 [ext_resource type="Material" uid="uid://8nta8powxh0a" path="res://Assets/mats/shader base.tres" id="2_n7q57"]
 [ext_resource type="Texture2D" uid="uid://5pa7gi602erb" path="res://Assets/textures/hp fill.tres" id="3_n7q57"]
 [ext_resource type="Texture2D" uid="uid://i1fyt51ukosk" path="res://Assets/textures/hp overlay.tres" id="4_80imi"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3tqtp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -20,6 +28,9 @@ script = ExtResource("1_lgw76")
 hp_fill = NodePath("Node3D/fill")
 fire_range = 20.0
 SPEED = 4.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3tqtp")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
