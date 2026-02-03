@@ -15,7 +15,7 @@ var spread_count: int = 0
 var unlimited_cast: bool
 @onready var player_input = $PlayerInput
 
-@export_category("Sync Exports")
+@export_category("Player Sync Exports")
 @export var do_jump = false
 @export var do_cast = false
 @export var spell_cost: int = 1

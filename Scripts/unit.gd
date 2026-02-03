@@ -2,25 +2,29 @@ extends CharacterBody3D
 class_name Unit
 
 @export_category("Unit Options")
-@export var SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+@export var base_speed = 5.0
+@export var max_mana: float = 10
+@export var max_health: int = 100
+@export var current_health: int = 100
+@export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
 var knockback_duration: float = 0.2
-@export var max_health: int = 100
-@export var current_health: int = 100
-var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
-@export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
-@export var shield_type: Globals.element_type
-var shield_obj: Node3D
 @onready var shield_scene = preload("res://Prefabs/Spawnables/shield.tscn")
-@export var max_mana: float = 10
+var shield_obj: Node3D
+var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals.element_type.NONE:1, Globals.element_type.RED:1, Globals.element_type.YELLOW:1, Globals.element_type.BLUE:1, Globals.element_type.GREEN:1}
+
+@export_category("Unit Sync Exports")
+@export var SPEED = 5.0
+@export var JUMP_VELOCITY = 4.5
 @export var current_mana: float = 5
+@export var shield_type: Globals.element_type
 @export var mana_regen: float = 1
-var is_dead = false
+@export var is_dead = false
 @export var status_effects: Array = []
 
 func _ready() -> void:
+	SPEED = base_speed
 	current_health = max_health
 	current_mana = max_mana
 	if shield_type != Globals.element_type.NONE:
