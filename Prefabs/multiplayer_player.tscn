@@ -34,6 +34,9 @@ properties/8/replication_mode = 1
 properties/9/path = NodePath(".:current_health")
 properties/9/spawn = true
 properties/9/replication_mode = 1
+properties/10/path = NodePath(".:status_effects")
+properties/10/spawn = true
+properties/10/replication_mode = 1
 
 [node name="MultiplayerPlayer" instance=ExtResource("1_dh0ku")]
 script = ExtResource("2_dh0ku")
