@@ -7,6 +7,7 @@ class_name Attack
 var active = false
 var lived_time = 0
 var type: Globals.element_type
+var spell_mods: Array
 @export var damage = 0
 var clear_color_target
 var solid_color_target

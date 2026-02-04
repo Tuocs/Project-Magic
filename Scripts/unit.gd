@@ -3,9 +3,10 @@ class_name Unit
 
 @export_category("Unit Options")
 @export var base_speed = 5.0
+@export var base_attack_speed = 1.0
 @export var max_mana: float = 10
-@export var max_health: int = 100
-@export var current_health: int = 100
+@export var max_health: float = 100
+@export var current_health: float = 100
 @export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_timer: float = 0.0
@@ -17,6 +18,7 @@ var element_dmg_multipliers: Dictionary[Globals.element_type, float] = { Globals
 @export_category("Unit Sync Exports")
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 4.5
+@export var ATTACK_SPEED = 1
 @export var current_mana: float = 5
 @export var shield_type: Globals.element_type
 @export var mana_regen: float = 1
@@ -69,15 +71,35 @@ func add_status_effect(effect: Globals.status_effect, duration: float):
 			dictionary["duration"] = duration
 			return
 	status_effects.append({"effect": effect, "duration": duration, "power": 1})
+	update_modifiers()
 
 func remove_status_effect(effect: Globals.status_effect):
 	for i in range(status_effects.size() - 1, -1, -1):
 		if status_effects[i]["effect"] == effect:
 			status_effects.remove_at(i)
+	update_modifiers()
+
+func update_modifiers():
+	SPEED = base_speed
+	ATTACK_SPEED = base_attack_speed
+	for dictionary in status_effects:
+		match dictionary["effect"]:
+			Globals.status_effect.SLOW:
+				for i in dictionary["power"]:
+					SPEED *= 0.7
+					ATTACK_SPEED *= 0.7
+			Globals.status_effect.STUN:
+				SPEED = 0
+				ATTACK_SPEED = 0
+			Globals.status_effect.ROOT:
+				SPEED = 0
 
 func tick_status_effects(delta: float):
 	for i in range(status_effects.size() - 1, -1, -1):
 		status_effects[i]["duration"] -= delta
+		match status_effects[i]["effect"]:
+			Globals.status_effect.BURN:
+				hit(5.0*delta*status_effects[i]["power"], Globals.element_type.RED)
 		if status_effects[i]["duration"] <= 0:
 			remove_status_effect(status_effects[i]["effect"])
 
@@ -97,14 +119,14 @@ func destroy_shield():
 	if shield_obj != null:
 		shield_obj.queue_free()
 
-func hit(dmg_ammount: int = 1000, dmg_type: Globals.element_type = Globals.element_type.NONE, piercing: bool = false):
+func hit(dmg_ammount: float = 1000, dmg_type: Globals.element_type = Globals.element_type.NONE, piercing: bool = false):
 	if shield_type == Globals.element_type.NONE:
-		take_damage(int(dmg_ammount * element_dmg_multipliers[dmg_type]))
+		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
 		print("hit enemy")
 	elif shield_type == dmg_type && piercing:
 		print("hit shield")
 		destroy_shield()
-		take_damage(int(dmg_ammount * element_dmg_multipliers[dmg_type]))
+		take_damage(dmg_ammount * element_dmg_multipliers[dmg_type])
 	else:
 		print("hit blocked")
 
@@ -127,7 +149,7 @@ func paint_color(type: Globals.element_type):
 		Globals.element_type.RED:
 			set_element_dmg_multipliers(0.25,0.25,0.25,0.25,1)
 	
-func take_damage(ammount: int):
+func take_damage(ammount: float):
 	current_health -= ammount
 	update_hp()
 	if current_health <= 0:

@@ -18,6 +18,7 @@ func _on_area_entered(body):
 	print("aura hit ", body)
 	if body.is_in_group("Unit"):
 		body.hit(damage, type, true)
+		body.add_status_effect(type, 10)
 		queue_free()
 
 func set_color(color: Color):

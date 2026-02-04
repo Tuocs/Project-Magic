@@ -10,7 +10,6 @@ var player_array
 @export var hp_fill: Sprite3D
 @export var is_ranged: bool = false
 @export var fire_range: float = 10
-@export var fire_rate: float = 1
 @export var retarget_distance: float = 5
 var can_shoot = true
 var speed_mod: float = 1
@@ -19,9 +18,11 @@ var speed_mod: float = 1
 func _ready() -> void:
 	super()
 	randomize_elements_and_shield()
-	fire_rate_timer.wait_time = 1/fire_rate
+	fire_rate_timer.wait_time = 1/ATTACK_SPEED
 	if is_ranged:
 		$HatMesh.visible = true
+	player_array = Globals.get_alive_players()
+	target = player_array.pick_random()
 	refresh_target()
 
 func update_target_location(target_location):
@@ -68,7 +69,10 @@ func _physics_process(delta: float) -> void:
 
 func update_hp():
 	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4
-	
+func update_modifiers():
+	super()
+	fire_rate_timer.wait_time = 1/ATTACK_SPEED
+
 func can_see_player() -> bool:
 	ray_cast_node.target_position = target.global_position
 	if ray_cast_node.is_colliding():

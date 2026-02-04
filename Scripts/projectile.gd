@@ -14,10 +14,6 @@ func _physics_process(delta):
 	global_position += -global_transform.basis.z.normalized() * speed * delta
 
 func _on_area_entered(body):
-	if owner_name != body.name:
-		#body.hit(damage, type)
-		spawn_explosion()
-		queue_free()
 	if body.is_in_group("Reflect"):
 		global_transform.basis.z = -global_transform.basis.z
 	elif body.is_in_group("Barrier"):
@@ -32,6 +28,10 @@ func _on_area_entered(body):
 			spawn_explosion()
 			queue_free()
 	elif body.is_in_group("Terrain"):
+		spawn_explosion()
+		queue_free()
+	elif body.is_in_group("Unit") && owner_name != body.name:
+		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
 
