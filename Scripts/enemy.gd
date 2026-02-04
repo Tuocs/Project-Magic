@@ -11,6 +11,7 @@ var player_array
 @export var is_ranged: bool = false
 @export var fire_range: float = 10
 @export var fire_rate: float = 1
+@export var retarget_distance: float = 5
 var can_shoot = true
 var speed_mod: float = 1
 
@@ -21,8 +22,7 @@ func _ready() -> void:
 	fire_rate_timer.wait_time = 1/fire_rate
 	if is_ranged:
 		$HatMesh.visible = true
-	player_array = get_tree().get_nodes_in_group("Player")
-	target = player_array.pick_random()
+	refresh_target()
 
 func update_target_location(target_location):
 	if is_ranged && global_position.distance_to(target.global_position) < fire_range:
@@ -40,6 +40,7 @@ func update_target_location(target_location):
 			spwn.transform.basis = global_transform.basis
 			spwn.look_at(target.global_position + Vector3(0,1.5,0))
 	else:
+		refresh_target()
 		speed_mod = 1
 		nav_agent.set_target_position(target_location)
 
@@ -120,3 +121,11 @@ func randomize_elements_and_shield() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	can_shoot = true
+
+func refresh_target():
+	var target_dist = global_position.distance_to(target.global_position)
+	player_array = Globals.get_alive_players()
+	for player in player_array:
+		if abs(target_dist-global_position.distance_to(player.global_position)) >= retarget_distance:
+			target = player
+			return
