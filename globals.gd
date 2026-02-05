@@ -9,6 +9,7 @@ enum status_effect {NONE, BURN, STUN, SLOW, ROOT, HASTE}
 @export var toggle_spell_window: bool = false
 @export var instant_spell_cast: bool = false
 @export var infinite_spell_charge: bool = false
+@export var element_colors: Array[Color] = [Color(), Color(1.0, 0.0, 0.0, 1.0), Color(1.0, 1.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0)]
 
 static func set_color(color: Color, target: MeshInstance3D):
 	var material = target.get_active_material(0)

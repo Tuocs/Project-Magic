@@ -71,7 +71,7 @@ func update_hp():
 	hp_fill.scale.x = (float(current_health)/float(max_health))*0.4
 func update_modifiers():
 	super()
-	fire_rate_timer.wait_time = 1/ATTACK_SPEED
+	fire_rate_timer.wait_time = 1/(ATTACK_SPEED+0.00000001)
 
 func can_see_player() -> bool:
 	ray_cast_node.target_position = target.global_position

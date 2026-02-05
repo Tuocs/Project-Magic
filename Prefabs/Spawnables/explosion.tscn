@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dck3a108wo8cx"]
+[gd_scene load_steps=14 format=3 uid="uid://dck3a108wo8cx"]
 
 [ext_resource type="Script" uid="uid://bcmapf3vn7kfi" path="res://Scripts/explosion.gd" id="1_nfi1t"]
 [ext_resource type="Material" uid="uid://cb08rnw3u78fd" path="res://Assets/mats/explosion particle.tres" id="2_g0hho"]
@@ -49,6 +49,20 @@ size = Vector2(0.1, 0.1)
 
 [sub_resource type="Skin" id="Skin_8in1u"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jpv5h"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:type")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:lived_time")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
 [node name="Explosion" type="Area3D"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 collision_mask = 7
@@ -75,6 +89,9 @@ trail_lifetime = 0.98
 process_material = SubResource("ParticleProcessMaterial_31rmq")
 draw_pass_1 = SubResource("QuadMesh_kmffy")
 draw_skin = SubResource("Skin_8in1u")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["Attack"]]
+replication_config = SubResource("SceneReplicationConfig_jpv5h")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_area_entered"]

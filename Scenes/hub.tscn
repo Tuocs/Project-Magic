@@ -26,6 +26,8 @@ spawn_path = NodePath("../Units")
 
 [node name="Player" parent="Players" instance=ExtResource("11_3snl7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6475611, -2.6269894)
+max_health = 100.0
+current_health = 100.0
 
 [node name="Entities" type="Node3D" parent="."]
 

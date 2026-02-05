@@ -37,6 +37,7 @@ Terrain=""
 Player=""
 Reflect=""
 Barrier=""
+Attack=""
 
 [input]
 
