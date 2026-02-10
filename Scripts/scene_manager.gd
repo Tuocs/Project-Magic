@@ -105,4 +105,4 @@ func create_new_fade_bar():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("Reload"):
-		SceneManager.map_transition(1)
+		SceneManager.map_transition(0)

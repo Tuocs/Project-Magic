@@ -95,7 +95,32 @@ offset_right = 100.0
 offset_bottom = 236.25
 text = "Accept"
 
+[node name="Panel3" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 105.0
+grow_vertical = 2
+text = "Clear all Monsters"
+
+[node name="Button2" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 205.25
+offset_right = 100.0
+offset_bottom = 236.25
+text = "Accept"
+
 [node name="Panel2" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -120,29 +145,5 @@ offset_bottom = 236.25
 disabled = true
 text = "Accept"
 
-[node name="Panel3" type="Panel" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 105.0
-grow_vertical = 2
-text = "Clear all Monsters"
-
-[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 205.25
-offset_right = 100.0
-offset_bottom = 236.25
-disabled = true
-text = "Accept"
-
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/GridContainer/Panel3/Button2" to="." method="_on_button_2_pressed"]

@@ -40,6 +40,8 @@ properties/10/replication_mode = 1
 
 [node name="MultiplayerPlayer" instance=ExtResource("1_dh0ku")]
 script = ExtResource("2_dh0ku")
+max_health = 100.0
+current_health = 100.0
 mana_regen = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="0"]

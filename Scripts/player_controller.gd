@@ -18,6 +18,7 @@ var unlimited_cast: bool
 @export_category("Player Sync Exports")
 @export var do_jump = false
 @export var do_cast = false
+@export var do_meditate = false
 @export var spell_cost: int = 1
 @export var spell_charges: int = 0
 @export var current_magic: Globals.spell_type = Globals.spell_type.NONE
@@ -138,6 +139,11 @@ func _process(delta: float) -> void:
 		return
 	super(delta)
 	cast_ui.mana_bar.value = current_mana
+	if do_cast || do_jump || player_input.input_dir != Vector2.ZERO:
+		do_meditate = false
+	if do_meditate:
+		current_mana = clamp(current_mana + (mana_regen * delta), 0, max_mana)
+		current_mana = clamp(current_mana + (mana_regen * delta), 0, max_mana)
 	if do_cast && !cast_ui.is_active:
 		if current_magic != Globals.spell_type.NONE:
 			if (!base_spell_costs()):

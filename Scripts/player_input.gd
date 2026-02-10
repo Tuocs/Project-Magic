@@ -66,12 +66,16 @@ func singleplayer_process(delta: float) -> void:
 		player.do_jump = true
 	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
 		player.do_cast = true
+	if Input.is_action_just_pressed("meditate"):
+		player.do_meditate = true
 
 func multiplayer_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump.rpc()
 	if Input.is_action_just_pressed("magic_cast") && !cast_ui.is_active:
 		cast.rpc()
+	if Input.is_action_just_pressed("meditate"):
+		meditate.rpc()
 
 func get_look_vector() -> Array[Vector3]:
 	var viewport_size: Vector2 = get_viewport().size
@@ -89,6 +93,11 @@ func jump():
 func cast():
 	if multiplayer.is_server():
 		player.do_cast = true
+
+@rpc("call_local")
+func meditate():
+	if multiplayer.is_server():
+		player.do_meditate = true
 
 @rpc("call_local")
 func finish_spell(_spell: Globals.spell_type, _mods: Array[bool]):
