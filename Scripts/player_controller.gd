@@ -92,7 +92,7 @@ func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 	var spwn = scene.instantiate()
 	spwn.owner_name = name
 	$"/root/Hub/Entities".add_child(spwn)
-	var color = element_colors[imbuement]	
+	var color = element_colors[imbuement]
 	spwn.set_color(color)
 	spwn.type = imbuement
 	spwn.global_position = pos
