@@ -37,7 +37,7 @@ func _on_area_entered(body):
 
 func spawn_explosion():
 	var spwn = explosion_scene.instantiate()
-	spwn.owner_name = owner_node.name
+	spwn.owner_node = owner_node
 	add_sibling(spwn)
 	var color = $MeshInstance3D.get_active_material(0).albedo_color
 	color.a = 0.5

@@ -3,9 +3,9 @@ extends Attack
 func _ready() -> void:
 	clear_color_target = $MeshInstance3D
 	if knockback != 0:
-		knockback *= 5
+		knockback *= 2.5
 	else:
-		knockback = 20
+		knockback = 15
 
 func _on_area_entered(body):
 	print("blast hit ",body)

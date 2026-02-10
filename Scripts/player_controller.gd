@@ -106,9 +106,9 @@ func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 	if spell_mods[Globals.spell_mod.DURATION_DOWN]:
 		spwn.lifetime = spwn.lifetime/3
 	if spell_mods[Globals.spell_mod.PUSH]:
-		spwn.knockback = 5
+		spwn.knockback = 8
 	if spell_mods[Globals.spell_mod.PULL]:
-		spwn.knockback = -5
+		spwn.knockback = -8
 	return spwn
 
 func base_spell_costs() -> bool:
