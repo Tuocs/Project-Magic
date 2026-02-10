@@ -2,11 +2,15 @@ extends Attack
 
 func _ready() -> void:
 	clear_color_target = $MeshInstance3D
+	if knockback != 0:
+		knockback *= 5
+	else:
+		knockback = 20
 
 func _on_area_entered(body):
 	print("blast hit ",body)
 	if body.is_in_group("Unit"):
-		body.apply_knockback(position, 20)
+		body.apply_knockback(owner_node.global_position, knockback)
 		body.hit(damage, type)
 		if type != Globals.element_type.NONE && body.is_in_group("Enemy"):
 			body.paint_color(type)

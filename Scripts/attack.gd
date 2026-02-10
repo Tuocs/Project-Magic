@@ -2,8 +2,9 @@ extends Node3D
 class_name Attack
 
 
-@export var owner_name: String = "Player"
+@export var owner_node: Node3D
 @export var lifetime: float = 2.0
+@export var knockback: float = 0.0
 var active = false
 @export var lived_time = 0
 @export var type: Globals.element_type

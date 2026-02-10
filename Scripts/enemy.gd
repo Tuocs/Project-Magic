@@ -34,7 +34,7 @@ func update_target_location(target_location):
 			var spwn = projectile_scene.instantiate()
 			add_sibling(spwn)
 			My_Globals.set_color(Color(1.0, 1.0, 1.0, 1.0), spwn.get_child(0))
-			spwn.owner_name = name
+			spwn.owner_node = self
 			spwn.speed = 40
 			spwn.damage = 5
 			spwn.global_position = global_position + Vector3(0,1.5,0)

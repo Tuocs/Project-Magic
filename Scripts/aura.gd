@@ -19,6 +19,8 @@ func _on_area_entered(body):
 	if body.is_in_group("Unit"):
 		body.hit(damage, type, true)
 		body.add_status_effect(type, 10)
+		if knockback != 0:
+			body.apply_knockback(owner_node.global_position, knockback)
 		queue_free()
 
 func set_color(color: Color):

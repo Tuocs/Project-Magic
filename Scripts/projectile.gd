@@ -30,20 +30,21 @@ func _on_area_entered(body):
 	elif body.is_in_group("Terrain"):
 		spawn_explosion()
 		queue_free()
-	elif body.is_in_group("Unit") && owner_name != body.name:
+	elif body.is_in_group("Unit") && owner_node.name != body.name:
 		#body.hit(damage, type)
 		spawn_explosion()
 		queue_free()
 
 func spawn_explosion():
 	var spwn = explosion_scene.instantiate()
-	spwn.owner_name = owner_name
+	spwn.owner_name = owner_node.name
 	add_sibling(spwn)
 	var color = $MeshInstance3D.get_active_material(0).albedo_color
 	color.a = 0.5
 	My_Globals.set_color(color, spwn.get_child(0))
 	spwn.type = type
 	spwn.damage = damage
+	spwn.knockback = knockback
 	spwn.global_position = global_position
 	spwn.transform.basis = global_transform.basis
 	if aoe:

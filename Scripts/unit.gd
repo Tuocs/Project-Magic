@@ -61,7 +61,9 @@ func combine_move_and_knock(delta: float):
 	move_and_slide()
 
 func apply_knockback(source_position: Vector3, power: float = 5):
-	knockback_velocity = ((global_position - source_position).normalized()+Vector3(0,1,0)) * power
+	var knockback_direction = (global_position - source_position)
+	knockback_direction.y = 0
+	knockback_velocity = (knockback_direction.normalized()+Vector3(0,0.5,0)) * power
 	knockback_timer = knockback_duration
 
 func add_status_effect(effect: Globals.status_effect, duration: float):

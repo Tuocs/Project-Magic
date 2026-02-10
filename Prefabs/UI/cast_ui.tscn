@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cgg8xh2ho75yh"]
+[gd_scene load_steps=29 format=3 uid="uid://cgg8xh2ho75yh"]
 
 [ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_hrqfe"]
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="2_e856e"]
@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://c5ubv04p08q1a" path="res://Assets/textures/Aoe.png" id="11_xxskf"]
 [ext_resource type="Texture2D" uid="uid://be680asj0mp3m" path="res://Assets/textures/Reflect.png" id="12_gj236"]
 [ext_resource type="Texture2D" uid="uid://dke0fbx56w8qt" path="res://Assets/textures/Charge.png" id="13_a74r3"]
+[ext_resource type="Texture2D" uid="uid://bxcr4205fnaov" path="res://Assets/textures/push.png" id="13_jvqa2"]
 [ext_resource type="Texture2D" uid="uid://df8n0swdoo5jj" path="res://Assets/textures/Spread.png" id="14_ik6ap"]
+[ext_resource type="Texture2D" uid="uid://mvtomy45rrsq" path="res://Assets/textures/pull.png" id="14_kblvp"]
 [ext_resource type="Texture2D" uid="uid://cp65u3hxn2jo3" path="res://Assets/textures/projectile.png" id="15_e11g1"]
 [ext_resource type="Texture2D" uid="uid://dura4ud76f5ny" path="res://Assets/textures/duration_up.png" id="15_gf7ag"]
 [ext_resource type="Texture2D" uid="uid://6ik6yw6qw3nc" path="res://Assets/textures/duration_down.png" id="16_ac0ky"]
@@ -286,8 +288,8 @@ metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_mods = Array[int]([6, 7, 9])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("11_xxskf"), ExtResource("12_gj236")])
+spell_mods = Array[int]([6, 7, 9, 14, 15])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("11_xxskf"), ExtResource("12_gj236"), ExtResource("13_jvqa2"), ExtResource("14_kblvp")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Details Crystal"]
 script = ExtResource("9_3yxrg")

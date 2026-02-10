@@ -90,7 +90,7 @@ func cast_blast(inaccuracy: float = 0):#------------------------------------BLAS
 
 func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 	var spwn = scene.instantiate()
-	spwn.owner_name = name
+	spwn.owner_node = self
 	$"/root/Hub/Entities".add_child(spwn)
 	var color = element_colors[imbuement]
 	spwn.set_color(color)
@@ -105,6 +105,10 @@ func base_spell_effects(scene: PackedScene, pos: Vector3, rot) -> Node3D:
 		spwn.lifetime = spwn.lifetime*2
 	if spell_mods[Globals.spell_mod.DURATION_DOWN]:
 		spwn.lifetime = spwn.lifetime/3
+	if spell_mods[Globals.spell_mod.PUSH]:
+		spwn.knockback = 5
+	if spell_mods[Globals.spell_mod.PULL]:
+		spwn.knockback = -5
 	return spwn
 
 func base_spell_costs() -> bool:
