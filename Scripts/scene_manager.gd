@@ -6,6 +6,7 @@ extends Control
 var MenuScene
 var Hub
 var Forest
+var City
 var Room
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +15,7 @@ func _ready() -> void:
 	Hub = preload("res://Scenes/hub.tscn")
 	Room = preload("res://Scenes/room.tscn")
 	Forest = preload("res://Scenes/forest.tscn")
+	City = preload("res://Scenes/city.tscn")
 	if fade_bar == null:
 		create_new_fade_bar()
 	reveal_scene()
@@ -57,6 +59,8 @@ func map_transition(map_to_load: int):
 				newmap = Room.instantiate()
 			1:
 				newmap = Forest.instantiate()
+			2:
+				newmap = City.instantiate()
 		map_node.add_child(newmap, true)
 	var player_array = get_tree().get_nodes_in_group("Player")
 	for player in player_array:
