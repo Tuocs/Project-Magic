@@ -40,7 +40,6 @@ mouse_filter = 1
 script = ExtResource("1_hrqfe")
 crystals = [NodePath("Edit Overlay/Type Crystal"), NodePath("Edit Overlay/Spell Details/Color Crystal"), NodePath("Edit Overlay/Spell Details/Details Crystal"), NodePath("Edit Overlay/Spell Details/Casting Crystal2"), NodePath("Edit Overlay/Spell Details/Proj Type"), NodePath("Edit Overlay/Spell Details/Proj Path"), NodePath("Edit Overlay/Spell Details/Proj AOE")]
 crystal_spawn_radius = 125.0
-crystal_spawn_anim_offset = 0.05
 cursor_radius = 200.0
 center_zone_radius = 75.0
 
@@ -280,7 +279,7 @@ spell_type_exclusive = 3
 spell_mods = Array[int]([1, 2, 3, 4])
 charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("5_jvqa2"), ExtResource("6_kblvp"), ExtResource("7_d6vlg"), ExtResource("8_qbgm8")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
+[node name="AnimationComponent2" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
@@ -299,6 +298,7 @@ charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.05
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
@@ -314,6 +314,7 @@ charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_a74r3"
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.1
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
@@ -329,6 +330,7 @@ charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_e11g1"
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.1
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
@@ -344,6 +346,7 @@ charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.1
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
@@ -359,6 +362,7 @@ charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_gf7ag"
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
+enter_delay = 0.1
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 

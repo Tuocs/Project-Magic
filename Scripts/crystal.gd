@@ -17,6 +17,7 @@ var cursor_pos: Vector2 = Vector2(0,0)
 @export var cursor_offset: Vector2
 
 @export_category("Spell Settings")
+@export var spell_type_exclusive: Globals.spell_type = Globals.spell_type.NONE
 @onready var selection_box = $"largeBG/Edit Overlay/selector"
 @export var spawn_radius: float = 100.0
 @export var spell_mods: Array[Globals.spell_mod]
@@ -55,6 +56,7 @@ func deactivate():
 func charge(_section: int):
 	if is_main_crystal:
 		charged_option = spell_types[_section]
+		cast_ui.move_crystals_in_circle(charged_option)
 	else:
 		charged_option = spell_mods[_section]
 	cast_ui._crystal_charge()
@@ -74,7 +76,7 @@ func _input(event: InputEvent) -> void:
 		return
 	var section = get_section(sections)
 	if section == -1:
-		print("no selection, defaulting to 1")
+		print("no crystal option selection, defaulting to 1")
 		section = 1
 	if event is InputEventMouseMotion:
 		cursor_pos.y += event.relative.y * mouse_sensitivity
