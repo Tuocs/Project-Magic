@@ -362,6 +362,111 @@ hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
+[node name="Proj Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 1
+spell_mods = Array[int]([23, 24])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("13_jvqa2")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Effects"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="Aura Activation" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 2
+spell_mods = Array[int]([29, 28])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_gf7ag"), ExtResource("16_ue45s")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Activation"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="Aura Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 2
+spell_mods = Array[int]([30, 31, 32, 33])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("20_ac0ky"), ExtResource("14_kblvp"), ExtResource("10_ka52f"), ExtResource("13_a74r3")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Effects"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="Aura Linger" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 2
+spell_mods = Array[int]([34, 35])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("16_ue45s"), ExtResource("13_a74r3")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Linger"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="CQB Manifests" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 5
+spell_mods = Array[int]([23, 24, 25])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("13_a74r3"), ExtResource("20_ac0ky")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/CQB Manifests"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="CQB Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 5
+spell_mods = Array[int]([26, 27])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("10_ka52f")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/CQB Effects"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
+[node name="Move Type" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+self_modulate = Color(1, 1, 1, 0.6862745)
+layout_mode = 1
+cast_ui = NodePath("../../..")
+spell_type_exclusive = 6
+spell_mods = Array[int]([36, 37, 38])
+charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("15_e11g1"), ExtResource("11_xxskf")])
+
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Move Type"]
+script = ExtResource("9_3yxrg")
+enter_animation = true
+hover_scale = Vector2(1.1, 1.1)
+enter_transition = 1
+metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
+
 [node name="Type Crystal" parent="Edit Overlay" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 layout_mode = 1
 offset_left = -25.0

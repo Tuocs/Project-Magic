@@ -5,6 +5,7 @@ class_name Attack
 @export var owner_node: Node3D
 @export var lifetime: float = 2.0
 @export var knockback: float = 0.0
+@export var knockup: float = 0.0
 var active = false
 @export var lived_time = 0
 @export var type: Globals.element_type

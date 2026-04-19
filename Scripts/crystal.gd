@@ -59,7 +59,7 @@ func charge(_section: int):
 		cast_ui.move_crystals_in_circle(charged_option)
 	else:
 		charged_option = spell_mods[_section]
-	cast_ui._crystal_charge()
+	cast_ui._crystal_charge() 
 	texture = charge_textures[_section+1]
 	deactivate()
 

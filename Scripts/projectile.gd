@@ -1,7 +1,14 @@
 extends Attack
 
 @onready var explosion_scene = preload("res://Prefabs/Spawnables/explosion.tscn")
-@export var speed: float = 70.0
+var speed: float = 0.0
+var gravity: float = 0.0
+var piercing: bool = false
+var sticky: bool = false
+var bouncy: bool = false
+var timed_explosion: bool = false
+var contact_explosion: bool = false
+var stuck = false
 var aoe: bool = false
 
 func _ready() -> void:
@@ -10,13 +17,20 @@ func _ready() -> void:
 func _physics_process(delta):
 	lived_time += delta
 	if lived_time > lifetime:
+		if timed_explosion:
+			spawn_explosion()
 		queue_free()
 	global_position += -global_transform.basis.z.normalized() * speed * delta
+	global_position.y -= gravity * delta
 
 func _on_area_entered(body):
-	if body.is_in_group("Reflect"):
+	if sticky and !stuck:
+		stuck = true
+		stick(body)
+		return
+	if body.is_in_group("Reflect") and !piercing:
 		global_transform.basis.z = -global_transform.basis.z
-	elif body.is_in_group("Barrier"):
+	elif body.is_in_group("Barrier") and !piercing:
 		var angle_diff = get_y_rotation_difference_3d(self, body)
 		if angle_diff <= 90:
 			if body.type != My_Globals.element_type.NONE:
@@ -25,15 +39,30 @@ func _on_area_entered(body):
 			scale = scale*1.1
 			set_color(body.clear_color_target.get_active_material(0).albedo_color)
 		else:
-			spawn_explosion()
+			if contact_explosion:
+				spawn_explosion()
 			queue_free()
 	elif body.is_in_group("Terrain"):
-		spawn_explosion()
+		if contact_explosion:
+			spawn_explosion()
 		queue_free()
 	elif body.is_in_group("Unit") && owner_node.name != body.name:
 		#body.hit(damage, type)
-		spawn_explosion()
-		queue_free()
+		if contact_explosion:
+			spawn_explosion()
+		if !piercing:
+			queue_free()
+
+func stick(body):
+	for i in 5:
+		await get_tree().create_timer(1.0).timeout
+		if body.is_in_group("Unit"):
+			body.hit(damage/2, type)
+			body.add_status_effect(type, 5)
+			if knockback != 0:
+				body.apply_knockback(owner_node.global_position, knockback)
+			if knockup != 0:
+				body.apply_knockback(body.global_position + Vector3(0,-10,0), knockup)
 
 func spawn_explosion():
 	var spwn = explosion_scene.instantiate()
