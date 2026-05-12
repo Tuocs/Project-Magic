@@ -296,7 +296,7 @@ layout_mode = 1
 cast_ui = NodePath("../../..")
 simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([8])
+spell_mods = Array[int]([12])
 charge_textures = Array[Texture]([ExtResource("17_8w56e"), ExtResource("4_ac0ky")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Solid"]
@@ -360,7 +360,7 @@ layout_mode = 1
 cast_ui = NodePath("../../..")
 simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([12])
+spell_mods = Array[int]([11])
 charge_textures = Array[Texture]([ExtResource("14_kblvp"), ExtResource("4_ac0ky")])
 
 [node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Repulse"]
