@@ -15,6 +15,7 @@ var sections: int = 0
 var curent_section: int= -1
 
 @export_category("Spell Settings")
+@export var simplified: bool
 @export var crystals: Array[Control]
 var active_crystals: Array[Control]
 var spell_type_data: Globals.spell_type = Globals.spell_type.NONE
@@ -46,8 +47,11 @@ func activate():
 	selector.visible = true
 	edit_overlay.visible = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	highlight.position = cursor_offset# + Vector2(72,72)
+	highlight.position = cursor_offset + Vector2(72,72)
 	cost_bar.value = 0
+	spell_type_data = Globals.spell_type.PROJECTILE
+	move_crystals_in_circle(spell_type_data)
+	spell_details.visible = true
 	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func deactivate():
@@ -74,14 +78,14 @@ func _crystal_charge():
 	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
 	spell_details.visible = true
 	for i in range(crystals.size()):
-		if i == 0 && crystals[i].charged_option != null:
+		if !simplified and i == 0 and crystals[i].charged_option != null:
 			cost_bar.value = 1
 		elif crystals[i].charged_option != null:
 			cost_bar.value += 1
 
 func _finilize_spell():
 	for i in range(crystals.size()):
-		if i == 0 && crystals[i].charged_option != null:
+		if !simplified and i == 0 and crystals[i].charged_option != null:
 			spell_type_data = crystals[i].charged_option
 			crystals[i].charged_option = null
 			cost_bar.value = 1
@@ -108,9 +112,9 @@ func _input(event: InputEvent) -> void:
 		selector.position = selector_pos + cursor_offset
 		get_section(sections)
 		if curent_section == -1:
-			highlight.position = crystals[0].position + Vector2(72,72)
+			highlight.position = crystals[0].position #+ Vector2(72,72)
 		else:
-			highlight.position = active_crystals[curent_section].position + Vector2(72,72)
+			highlight.position = active_crystals[curent_section].position #+ Vector2(72,72)
 		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
 		#if spell_details.visible == false:
 		#	highlight.position = cursor_offset + Vector2(72,72)
@@ -121,10 +125,14 @@ func _input(event: InputEvent) -> void:
 		#if (selector_pos.distance_to(Vector2.ZERO) < center_zone_radius): this detected if the mouse was in the middle but it didnt feel great
 		if curent_section == -1 or active_crystals.size() == 0:
 			crystals[0].activate()
+			if !crystals[0].simplified_crystal:
+				cursor_active = false
+				selector.visible = false
 		else:
 			active_crystals[curent_section].activate()
-		cursor_active = false
-		selector.visible = false
+			if !active_crystals[curent_section].simplified_crystal:
+				cursor_active = false
+				selector.visible = false
 
 func get_section(section_count: int) -> int:
 	var angle = atan2(selector_pos.y, selector_pos.x) # -PI .. PI

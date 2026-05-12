@@ -1,25 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://cgg8xh2ho75yh"]
+[gd_scene load_steps=20 format=3 uid="uid://cgg8xh2ho75yh"]
 
 [ext_resource type="Script" uid="uid://d0q8md86qvg1e" path="res://Scripts/cast_ui.gd" id="1_hrqfe"]
 [ext_resource type="Texture2D" uid="uid://cp2llsu1ys04v" path="res://Assets/textures/empty_select.png" id="2_e856e"]
 [ext_resource type="PackedScene" uid="uid://bxblkj71ril0k" path="res://Prefabs/UI/spell_crystal.tscn" id="3_gf7ag"]
 [ext_resource type="Texture2D" uid="uid://cdb8br1wx1k3h" path="res://Assets/textures/Circle.png" id="4_ac0ky"]
-[ext_resource type="Texture2D" uid="uid://bwsku3h4hp3wd" path="res://Assets/textures/red_mana.png" id="5_jvqa2"]
-[ext_resource type="Texture2D" uid="uid://dsrtupkhf21qq" path="res://Assets/textures/yellow_mana.png" id="6_kblvp"]
-[ext_resource type="Texture2D" uid="uid://cujcrmhdkvgmo" path="res://Assets/textures/blue_mana.png" id="7_d6vlg"]
-[ext_resource type="Texture2D" uid="uid://bmk4c3o2od34w" path="res://Assets/textures/green_mana.png" id="8_qbgm8"]
 [ext_resource type="Script" uid="uid://cvc4sh0ylj1o4" path="res://Scripts/animation_component.gd" id="9_3yxrg"]
 [ext_resource type="Texture2D" uid="uid://fqlofmyxno27" path="res://Assets/textures/Dmg.png" id="10_ka52f"]
 [ext_resource type="Texture2D" uid="uid://c5ubv04p08q1a" path="res://Assets/textures/Aoe.png" id="11_xxskf"]
 [ext_resource type="Texture2D" uid="uid://be680asj0mp3m" path="res://Assets/textures/Reflect.png" id="12_gj236"]
 [ext_resource type="Texture2D" uid="uid://dke0fbx56w8qt" path="res://Assets/textures/Charge.png" id="13_a74r3"]
-[ext_resource type="Texture2D" uid="uid://bxcr4205fnaov" path="res://Assets/textures/push.png" id="13_jvqa2"]
-[ext_resource type="Texture2D" uid="uid://df8n0swdoo5jj" path="res://Assets/textures/Spread.png" id="14_ik6ap"]
 [ext_resource type="Texture2D" uid="uid://mvtomy45rrsq" path="res://Assets/textures/pull.png" id="14_kblvp"]
-[ext_resource type="Texture2D" uid="uid://cp65u3hxn2jo3" path="res://Assets/textures/projectile.png" id="15_e11g1"]
 [ext_resource type="Texture2D" uid="uid://dura4ud76f5ny" path="res://Assets/textures/duration_up.png" id="15_gf7ag"]
-[ext_resource type="Texture2D" uid="uid://6ik6yw6qw3nc" path="res://Assets/textures/duration_down.png" id="16_ac0ky"]
-[ext_resource type="Texture2D" uid="uid://dfnrxm4cp4klx" path="res://Assets/textures/Aura.png" id="16_ue45s"]
 [ext_resource type="Texture2D" uid="uid://dvl0cjpp18h8g" path="res://Assets/textures/wall.png" id="17_8w56e"]
 [ext_resource type="Texture2D" uid="uid://dxhuj6rv6req8" path="res://Assets/textures/dark_circle.png" id="19_j2agj"]
 [ext_resource type="Texture2D" uid="uid://b62sqju064t4d" path="res://Assets/textures/Expansion.png" id="20_ac0ky"]
@@ -38,7 +29,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_hrqfe")
-crystals = [NodePath("Edit Overlay/Type Crystal"), NodePath("Edit Overlay/Spell Details/Color Crystal"), NodePath("Edit Overlay/Spell Details/Details Crystal"), NodePath("Edit Overlay/Spell Details/Casting Crystal2"), NodePath("Edit Overlay/Spell Details/Proj Type"), NodePath("Edit Overlay/Spell Details/Proj Path"), NodePath("Edit Overlay/Spell Details/Proj AOE")]
+simplified = true
+crystals = [null, NodePath("Edit Overlay/Spell Details/Proj Expans"), NodePath("Edit Overlay/Spell Details/Proj Linger"), NodePath("Edit Overlay/Spell Details/Proj Solid"), NodePath("Edit Overlay/Spell Details/Proj Split"), NodePath("Edit Overlay/Spell Details/Proj Bounce"), NodePath("Edit Overlay/Spell Details/Proj Dmg"), NodePath("Edit Overlay/Spell Details/Proj Repulse"), NodePath("Edit Overlay/Spell Details/Proj Phase")]
 crystal_spawn_radius = 125.0
 crystal_spawn_anim_offset = 0.05
 cursor_radius = 200.0
@@ -69,7 +61,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Highlight" type="TextureRect" parent="Edit Overlay"]
-visible = false
 layout_mode = 0
 offset_left = 549.0
 offset_top = 296.0
@@ -81,7 +72,6 @@ texture = ExtResource("2_e856e")
 expand_mode = 1
 
 [node name="Spell Details" type="Control" parent="Edit Overlay"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -268,220 +258,132 @@ grow_vertical = 2
 rotation = 6.8442903
 scale = Vector2(3.5893693, 0.165)
 
-[node name="Color Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-self_modulate = Color(1, 1, 1, 0.6862745)
-layout_mode = 1
-offset_left = -321.0
-offset_top = -114.0
-offset_right = -271.0
-offset_bottom = -64.0
-cast_ui = NodePath("../../..")
-spell_type_exclusive = 3
-spell_mods = Array[int]([1, 2, 3, 4])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("5_jvqa2"), ExtResource("6_kblvp"), ExtResource("7_d6vlg"), ExtResource("8_qbgm8")])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Color Crystal"]
-script = ExtResource("9_3yxrg")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="Details Crystal" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Expans" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_type_exclusive = 3
-spell_mods = Array[int]([6, 7, 9, 14, 15])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("11_xxskf"), ExtResource("12_gj236"), ExtResource("13_jvqa2"), ExtResource("14_kblvp")])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Details Crystal"]
-script = ExtResource("9_3yxrg")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="Casting Crystal2" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-self_modulate = Color(1, 1, 1, 0.6862745)
-layout_mode = 1
-cast_ui = NodePath("../../..")
-spell_type_exclusive = 3
-spell_mods = Array[int]([5, 8, 12, 13])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_a74r3"), ExtResource("14_ik6ap"), ExtResource("15_gf7ag"), ExtResource("16_ac0ky")])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Casting Crystal2"]
-script = ExtResource("9_3yxrg")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="Proj Type" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-self_modulate = Color(1, 1, 1, 0.6862745)
-layout_mode = 1
-cast_ui = NodePath("../../..")
+simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([14, 15, 16])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_e11g1"), ExtResource("12_gj236"), ExtResource("17_8w56e")])
+spell_mods = Array[int]([7])
+charge_textures = Array[Texture]([ExtResource("11_xxskf"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Type"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Expans"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Proj Path" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Linger" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
+simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([17, 18, 19])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("15_e11g1"), ExtResource("14_ik6ap")])
+spell_mods = Array[int]([10])
+charge_textures = Array[Texture]([ExtResource("15_gf7ag"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Path"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Linger"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Proj AOE" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Solid" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
+simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([20, 21, 22])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_gf7ag"), ExtResource("14_kblvp"), ExtResource("11_xxskf")])
+spell_mods = Array[int]([8])
+charge_textures = Array[Texture]([ExtResource("17_8w56e"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj AOE"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Solid"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Proj Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Split" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
+simplified_crystal = true
 spell_type_exclusive = 1
-spell_mods = Array[int]([23, 24])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("10_ka52f"), ExtResource("13_jvqa2")])
+spell_mods = Array[int]([8])
+charge_textures = Array[Texture]([ExtResource("13_a74r3"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Effects"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Split"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Aura Activation" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Bounce" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_type_exclusive = 2
-spell_mods = Array[int]([29, 28])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_gf7ag"), ExtResource("16_ue45s")])
+simplified_crystal = true
+spell_type_exclusive = 1
+spell_mods = Array[int]([9])
+charge_textures = Array[Texture]([ExtResource("12_gj236"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Activation"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Bounce"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Aura Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Dmg" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_type_exclusive = 2
-spell_mods = Array[int]([30, 31, 32, 33])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("20_ac0ky"), ExtResource("14_kblvp"), ExtResource("10_ka52f"), ExtResource("13_a74r3")])
+simplified_crystal = true
+spell_type_exclusive = 1
+spell_mods = Array[int]([6])
+charge_textures = Array[Texture]([ExtResource("10_ka52f"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Effects"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Dmg"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="Aura Linger" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Repulse" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_type_exclusive = 2
-spell_mods = Array[int]([34, 35])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("16_ue45s"), ExtResource("13_a74r3")])
+simplified_crystal = true
+spell_type_exclusive = 1
+spell_mods = Array[int]([12])
+charge_textures = Array[Texture]([ExtResource("14_kblvp"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Aura Linger"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Repulse"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
-[node name="CQB Manifests" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
+[node name="Proj Phase" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
 self_modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 1
 cast_ui = NodePath("../../..")
-spell_type_exclusive = 5
-spell_mods = Array[int]([23, 24, 25])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("13_a74r3"), ExtResource("20_ac0ky")])
+simplified_crystal = true
+spell_type_exclusive = 1
+spell_mods = Array[int]([5])
+charge_textures = Array[Texture]([ExtResource("20_ac0ky"), ExtResource("4_ac0ky")])
 
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/CQB Manifests"]
+[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Proj Phase"]
 script = ExtResource("9_3yxrg")
 enter_animation = true
 hover_scale = Vector2(1.1, 1.1)
 enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="CQB Effects" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-self_modulate = Color(1, 1, 1, 0.6862745)
-layout_mode = 1
-cast_ui = NodePath("../../..")
-spell_type_exclusive = 5
-spell_mods = Array[int]([26, 27])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("10_ka52f")])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/CQB Effects"]
-script = ExtResource("9_3yxrg")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="Move Type" parent="Edit Overlay/Spell Details" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-self_modulate = Color(1, 1, 1, 0.6862745)
-layout_mode = 1
-cast_ui = NodePath("../../..")
-spell_type_exclusive = 6
-spell_mods = Array[int]([36, 37, 38])
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("13_jvqa2"), ExtResource("15_e11g1"), ExtResource("11_xxskf")])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Spell Details/Move Type"]
-script = ExtResource("9_3yxrg")
-enter_animation = true
-hover_scale = Vector2(1.1, 1.1)
-enter_transition = 1
-metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
-
-[node name="Type Crystal" parent="Edit Overlay" node_paths=PackedStringArray("cast_ui") instance=ExtResource("3_gf7ag")]
-layout_mode = 1
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-cast_ui = NodePath("../..")
-charge_textures = Array[Texture]([ExtResource("4_ac0ky"), ExtResource("15_e11g1"), ExtResource("20_ac0ky"), ExtResource("16_ue45s"), ExtResource("13_jvqa2")])
-is_main_crystal = true
-spell_types = Array[int]([1, 5, 2, 6])
-
-[node name="AnimationComponent" type="Node" parent="Edit Overlay/Type Crystal"]
-script = ExtResource("9_3yxrg")
-enter_transition = 9
-enter_scale = Vector2(0, 0)
 metadata/_custom_type_script = "uid://cvc4sh0ylj1o4"
 
 [node name="MainCursor" type="TextureRect" parent="Edit Overlay"]

@@ -39,33 +39,23 @@ func cast_projectile(inaccuracy: float = 0): #-----------------------------PROJE
 	var rot = shoot_rotate_spot.global_transform.basis
 	var spwn = base_spell_effects(projectile_scene, pos, rot)
 	#type
-	if spell_mods[Globals.spell_mod.PROJ_PIERCE]:
-		spwn.piercing = true
-	if spell_mods[Globals.spell_mod.PROJ_BOUNCE]:
+	#if spell_mods[Globals.spell_mod.PROJ_PIERCE]:
+		#spwn.piercing = true
+	if spell_mods[Globals.spell_mod.REFLECT]:
 		spwn.bouncy = true #still needs implementing
-	if spell_mods[Globals.spell_mod.PROJ_STICKY]:
-		spwn.sticky = true
-	#path
-	if spell_mods[Globals.spell_mod.PROJ_STRAIGHT]:
-		spwn.speed = 70
-	if spell_mods[Globals.spell_mod.PROJ_PARABOLIC]:
+	#if spell_mods[Globals.spell_mod.PROJ_STICKY]:
+		#spwn.sticky = true
+	if spell_mods[Globals.spell_mod.EXTRA_DMG]:
 		spwn.speed = 70
 		spwn.gravity = 10
-	if spell_mods[Globals.spell_mod.PROJ_MANUAL]:
-		spwn.speed = 70 #still needs implementing
-	#aoe
-	if spell_mods[Globals.spell_mod.PROJ_TIMER]:
-		spwn.timed_explosion = true
-		spwn.lifetime = 3
-	if spell_mods[Globals.spell_mod.PROJ_CONTACT]:
-		spwn.contact_explosion = true
-	if spell_mods[Globals.spell_mod.PROJ_REMOTE]:
-		spwn.contact_explosion = true #still needs implementing
-	#effect
-	if spell_mods[Globals.spell_mod.PROJ_DAMAGE]:
 		spwn.damage = spwn.damage + 50
-	if spell_mods[Globals.spell_mod.PROJ_KNOCKUP]:
-		spwn.knockup = 8
+	#if spell_mods[Globals.spell_mod.PROJ_TIMER]:
+		#spwn.timed_explosion = true
+		#spwn.lifetime = 3
+	#if spell_mods[Globals.spell_mod.PROJ_CONTACT]:
+		#spwn.contact_explosion = true
+	#if spell_mods[Globals.spell_mod.PROJ_KNOCKUP]:
+		#spwn.knockup = 8
 	#endmods
 	spwn.rotation_degrees.y += randf_range(-inaccuracy, inaccuracy)
 	if spell_mods[Globals.spell_mod.EXTRA_AOE]:

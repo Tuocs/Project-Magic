@@ -6,6 +6,7 @@ var is_active = false
 var texture_rects: Array[TextureRect]
 var sections: int = 0
 @export var cast_ui: Control
+@export var simplified_crystal: bool
 @onready var expanded_visuals = $"largeBG"
 var has_charged
 
@@ -30,28 +31,35 @@ var charged_option
 
 
 func _ready() -> void:
+	texture = charge_textures[0]
 	sections = charge_textures.size()-1
 	spawn_rects_in_circle()
 
 func activate():
-	#print("opened crystal")
-	is_active = true
-	cursor_pos = Vector2.ZERO
-	expanded_visuals.visible = true
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#mouse_filter = Control.MOUSE_FILTER_STOP
+	if simplified_crystal:
+		charge(0)
+	else:
+		#print("opened crystal")
+		is_active = true
+		cursor_pos = Vector2.ZERO
+		expanded_visuals.visible = true
+		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#mouse_filter = Control.MOUSE_FILTER_STOP
 
 func deactivate():
 	if !is_active:
 		return
-	var viewport_size = get_viewport().size
-	var center_of_screen = viewport_size / 2
-	Input.warp_mouse(center_of_screen)
-	is_active = false
-	expanded_visuals.visible = false
-	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	cursor_pos = Vector2.ZERO
-	#mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if simplified_crystal:
+		pass
+	else:
+		var viewport_size = get_viewport().size
+		var center_of_screen = viewport_size / 2
+		Input.warp_mouse(center_of_screen)
+		is_active = false
+		expanded_visuals.visible = false
+		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		cursor_pos = Vector2.ZERO
+		#mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func charge(_section: int):
 	if is_main_crystal:
