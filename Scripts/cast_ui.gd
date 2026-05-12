@@ -39,6 +39,8 @@ func _ready() -> void:
 	cursor_offset = (size/2) - Vector2(100,100)
 	cost_bar.value = 0
 	
+	for crystal in crystals:
+		crystal.position = cursor_offset + Vector2(75,75)
 	#move_crystals_in_circle()
 
 func activate():
@@ -77,6 +79,7 @@ func _crystal_charge():
 	selector.visible = true
 	spell_details.mouse_filter = Control.MOUSE_FILTER_STOP
 	spell_details.visible = true
+	cost_bar.value = 0
 	for i in range(crystals.size()):
 		if !simplified and i == 0 and crystals[i].charged_option != null:
 			cost_bar.value = 1
@@ -95,7 +98,7 @@ func _finilize_spell():
 			cost_bar.value += 1
 	if spell_type_data == Globals.spell_type.NONE:
 		return;
-	var spell_cost = 1
+	var spell_cost = 0
 	spell_cost += Globals.count_array_values(spell_mod_data,true)
 	cost_bar.value = spell_cost
 	player_input.prepare_spell(spell_type_data, spell_mod_data)
@@ -154,25 +157,32 @@ func get_section(section_count: int) -> int:
 func move_crystals_in_circle(spell_type: Globals.spell_type = Globals.spell_type.NONE):
 	active_crystals = []
 	curent_section = -1
-	for i in range(crystals.size()-1):
-		if crystals[i+1].spell_type_exclusive == Globals.spell_type.NONE or crystals[i+1].spell_type_exclusive == spell_type:
-			active_crystals.append(crystals[i+1])
-			crystals[i+1].position = Vector2(100, 0)
+	# choose starting index
+	var start_index = 0 if simplified else 1
+	
+	for i in range(start_index, crystals.size()):
+		if crystals[i].spell_type_exclusive == Globals.spell_type.NONE \
+		or crystals[i].spell_type_exclusive == spell_type:
+			active_crystals.append(crystals[i])
+			crystals[i].position = Vector2(100, 0)
 		else:
-			crystals[i+1].hide()
+			crystals[i].hide()
 	sections = active_crystals.size()
-	print("aligning " + str(active_crystals.size()) +  " crystals using spelltype" + str(spell_type))
-	var angle_increment = TAU / sections # TAU is 2 * PI radians (360 degrees)
+	print("aligning " + str(active_crystals.size()) + " crystals using spelltype " + str(spell_type))
+	if sections <= 0:
+		return
+	var angle_increment = TAU / sections
 	for i in range(active_crystals.size()):
-		var current_angle = (angle_increment * (i))# + deg_to_rad(54)
+		var current_angle = angle_increment * i
 		var x = cos(current_angle) * crystal_spawn_radius
 		var y = sin(current_angle) * crystal_spawn_radius
 		var spawn_position = cursor_offset + Vector2(x, y) + Vector2(75,75)
-		print("crystal " + active_crystals[i].name +  " going to " + str(spawn_position))
+		print("crystal " + active_crystals[i].name + " going to " + str(spawn_position))
 		active_crystals[i].position = spawn_position
-		active_crystals[i].find_children("*", "AnimationComponent")[0].enter_position = -Vector2(x, y)
-		active_crystals[i].find_children("*", "AnimationComponent")[0].enter_delay = i * crystal_spawn_anim_offset
-		active_crystals[i].find_children("*", "AnimationComponent")[0].setup()
+		var anim = active_crystals[i].find_children("*", "AnimationComponent")[0]
+		anim.enter_position = -Vector2(x, y)
+		anim.enter_delay = i * crystal_spawn_anim_offset
+		anim.setup()
 		active_crystals[i].show()
 
 func _process(delta: float) -> void:
