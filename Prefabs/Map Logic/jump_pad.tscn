@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvq2bf68rrmfk"]
+
+[ext_resource type="Script" uid="uid://dj0up8hqpeif2" path="res://Scripts/jump_pad.gd" id="1_xhua3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p680c"]
+size = Vector3(2.5014038, 0.9707031, 2.5011597)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xhua3"]
+
+[node name="JumpPad" type="Node3D"]
+script = ExtResource("1_xhua3")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007659912, 0.44799805, 0.0077209473)
+shape = SubResource("BoxShape3D_p680c")
+debug_color = Color(0.9411765, 0, 0.22352941, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 0.105, 0, 0, 0, 2.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_xhua3")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
